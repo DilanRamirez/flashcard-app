@@ -131,6 +131,7 @@ export function FlashcardViewer({
                 </Badge>
                 {card.difficulty && (
                   <Badge
+                    style={{ backgroundColor: "#333333" }}
                     variant={
                       card.difficulty === "Beginner"
                         ? "default"
