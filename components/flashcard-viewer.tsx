@@ -1,23 +1,32 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { ChevronLeft, ChevronRight, RotateCcw, Flag, Check, X, Lightbulb, BookOpen } from "lucide-react"
-import type { Flashcard, UserCardState } from "@/app/page"
+import { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import {
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  Flag,
+  Check,
+  X,
+  Lightbulb,
+  BookOpen,
+} from "lucide-react";
+import type { Flashcard, UserCardState } from "@/app/page";
 
 interface FlashcardViewerProps {
-  card: Flashcard
-  cardState?: UserCardState[string]
-  onNext: () => void
-  onPrevious: () => void
-  onUpdateCardState: (updates: Partial<UserCardState[string]>) => void
-  canGoNext: boolean
-  canGoPrevious: boolean
+  card: Flashcard;
+  cardState?: UserCardState[string];
+  onNext: () => void;
+  onPrevious: () => void;
+  onUpdateCardState: (updates: Partial<UserCardState[string]>) => void;
+  canGoNext: boolean;
+  canGoPrevious: boolean;
 }
 
 export function FlashcardViewer({
@@ -29,68 +38,74 @@ export function FlashcardViewer({
   canGoNext,
   canGoPrevious,
 }: FlashcardViewerProps) {
-  const [isFlipped, setIsFlipped] = useState(false)
-  const [touchStart, setTouchStart] = useState<number | null>(null)
-  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   // Reset flip state when card changes
   useEffect(() => {
-    setIsFlipped(false)
-  }, [card?.id])
+    setIsFlipped(false);
+  }, [card?.id]);
 
   // Touch swipe handling
-  const minSwipeDistance = 50
+  const minSwipeDistance = 50;
 
   const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
-  }
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
+    if (!touchStart || !touchEnd) return;
 
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
 
     if (isLeftSwipe && canGoNext) {
-      onNext()
+      onNext();
     }
     if (isRightSwipe && canGoPrevious) {
-      onPrevious()
+      onPrevious();
     }
-  }
+  };
 
   // Keyboard navigation for card flipping
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === " " || e.key === "Enter") {
-        e.preventDefault()
-        setIsFlipped((prev) => !prev)
+        e.preventDefault();
+        setIsFlipped((prev) => !prev);
       }
-    }
+    };
 
-    window.addEventListener("keydown", handleKeyPress)
-    return () => window.removeEventListener("keydown", handleKeyPress)
-  }, [])
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, []);
 
-  if (!card) return null
+  if (!card) return null;
 
   const handleMarkKnown = () => {
-    onUpdateCardState({ known: true, confidence: Math.min((cardState?.confidence || 0) + 1, 5) })
-  }
+    onUpdateCardState({
+      known: true,
+      confidence: Math.min((cardState?.confidence || 0) + 1, 5),
+    });
+  };
 
   const handleMarkUnknown = () => {
-    onUpdateCardState({ known: false, confidence: Math.max((cardState?.confidence || 0) - 1, 0) })
-  }
+    onUpdateCardState({
+      known: false,
+      confidence: Math.max((cardState?.confidence || 0) - 1, 0),
+    });
+  };
 
   const handleToggleFlag = () => {
-    onUpdateCardState({ flagged: !(cardState?.flagged || false) })
-  }
+    onUpdateCardState({ flagged: !(cardState?.flagged || false) });
+  };
 
   return (
     <div className="space-y-3">
@@ -120,8 +135,8 @@ export function FlashcardViewer({
                       card.difficulty === "Beginner"
                         ? "default"
                         : card.difficulty === "Intermediate"
-                          ? "secondary"
-                          : "destructive"
+                        ? "secondary"
+                        : "destructive"
                     }
                     className="text-xs"
                   >
@@ -145,8 +160,8 @@ export function FlashcardViewer({
                 variant="ghost"
                 size="sm"
                 onClick={(e) => {
-                  e.stopPropagation()
-                  setIsFlipped(!isFlipped)
+                  e.stopPropagation();
+                  setIsFlipped(!isFlipped);
                 }}
                 className="h-8 w-8 p-0"
               >
@@ -162,7 +177,9 @@ export function FlashcardViewer({
                     <BookOpen className="h-3 w-3" />
                     Question
                   </div>
-                  <div className="text-lg sm:text-xl font-medium leading-relaxed">{card.front}</div>
+                  <div className="text-lg sm:text-xl font-medium leading-relaxed">
+                    {card.front}
+                  </div>
                   <div className="text-center text-xs text-muted-foreground mt-6">
                     Tap to reveal answer • Swipe to navigate
                   </div>
@@ -175,7 +192,9 @@ export function FlashcardViewer({
                       <Check className="h-3 w-3" />
                       Answer
                     </div>
-                    <div className="text-base sm:text-lg leading-relaxed">{card.back}</div>
+                    <div className="text-base sm:text-lg leading-relaxed">
+                      {card.back}
+                    </div>
                   </div>
 
                   {card.example && (
@@ -186,7 +205,9 @@ export function FlashcardViewer({
                           <BookOpen className="h-3 w-3" />
                           Example
                         </div>
-                        <div className="text-sm text-muted-foreground italic leading-relaxed">{card.example}</div>
+                        <div className="text-sm text-muted-foreground italic leading-relaxed">
+                          {card.example}
+                        </div>
                       </div>
                     </>
                   )}
@@ -199,7 +220,9 @@ export function FlashcardViewer({
                           <Lightbulb className="h-3 w-3" />
                           Memory Aid
                         </div>
-                        <div className="text-sm font-medium text-primary">{card.mnemonic}</div>
+                        <div className="text-sm font-medium text-primary">
+                          {card.mnemonic}
+                        </div>
                       </div>
                     </>
                   )}
@@ -215,7 +238,9 @@ export function FlashcardViewer({
             {Array.from({ length: 5 }, (_, i) => (
               <div
                 key={i}
-                className={`w-1.5 h-1.5 rounded-full ${i < cardState.confidence ? "bg-primary" : "bg-muted"}`}
+                className={`w-1.5 h-1.5 rounded-full ${
+                  i < cardState.confidence ? "bg-primary" : "bg-muted"
+                }`}
               />
             ))}
           </div>
@@ -231,7 +256,9 @@ export function FlashcardViewer({
               variant="outline"
               size="sm"
               onClick={handleToggleFlag}
-              className={`h-10 px-3 ${cardState?.flagged ? "bg-destructive/10" : ""}`}
+              className={`h-10 px-3 ${
+                cardState?.flagged ? "bg-destructive/10" : ""
+              }`}
             >
               <Flag className="h-4 w-4" />
             </Button>
@@ -242,7 +269,7 @@ export function FlashcardViewer({
               className="h-10 px-4 text-destructive hover:text-destructive bg-transparent"
             >
               <X className="h-4 w-4 mr-1" />
-              Don't Know
+              Dont Know
             </Button>
             <Button
               variant="outline"
@@ -285,5 +312,5 @@ export function FlashcardViewer({
         {card.course} • {card.module}
       </div>
     </div>
-  )
+  );
 }

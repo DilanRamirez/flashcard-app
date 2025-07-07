@@ -1,38 +1,54 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
-import { Badge } from "@/components/ui/badge"
-import { X, Check, Flag, RotateCcw, Clock, Target, TrendingUp } from "lucide-react"
-import type { Flashcard, UserCardState } from "@/app/page"
+import { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import {
+  X,
+  Check,
+  Flag,
+  RotateCcw,
+  Clock,
+  Target,
+  TrendingUp,
+} from "lucide-react";
+import type { Flashcard, UserCardState } from "@/app/page";
 
 interface StudySessionProps {
-  cards: Flashcard[]
-  userCardStates: UserCardState
-  onUpdateCardState: (cardId: string, updates: Partial<UserCardState[string]>) => void
-  onExit: () => void
+  cards: Flashcard[];
+  userCardStates: UserCardState;
+  onUpdateCardState: (
+    cardId: string,
+    updates: Partial<UserCardState[string]>
+  ) => void;
+  onExit: () => void;
 }
 
-export function StudySession({ cards, userCardStates, onUpdateCardState, onExit }: StudySessionProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isFlipped, setIsFlipped] = useState(false)
+export function StudySession({
+  cards,
+  userCardStates,
+  onUpdateCardState,
+  onExit,
+}: StudySessionProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [sessionStats, setSessionStats] = useState({
     correct: 0,
     incorrect: 0,
     flagged: 0,
     startTime: Date.now(),
-  })
+  });
 
-  const currentCard = cards[currentIndex]
-  const progress = ((currentIndex + 1) / cards.length) * 100
-  const isLastCard = currentIndex === cards.length - 1
+  const currentCard = cards[currentIndex];
+  const progress = ((currentIndex + 1) / cards.length) * 100;
+  const isLastCard = currentIndex === cards.length - 1;
 
   // Reset flip state when card changes
   useEffect(() => {
-    setIsFlipped(false)
-  }, [currentIndex])
+    setIsFlipped(false);
+  }, [currentIndex]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -40,85 +56,92 @@ export function StudySession({ cards, userCardStates, onUpdateCardState, onExit 
       switch (e.key) {
         case " ":
         case "Enter":
-          e.preventDefault()
+          e.preventDefault();
           if (!isFlipped) {
-            setIsFlipped(true)
+            setIsFlipped(true);
           }
-          break
+          break;
         case "1":
           if (isFlipped) {
-            handleAnswer(false)
+            handleAnswer(false);
           }
-          break
+          break;
         case "2":
           if (isFlipped) {
-            handleAnswer(true)
+            handleAnswer(true);
           }
-          break
+          break;
         case "f":
           if (isFlipped) {
-            handleFlag()
+            handleFlag();
           }
-          break
+          break;
         case "Escape":
-          onExit()
-          break
+          onExit();
+          break;
       }
-    }
+    };
 
-    window.addEventListener("keydown", handleKeyPress)
-    return () => window.removeEventListener("keydown", handleKeyPress)
-  }, [isFlipped, currentCard])
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFlipped, currentCard]);
 
   const handleAnswer = (correct: boolean) => {
-    if (!currentCard) return
+    if (!currentCard) return;
 
     onUpdateCardState(currentCard.id, {
       known: correct,
       confidence: correct
         ? Math.min((userCardStates[currentCard.id]?.confidence || 0) + 1, 5)
         : Math.max((userCardStates[currentCard.id]?.confidence || 0) - 1, 0),
-    })
+    });
 
     setSessionStats((prev) => ({
       ...prev,
       correct: correct ? prev.correct + 1 : prev.correct,
       incorrect: correct ? prev.incorrect : prev.incorrect + 1,
-    }))
+    }));
 
-    nextCard()
-  }
+    nextCard();
+  };
 
   const handleFlag = () => {
-    if (!currentCard) return
+    if (!currentCard) return;
 
-    const isFlagged = userCardStates[currentCard.id]?.flagged || false
-    onUpdateCardState(currentCard.id, { flagged: !isFlagged })
+    const isFlagged = userCardStates[currentCard.id]?.flagged || false;
+    onUpdateCardState(currentCard.id, { flagged: !isFlagged });
 
     setSessionStats((prev) => ({
       ...prev,
       flagged: isFlagged ? prev.flagged - 1 : prev.flagged + 1,
-    }))
-  }
+    }));
+  };
 
   const nextCard = () => {
     if (isLastCard) {
       // Session complete
-      return
+      return;
     }
-    setCurrentIndex((prev) => prev + 1)
-  }
+    setCurrentIndex((prev) => prev + 1);
+  };
 
-  const sessionDuration = Math.floor((Date.now() - sessionStats.startTime) / 1000)
-  const minutes = Math.floor(sessionDuration / 60)
-  const seconds = sessionDuration % 60
+  const sessionDuration = Math.floor(
+    (Date.now() - sessionStats.startTime) / 1000
+  );
+  const minutes = Math.floor(sessionDuration / 60);
+  const seconds = sessionDuration % 60;
 
   if (isLastCard && isFlipped) {
     // Session complete screen
     const accuracy =
       sessionStats.correct + sessionStats.incorrect > 0
-        ? Math.round((sessionStats.correct / (sessionStats.correct + sessionStats.incorrect)) * 100)
-        : 0
+        ? Math.round(
+            (sessionStats.correct /
+              (sessionStats.correct + sessionStats.incorrect)) *
+              100
+          )
+        : 0;
 
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -132,11 +155,15 @@ export function StudySession({ cards, userCardStates, onUpdateCardState, onExit 
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <div className="text-2xl font-bold text-green-600">{sessionStats.correct}</div>
+                <div className="text-2xl font-bold text-green-600">
+                  {sessionStats.correct}
+                </div>
                 <div className="text-sm text-muted-foreground">Correct</div>
               </div>
               <div className="space-y-1">
-                <div className="text-2xl font-bold text-red-600">{sessionStats.incorrect}</div>
+                <div className="text-2xl font-bold text-red-600">
+                  {sessionStats.incorrect}
+                </div>
                 <div className="text-sm text-muted-foreground">Incorrect</div>
               </div>
             </div>
@@ -160,7 +187,7 @@ export function StudySession({ cards, userCardStates, onUpdateCardState, onExit 
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
@@ -179,7 +206,12 @@ export function StudySession({ cards, userCardStates, onUpdateCardState, onExit 
                 <Clock className="h-3 w-3" />
                 {minutes}:{seconds.toString().padStart(2, "0")}
               </div>
-              <Button variant="outline" size="sm" onClick={onExit} className="h-8 px-3 text-xs bg-transparent">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onExit}
+                className="h-8 px-3 text-xs bg-transparent"
+              >
                 <X className="h-3 w-3 mr-1" />
                 Exit
               </Button>
@@ -201,30 +233,44 @@ export function StudySession({ cards, userCardStates, onUpdateCardState, onExit 
                     <Badge variant="secondary" className="text-xs">
                       {currentCard.category}
                     </Badge>
-                    <h2 className="text-lg sm:text-xl font-medium leading-relaxed">{currentCard.front}</h2>
+                    <h2 className="text-lg sm:text-xl font-medium leading-relaxed">
+                      {currentCard.front}
+                    </h2>
                   </div>
                   <div className="space-y-3 mt-8">
-                    <Button onClick={() => setIsFlipped(true)} size="lg" className="w-full sm:w-auto">
+                    <Button
+                      onClick={() => setIsFlipped(true)}
+                      size="lg"
+                      className="w-full sm:w-auto"
+                    >
                       <RotateCcw className="h-4 w-4 mr-2" />
                       Reveal Answer
                     </Button>
-                    <p className="text-xs text-muted-foreground">Tap to reveal</p>
+                    <p className="text-xs text-muted-foreground">
+                      Tap to reveal
+                    </p>
                   </div>
                 </div>
               ) : (
                 <div className="space-y-4">
                   <div className="space-y-3">
-                    <div className="text-base sm:text-lg leading-relaxed">{currentCard.back}</div>
+                    <div className="text-base sm:text-lg leading-relaxed">
+                      {currentCard.back}
+                    </div>
                     {currentCard.example && (
                       <div className="p-3 bg-muted rounded-lg">
                         <p className="text-xs font-medium mb-1">Example:</p>
-                        <p className="text-xs text-muted-foreground italic leading-relaxed">{currentCard.example}</p>
+                        <p className="text-xs text-muted-foreground italic leading-relaxed">
+                          {currentCard.example}
+                        </p>
                       </div>
                     )}
                     {currentCard.mnemonic && (
                       <div className="p-3 bg-primary/10 rounded-lg">
                         <p className="text-xs font-medium mb-1">Memory Aid:</p>
-                        <p className="text-xs font-medium text-primary">{currentCard.mnemonic}</p>
+                        <p className="text-xs font-medium text-primary">
+                          {currentCard.mnemonic}
+                        </p>
                       </div>
                     )}
                   </div>
@@ -237,12 +283,16 @@ export function StudySession({ cards, userCardStates, onUpdateCardState, onExit 
                         className="flex-1 h-12 text-red-600 hover:text-red-600"
                       >
                         <X className="h-4 w-4 mr-2" />
-                        Don't Know
+                        Dont Know
                       </Button>
                       <Button
                         variant="outline"
                         onClick={handleFlag}
-                        className={`h-12 px-4 ${userCardStates[currentCard.id]?.flagged ? "bg-yellow-100" : ""}`}
+                        className={`h-12 px-4 ${
+                          userCardStates[currentCard.id]?.flagged
+                            ? "bg-yellow-100"
+                            : ""
+                        }`}
                       >
                         <Flag className="h-4 w-4" />
                       </Button>
@@ -256,7 +306,8 @@ export function StudySession({ cards, userCardStates, onUpdateCardState, onExit 
                     </div>
 
                     <div className="text-center text-xs text-muted-foreground">
-                      Tap buttons or use keyboard: 1 (don't know), 2 (know it), F (flag)
+                      Tap buttons or use keyboard: 1 (dont know), 2 (know it), F
+                      (flag)
                     </div>
                   </div>
                 </div>
@@ -267,20 +318,26 @@ export function StudySession({ cards, userCardStates, onUpdateCardState, onExit 
           {/* Mobile Session Stats */}
           <div className="mt-4 grid grid-cols-3 gap-2">
             <Card className="p-3 text-center">
-              <div className="text-lg font-bold text-green-600">{sessionStats.correct}</div>
+              <div className="text-lg font-bold text-green-600">
+                {sessionStats.correct}
+              </div>
               <div className="text-xs text-muted-foreground">Correct</div>
             </Card>
             <Card className="p-3 text-center">
-              <div className="text-lg font-bold text-red-600">{sessionStats.incorrect}</div>
+              <div className="text-lg font-bold text-red-600">
+                {sessionStats.incorrect}
+              </div>
               <div className="text-xs text-muted-foreground">Incorrect</div>
             </Card>
             <Card className="p-3 text-center">
-              <div className="text-lg font-bold text-yellow-600">{sessionStats.flagged}</div>
+              <div className="text-lg font-bold text-yellow-600">
+                {sessionStats.flagged}
+              </div>
               <div className="text-xs text-muted-foreground">Flagged</div>
             </Card>
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 }

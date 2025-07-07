@@ -1,25 +1,31 @@
-"use client"
+"use client";
 
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, X } from "lucide-react"
-import type { Flashcard } from "@/app/page"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Search, X } from "lucide-react";
+import type { Flashcard } from "@/app/page";
 
 interface FilterPanelProps {
-  cards: Flashcard[]
-  searchQuery: string
+  cards: Flashcard[];
+  searchQuery: string;
   filters: {
-    category: string
-    subject: string
-    course: string
-    module: string
-    difficulty: string
-  }
-  onSearchChange: (query: string) => void
-  onFilterChange: (filters: FilterPanelProps["filters"]) => void
-  onReset: () => void
+    category: string;
+    subject: string;
+    course: string;
+    module: string;
+    difficulty: string;
+  };
+  onSearchChange: (query: string) => void;
+  onFilterChange: (filters: FilterPanelProps["filters"]) => void;
+  onReset: () => void;
 }
 
 export function FilterPanel({
@@ -31,13 +37,15 @@ export function FilterPanel({
   onReset,
 }: FilterPanelProps) {
   // Get unique values for filter options
-  const categories = [...new Set(cards.map((card) => card.category))].sort()
-  const subjects = [...new Set(cards.map((card) => card.subject))].sort()
-  const courses = [...new Set(cards.map((card) => card.course))].sort()
-  const modules = [...new Set(cards.map((card) => card.module))].sort()
-  const difficulties = [...new Set(cards.map((card) => card.difficulty).filter(Boolean))].sort()
+  const categories = [...new Set(cards.map((card) => card.category))].sort();
+  const subjects = [...new Set(cards.map((card) => card.subject))].sort();
+  const courses = [...new Set(cards.map((card) => card.course))].sort();
+  const modules = [...new Set(cards.map((card) => card.module))].sort();
+  const difficulties = [
+    ...new Set(cards.map((card) => card.difficulty).filter(Boolean)),
+  ].sort();
 
-  const hasActiveFilters = searchQuery || Object.values(filters).some(Boolean)
+  const hasActiveFilters = searchQuery || Object.values(filters).some(Boolean);
 
   return (
     <div className="space-y-4">
@@ -71,7 +79,12 @@ export function FilterPanel({
         <Label>Category</Label>
         <Select
           value={filters.category}
-          onValueChange={(value) => onFilterChange({ ...filters, category: value === "all" ? "" : value })}
+          onValueChange={(value) =>
+            onFilterChange({
+              ...filters,
+              category: value === "all" ? "" : value,
+            })
+          }
         >
           <SelectTrigger>
             <SelectValue placeholder="All categories" />
@@ -92,7 +105,12 @@ export function FilterPanel({
         <Label>Subject</Label>
         <Select
           value={filters.subject}
-          onValueChange={(value) => onFilterChange({ ...filters, subject: value === "all" ? "" : value })}
+          onValueChange={(value) =>
+            onFilterChange({
+              ...filters,
+              subject: value === "all" ? "" : value,
+            })
+          }
         >
           <SelectTrigger>
             <SelectValue placeholder="All subjects" />
@@ -113,7 +131,9 @@ export function FilterPanel({
         <Label>Course</Label>
         <Select
           value={filters.course}
-          onValueChange={(value) => onFilterChange({ ...filters, course: value === "all" ? "" : value })}
+          onValueChange={(value) =>
+            onFilterChange({ ...filters, course: value === "all" ? "" : value })
+          }
         >
           <SelectTrigger>
             <SelectValue placeholder="All courses" />
@@ -134,7 +154,9 @@ export function FilterPanel({
         <Label>Module</Label>
         <Select
           value={filters.module}
-          onValueChange={(value) => onFilterChange({ ...filters, module: value === "all" ? "" : value })}
+          onValueChange={(value) =>
+            onFilterChange({ ...filters, module: value === "all" ? "" : value })
+          }
         >
           <SelectTrigger>
             <SelectValue placeholder="All modules" />
@@ -156,7 +178,12 @@ export function FilterPanel({
           <Label>Difficulty</Label>
           <Select
             value={filters.difficulty}
-            onValueChange={(value) => onFilterChange({ ...filters, difficulty: value === "all" ? "" : value })}
+            onValueChange={(value) =>
+              onFilterChange({
+                ...filters,
+                difficulty: value === "all" ? "" : value,
+              })
+            }
           >
             <SelectTrigger>
               <SelectValue placeholder="All difficulties" />
@@ -164,7 +191,7 @@ export function FilterPanel({
             <SelectContent>
               <SelectItem value="all">All difficulties</SelectItem>
               {difficulties.map((difficulty) => (
-                <SelectItem key={difficulty} value={difficulty}>
+                <SelectItem key={difficulty} value={difficulty || ""}>
                   {difficulty}
                 </SelectItem>
               ))}
@@ -173,5 +200,5 @@ export function FilterPanel({
         </div>
       )}
     </div>
-  )
+  );
 }
