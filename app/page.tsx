@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState, useEffect, useCallback } from "react";
+
 import { FlashcardViewer } from "@/components/flashcard-viewer";
 import { FilterPanel } from "@/components/filter-panel";
 import { ProgressIndicator } from "@/components/progress-indicator";
@@ -27,6 +28,12 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DescriptionIcon from "@mui/icons-material/Description";
+import { generateQuiz } from "@/lib/quiz-generator";
+import type { QuizConfig as QuizConfigType, QuizResult } from "@/types/quiz";
+import { QuizSetup } from "@/components/quiz/quiz-config";
+import { QuizSession } from "@/components/quiz/quiz-session";
+import { QuizResults } from "@/components/quiz/quiz-result";
+import { Target } from "lucide-react";
 
 export interface Flashcard {
   id: string;
@@ -73,6 +80,7 @@ export interface AppState {
   showFilters: boolean;
   studyMode: boolean;
   viewMode: "single" | "grid" | "list";
+  quizMode: "config" | "session" | "results" | null;
   showDeckManager: boolean;
 }
 
@@ -81,6 +89,11 @@ export default function FlashcardApp() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [showAllDecks, setShowAllDecks] = useState(false);
+  const [currentQuiz, setCurrentQuiz] = useState<{
+    questions: any[];
+    config: QuizConfigType;
+  } | null>(null);
+  const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
   const [appState, setAppState] = useLocalStorage<AppState>(
     "flashcard-app-state",
     {
@@ -100,11 +113,13 @@ export default function FlashcardApp() {
       studyMode: false,
       viewMode: "single",
       showDeckManager: false,
+      quizMode: null, // "config", "session", "results" or null
     }
   );
 
   useEffect(() => {
     initializeDecks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const initializeDecks = async () => {
@@ -314,6 +329,70 @@ export default function FlashcardApp() {
     }));
   };
 
+  const handleStartQuiz = (config: QuizConfigType) => {
+    const questions = generateQuiz(
+      decks.map((deck) => deck.cards).flat() || [],
+      config
+    );
+    console.log("Generated questions:", questions);
+    if (questions.length > 0) {
+      setCurrentQuiz({ questions, config });
+      setAppState((prev) => ({ ...prev, quizMode: "session" }));
+    }
+  };
+
+  const handleQuizComplete = (result: QuizResult) => {
+    setQuizResult(result);
+    setAppState((prev) => ({ ...prev, quizMode: "results" }));
+  };
+
+  const handleRetakeQuiz = () => {
+    if (currentQuiz) {
+      const questions = generateQuiz(
+        currentDeck?.cards || [],
+        currentQuiz.config
+      );
+      setCurrentQuiz({ ...currentQuiz, questions });
+      setAppState((prev) => ({ ...prev, quizMode: "session" }));
+    }
+  };
+
+  const handleExitQuiz = () => {
+    setCurrentQuiz(null);
+    setQuizResult(null);
+    setAppState((prev) => ({ ...prev, quizMode: null }));
+  };
+
+  if (appState.quizMode === "config") {
+    return (
+      <QuizSetup
+        cards={decks.map((deck) => deck.cards).flat() || []}
+        onStartQuiz={handleStartQuiz}
+        onCancel={handleExitQuiz}
+      />
+    );
+  }
+
+  if (appState.quizMode === "session" && currentQuiz) {
+    return (
+      <QuizSession
+        questions={currentQuiz.questions}
+        onComplete={handleQuizComplete}
+        onExit={handleExitQuiz}
+      />
+    );
+  }
+
+  if (appState.quizMode === "results" && quizResult) {
+    return (
+      <QuizResults
+        result={quizResult}
+        onRetakeQuiz={handleRetakeQuiz}
+        onBackToHome={handleExitQuiz}
+      />
+    );
+  }
+
   if (isLoading) {
     return (
       <Box
@@ -442,70 +521,105 @@ export default function FlashcardApp() {
           </Stack>
           <Box sx={{ overflowX: "auto", width: "100%" }}>
             <Stack
-              direction={{ xs: "row", sm: "row" }}
+              direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 0.5, sm: 1 }}
               alignItems="center"
               sx={{ width: "100%", mb: 1 }}
             >
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={() =>
-                  setAppState((prev) => ({ ...prev, studyMode: true }))
-                }
-                disabled={displayCards.length === 0}
-                aria-label="Start study session"
-                sx={{
-                  fontSize: "0.75rem",
-                  color: displayCards.length === 0 ? "#888" : "inherit",
-                  borderColor: "white.main",
-                  py: 0.5,
-                }}
+              <Stack
+                direction={{ xs: "row", sm: "row" }}
+                sx={{ width: "100%", mb: 1 }}
+                spacing={1}
               >
-                <PlayArrowIcon fontSize="small" sx={{ mr: 1 }} />
-                Study
-              </Button>
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={() =>
-                  setAppState((prev) => ({
-                    ...prev,
-                    showFilters: !prev.showFilters,
-                  }))
-                }
-                aria-label="Show filters"
-                sx={{
-                  fontSize: "0.75rem",
-                  color: displayCards.length === 0 ? "#888" : "inherit",
-                  borderColor: "white.main",
-                  py: 0.5,
-                }}
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() =>
+                    setAppState((prev) => ({ ...prev, studyMode: true }))
+                  }
+                  disabled={displayCards.length === 0}
+                  aria-label="Start study session"
+                  sx={{
+                    width: "100%",
+                    fontSize: "0.75rem",
+                    color: displayCards.length === 0 ? "#888" : "inherit",
+                    borderColor: "white.main",
+                    py: 0.5,
+                  }}
+                >
+                  <PlayArrowIcon fontSize="small" sx={{ mr: 1 }} />
+                  Study
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() =>
+                    setAppState((prev) => ({
+                      ...prev,
+                      showFilters: !prev.showFilters,
+                    }))
+                  }
+                  aria-label="Show filters"
+                  sx={{
+                    width: "100%",
+
+                    fontSize: "0.75rem",
+                    color: displayCards.length === 0 ? "#888" : "inherit",
+                    borderColor: "white.main",
+                    py: 0.5,
+                  }}
+                >
+                  <SettingsIcon fontSize="small" sx={{ mr: 1 }} />
+                  Filter
+                </Button>
+              </Stack>
+              <Stack
+                direction={{ xs: "row", sm: "row" }}
+                sx={{ width: "100%", mb: 1 }}
+                spacing={1}
               >
-                <SettingsIcon fontSize="small" sx={{ mr: 1 }} />
-                Filter
-              </Button>
-              <Button
-                color="primary"
-                variant="outlined"
-                size="small"
-                onClick={() =>
-                  setAppState((prev) => ({
-                    ...prev,
-                    showDeckManager: !prev.showDeckManager,
-                  }))
-                }
-                aria-label="Show deck manager"
-                sx={{
-                  fontSize: "0.75rem",
-                  color: displayCards.length === 0 ? "#888" : "inherit",
-                  borderColor: "white.main",
-                  py: 0.5,
-                }}
-              >
-                <DescriptionIcon fontSize="small" sx={{ mr: 1 }} />
-                Decks
-              </Button>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  size="small"
+                  onClick={() =>
+                    setAppState((prev) => ({
+                      ...prev,
+                      showDeckManager: !prev.showDeckManager,
+                    }))
+                  }
+                  aria-label="Show deck manager"
+                  sx={{
+                    width: "100%",
+                    fontSize: "0.75rem",
+                    color: displayCards.length === 0 ? "#888" : "inherit",
+                    borderColor: "white.main",
+                    py: 0.5,
+                  }}
+                >
+                  <DescriptionIcon fontSize="small" sx={{ mr: 1 }} />
+                  Decks
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() =>
+                    setAppState((prev) => ({ ...prev, quizMode: "config" }))
+                  }
+                  disabled={displayCards.length === 0}
+                  sx={{
+                    width: "100%",
+                    fontSize: "0.75rem",
+                    color: displayCards.length === 0 ? "#888" : "inherit",
+                    borderColor: "white.main",
+                    py: 0.5,
+                  }}
+                >
+                  <Target className="h-3 w-3 mr-1" />
+                  Quiz
+                </Button>
+              </Stack>
+
               <ViewModeToggle
                 viewMode={appState.viewMode}
                 onViewModeChange={(mode) =>
