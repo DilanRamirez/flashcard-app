@@ -512,11 +512,19 @@ export default function FlashcardApp() {
             spacing={1}
             alignItems="center"
             justifyContent="space-between"
-            sx={{ width: "100%", mb: 1.5 }}
+            sx={{ width: "100%", mt: 1, mb: 2 }}
           >
-            <Box display="flex" alignItems="center" gap={1}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              gap={1}
+              sx={{ width: "100%" }}
+            >
               <MenuBookIcon fontSize="medium" />
-              <Typography variant="h6">Flashcards</Typography>
+              <Typography variant="h5" textAlign="center">
+                Flashcards
+              </Typography>
             </Box>
           </Stack>
           <Box sx={{ overflowX: "auto", width: "100%" }}>
