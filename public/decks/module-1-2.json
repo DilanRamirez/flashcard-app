@@ -1,0 +1,111 @@
+{
+  "name": "Interacting with AWS",
+  "description": "Flashcards covering Interacting with AWS from AWS Cloud Technical Essentials Module 1",
+  "category": "AWS Cloud Technical Essentials",
+  "cards": [
+    {
+      "id": "1",
+      "front": "What is an AWS API call?",
+      "back": "Any action you perform in AWS is an authenticated and authorized HTTP request to an AWS service endpoint.",
+      "example": "When you list EC2 instances using the console or CLI, you're making a DescribeInstances API call.",
+      "mnemonic": "API = Ask, Permit, Invoke",
+      "category": "API Calls",
+      "subject": "Interacting with AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["API", "AWS"]
+    },
+    {
+      "id": "2",
+      "front": "What are the three main ways to make AWS API calls?",
+      "back": "You can make API calls via the AWS Management Console, the AWS CLI, or AWS SDKs.",
+      "example": "I created an S3 bucket in the console, then listed its contents with the CLI and uploaded files via the Python SDK.",
+      "mnemonic": "C-L-S: Console, CLI, SDK",
+      "category": "API Calls",
+      "subject": "Interacting with AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["Console", "CLI", "SDK"]
+    },
+    {
+      "id": "3",
+      "front": "What is the AWS Management Console?",
+      "back": "A web-based graphical interface where you log in and click through services to create and manage AWS resources.",
+      "example": "I launched an EC2 instance by clicking through the EC2 dashboard in the console.",
+      "mnemonic": "Console = Click and Control",
+      "category": "Console",
+      "subject": "Interacting with AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["Management Console"]
+    },
+    {
+      "id": "4",
+      "front": "How does the Region selector in the AWS Console work?",
+      "back": "Changing the selector switches the console to send requests to services in a different geographic region, updating the URL subdomain accordingly.",
+      "example": "I switched from US East (Ohio) to EU (London) in the top bar to view resources in the London region.",
+      "mnemonic": "Region = Redirect Endpoint",
+      "category": "Console",
+      "subject": "Interacting with AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["Region", "Console"]
+    },
+    {
+      "id": "5",
+      "front": "What is the AWS Command Line Interface (CLI)?",
+      "back": "An open-source, unified tool that lets you issue AWS service commands programmatically from your terminal on Windows, Linux, or Mac.",
+      "example": "I ran `aws ec2 describe-instances` in my terminal to list all EC2 instances in my account.",
+      "mnemonic": "CLI = Command, List, Invoke",
+      "category": "CLI",
+      "subject": "Interacting with AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["CLI"]
+    },
+    {
+      "id": "6",
+      "front": "How does the AWS CLI help with automation?",
+      "back": "You can script CLI commands and schedule them to run regularly, eliminating manual console work and adapting to dynamic environments.",
+      "example": "I set up a daily cron job that uses the AWS CLI to back up EC2 instance data.",
+      "mnemonic": "Scripted C = Cron + CLI",
+      "category": "CLI",
+      "subject": "Interacting with AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["CLI", "Automation"]
+    },
+    {
+      "id": "7",
+      "front": "What are AWS SDKs?",
+      "back": "Open-source language libraries maintained by AWS that let developers call AWS APIs directly from their application code.",
+      "example": "Our Python app uses boto3 to upload user-uploaded images to S3 automatically.",
+      "mnemonic": "SDK = Software Developer’s Key",
+      "category": "SDK",
+      "subject": "Interacting with AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["SDK", "Development"]
+    },
+    {
+      "id": "8",
+      "front": "How do you list EC2 instances using the AWS SDK for Python (boto3)?",
+      "back": "Import boto3, create an EC2 client with `boto3.client('ec2')`, then call `describe_instances()`.",
+      "example": "In my script I wrote `ec2 = boto3.client('ec2'); response = ec2.describe_instances()` to get instance details.",
+      "mnemonic": "boto3 = Python Boto for EC2",
+      "category": "SDK",
+      "subject": "Interacting with AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["boto3", "EC2", "SDK"]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "name": "Shared Responsibility Model",
+  "description": "Flashcards covering the AWS Shared Responsibility Model from AWS Cloud Technical Essentials Module 1",
+  "category": "AWS Cloud Technical Essentials",
+  "cards": [
+    {
+      "id": "4829102736451820",
+      "front": "What is the AWS Shared Responsibility Model?",
+      "back": "A framework that divides security responsibilities between AWS (security of the cloud) and the customer (security in the cloud).",
+      "example": "AWS secures data center hardware, while you configure firewalls and encrypt your data in S3.",
+      "mnemonic": "Shared = Split Duties",
+      "category": "Core Concept",
+      "subject": "Security and the AWS Shared Responsibility Model",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["Shared Responsibility", "Security"]
+    },
+    {
+      "id": "5736190482739102",
+      "front": "What does 'security of the cloud' refer to in the Shared Responsibility Model?",
+      "back": "AWS's responsibility to protect and secure the underlying infrastructure, including data centers, hardware, networking, and virtualization layers.",
+      "example": "AWS patches the hypervisor and secures the physical servers hosting EC2 instances.",
+      "mnemonic": "Cloud = AWS Care",
+      "category": "AWS Responsibility",
+      "subject": "Security and the AWS Shared Responsibility Model",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["Security", "Infrastructure"]
+    },
+    {
+      "id": "6902841573028457",
+      "front": "What does 'security in the cloud' refer to in the Shared Responsibility Model?",
+      "back": "The customer's responsibility to secure their data, configure services properly, manage access controls, and apply encryption.",
+      "example": "You enable S3 bucket encryption and set IAM policies to restrict access.",
+      "mnemonic": "In = Your Job",
+      "category": "Customer Responsibility",
+      "subject": "Security and the AWS Shared Responsibility Model",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["Security", "Configuration"]
+    },
+    {
+      "id": "1583927465018273",
+      "front": "What are the three service categories in AWS and who manages infrastructure in each?",
+      "back": "Infrastructure services (AWS manages foundation only), Container services (AWS also manages OS and platform), Abstracted services (AWS manages infrastructure, OS, platform, and encryption).",
+      "example": "EC2 is infrastructure, RDS is container, S3 is abstracted.",
+      "mnemonic": "I-C-A Layers",
+      "category": "Service Categories",
+      "subject": "Security and the AWS Shared Responsibility Model",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["Services", "Infrastructure", "Containers", "Abstracted"]
+    },
+    {
+      "id": "3275901847629051",
+      "front": "In infrastructure services (e.g., EC2), what security tasks is the customer responsible for?",
+      "back": "Customer manages the VM OS, application platform, data encryption, access controls, and network firewalls.",
+      "example": "Patching the operating system on your EC2 instance every month.",
+      "mnemonic": "Infra = You Patch",
+      "category": "Infrastructure Services",
+      "subject": "Security and the AWS Shared Responsibility Model",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["EC2", "Infrastructure"]
+    },
+    {
+      "id": "4902761830456729",
+      "front": "In container services (e.g., RDS), what is AWS responsible for and what is the customer responsible for?",
+      "back": "AWS manages infrastructure, OS, and platform; the customer is responsible for data protection, encryption, backups, and access controls.",
+      "example": "AWS patches the RDS OS, while you configure database encryption and user permissions.",
+      "mnemonic": "Container = AWS + You",
+      "category": "Container Services",
+      "subject": "Security and the AWS Shared Responsibility Model",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["RDS", "Container"]
+    },
+    {
+      "id": "8150734629183746",
+      "front": "In abstracted services (e.g., S3), what security tasks remain with the customer?",
+      "back": "Customer manages data, client-side encryption, and access permissions; AWS handles infrastructure, OS, platform, and server-side encryption.",
+      "example": "You use SSE-KMS for S3 object encryption and set bucket policies.",
+      "mnemonic": "Abstract = AWS Shields, You Guard Data",
+      "category": "Abstracted Services",
+      "subject": "Security and the AWS Shared Responsibility Model",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["S3", "Storage"]
+    },
+    {
+      "id": "6392048173650928",
+      "front": "Why is it important to consider the Shared Responsibility Model when selecting AWS services?",
+      "back": "Different services require different levels of customer security management, affecting operational overhead and compliance.",
+      "example": "Choosing S3 reduces OS patching tasks compared to EC2 but still requires data encryption setup.",
+      "mnemonic": "Pick by Protection",
+      "category": "Best Practices",
+      "subject": "Security and the AWS Shared Responsibility Model",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "Beginner",
+      "tags": ["Service Selection", "Best Practices"]
+    }
+  ]
+}
