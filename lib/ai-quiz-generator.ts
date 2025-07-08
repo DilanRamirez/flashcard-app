@@ -2,11 +2,11 @@ import type { Flashcard } from "@/app/page";
 import type { QuizQuestion, QuizConfig } from "@/types/quiz";
 import { GoogleGenAI } from "@google/genai";
 
-const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+export const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 if (!GEMINI_API_KEY) {
   throw new Error("Gemini API key not configured");
 }
-const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+export const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 interface AIQuizQuestion {
   question: string;
@@ -61,14 +61,18 @@ ${index + 1}. Subject: ${card.subject}
     )
     .join("\n");
 
-  return `You are an expert quiz generator. Below are ${flashcards.length} flashcards. For each, generate a high-quality multiple-choice quiz question.
+  return `You are an AWS certification quiz generator. Below are ${flashcards.length} flashcards. For each, generate a high-quality multiple-choice quiz question in the style of official AWS certification exams 
+  (Cloud Practitioner, Solutions Architect Associate, etc.).
 
 Instructions:
+- Use a scenario or short context, as in real AWS exam questions.
 - Rephrase the flashcard question into a clear, engaging quiz-style question
 - Use the flashcard answer as the correct answer (may rephrase for clarity)
 - Create 3 plausible, challenging distractors that are related but clearly wrong
 - ${difficultyInstruction}
 - Ensure distractors are from the same domain/context as the correct answer
+- Make the tone and logic match real AWS exam questions (no overly simple wording).
+- The choices must NOT be obvious or silly; each should be a reasonable option.
 - Return ONLY valid JSON in the exact format shown below
 
 ### Flashcards:

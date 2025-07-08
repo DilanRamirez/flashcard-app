@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +12,7 @@ import {
   Home,
 } from "lucide-react";
 import type { QuizResult } from "@/types/quiz";
+import { QuestionExplanationComponent } from "./question-explanation";
 
 interface QuizResultsProps {
   result: QuizResult;
@@ -24,6 +25,10 @@ export function QuizResults({
   onRetakeQuiz,
   onBackToHome,
 }: QuizResultsProps) {
+  const [expandedExplanations, setExpandedExplanations] = useState<Set<string>>(
+    new Set(),
+  );
+
   const formatTime = (ms: number) => {
     const seconds = Math.floor(ms / 1000);
     const minutes = Math.floor(seconds / 60);
@@ -38,6 +43,18 @@ export function QuizResults({
   };
 
   const wrongAnswers = result.answers.filter((answer) => !answer.isCorrect);
+
+  const toggleExplanation = (questionId: string) => {
+    setExpandedExplanations((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(questionId)) {
+        newSet.delete(questionId);
+      } else {
+        newSet.add(questionId);
+      }
+      return newSet;
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -131,6 +148,9 @@ export function QuizResults({
                     (q) => q.id === answer.questionId,
                   );
                   if (!question) return null;
+                  const isExpanded = expandedExplanations.has(
+                    answer.questionId,
+                  );
 
                   return (
                     <div key={answer.questionId} className="space-y-3">
@@ -154,11 +174,11 @@ export function QuizResults({
                               </span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <CheckCircle className="h-4 w-4 text-green-600" />
-                              <span className="text-muted-foreground">
+                              <CheckCircle className="h-4 w-4 text-green-600 " />
+                              <span className="text-muted-foreground whitespace-normal break-words">
                                 Correct answer:
                               </span>
-                              <span className="text-green-600 font-medium">
+                              <span className="text-green-600 font-medium whitespace-normal break-words">
                                 {question.correctAnswer}
                               </span>
                             </div>
@@ -184,6 +204,17 @@ export function QuizResults({
                           )}
                         </div>
                       </div>
+                      {/* AI Explanation Component */}
+                      <QuestionExplanationComponent
+                        question={question}
+                        userAnswer={
+                          typeof answer.userAnswer === "string"
+                            ? answer.userAnswer
+                            : JSON.stringify(answer.userAnswer)
+                        }
+                        isExpanded={isExpanded}
+                        onToggle={() => toggleExplanation(answer.questionId)}
+                      />
                       {index < wrongAnswers.length - 1 && <Separator />}
                     </div>
                   );
