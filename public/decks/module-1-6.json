@@ -1,0 +1,77 @@
+{
+  "name": "Role-Based Access and IAM Best Practices",
+  "description": "Key concepts and best practices for managing roles and access in AWS using IAM and Identity Providers",
+  "category": "Security",
+  "cards": [
+    {
+      "id": "q7m8x1z9vb",
+      "front": "Your organization wants to grant employees temporary credentials when accessing AWS, instead of long-term credentials. What IAM feature should you use?",
+      "back": "Use IAM roles, which provide temporary security credentials that automatically expire, making them safer than permanent user credentials.",
+      "example": "Instead of giving developers access keys, they assume a 'DevAccess' role and receive temporary credentials that expire in 1 hour.",
+      "mnemonic": "Roles = Rotating Access",
+      "category": "Security",
+      "subject": "Role Based Access in AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["IAM", "roles", "temporary credentials"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "x2f4r9k8jd",
+      "front": "You're building a web app and need sign-up and login functionality for users. Should you use IAM to manage this?",
+      "back": "No, IAM is meant to manage identities within your AWS account, not external website users. Use Amazon Cognito or another identity service for web authentication.",
+      "example": "A blog site requires users to create accounts. IAM is not suitable here; Cognito would be the better choice.",
+      "mnemonic": "IAM is for Infrastructure, not Internet Users",
+      "category": "Security",
+      "subject": "Role Based Access in AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["IAM", "authentication", "web apps"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "a9v2t3mnxe",
+      "front": "You want to manage employee access to multiple AWS accounts using a central identity source. What should you implement?",
+      "back": "Use an identity provider (IdP) with IAM roles to federate access. This allows centralized identity management outside of AWS.",
+      "example": "Your company uses Okta to manage users. By federating Okta with IAM, you avoid creating IAM users in every AWS account.",
+      "mnemonic": "Federation = Fewer IAM Users",
+      "category": "Security",
+      "subject": "Role Based Access in AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["federation", "IAM roles", "identity provider"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "m4b1z8kwtq",
+      "front": "Your company wants employees to log in once and access all their assigned AWS accounts and applications. What AWS service supports this?",
+      "back": "AWS IAM Identity Center allows users to sign in with a single set of credentials and access multiple accounts and applications through a central portal.",
+      "example": "Martha signs in once to AWS IAM Identity Center and gains access to both dev and prod AWS accounts with her assigned roles.",
+      "mnemonic": "One Login, Many Doors",
+      "category": "Security",
+      "subject": "Role Based Access in AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["IAM Identity Center", "SSO", "IdP"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "y3tkc9weu0",
+      "front": "You’re writing an IAM policy for a developer. What is the best way to apply the principle of least privilege?",
+      "back": "Start with the minimal required permissions and add more only as needed. This limits risk and ensures controlled access.",
+      "example": "A developer only needs S3 read access, so you create a policy allowing 's3:GetObject' rather than granting full S3 access.",
+      "mnemonic": "Least Privilege = Least Risk",
+      "category": "Security",
+      "subject": "Role Based Access in AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["IAM", "least privilege", "policy"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

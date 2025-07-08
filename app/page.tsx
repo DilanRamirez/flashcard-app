@@ -33,7 +33,8 @@ import type { QuizConfig as QuizConfigType, QuizResult } from "@/types/quiz";
 import { QuizSetup } from "@/components/quiz/quiz-config";
 import { QuizSession } from "@/components/quiz/quiz-session";
 import { QuizResults } from "@/components/quiz/quiz-result";
-import { Target } from "lucide-react";
+import { Sparkles, Target } from "lucide-react";
+import { AIQuizSetup } from "@/components/quiz/ai-quiz-config";
 
 export interface Flashcard {
   id: string;
@@ -80,7 +81,7 @@ export interface AppState {
   showFilters: boolean;
   studyMode: boolean;
   viewMode: "single" | "grid" | "list";
-  quizMode: "config" | "session" | "results" | null;
+  quizMode: "config" | "session" | "results" | "ai-config" | null;
   showDeckManager: boolean;
 }
 
@@ -88,7 +89,6 @@ export default function FlashcardApp() {
   const [decks, setDecks] = useState<Deck[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
-  const [showAllDecks, setShowAllDecks] = useState(false);
   const [currentQuiz, setCurrentQuiz] = useState<{
     questions: any[];
     config: QuizConfigType;
@@ -114,7 +114,7 @@ export default function FlashcardApp() {
       viewMode: "single",
       showDeckManager: false,
       quizMode: null, // "config", "session", "results" or null
-    }
+    },
   );
 
   useEffect(() => {
@@ -193,6 +193,18 @@ export default function FlashcardApp() {
   const currentDeck =
     decks.find((deck) => deck.id === appState.currentDeckId) || decks[0];
 
+  const allDecks = decks
+    .map((deck) => deck.cards)
+    .flat()
+    .sort((a, b) => {
+      // natural sort on the id, so "module-1-1" comes before "module-2-1"
+      const collator = new Intl.Collator(undefined, {
+        numeric: true,
+        sensitivity: "base",
+      });
+      return collator.compare(a.id, b.id);
+    });
+
   const filteredCards =
     currentDeck?.cards.filter((card) => {
       const matchesSearch =
@@ -225,7 +237,7 @@ export default function FlashcardApp() {
       setShuffledIndices(indices.sort(() => Math.random() - 0.5));
     } else {
       setShuffledIndices(
-        Array.from({ length: filteredCards.length }, (_, i) => i)
+        Array.from({ length: filteredCards.length }, (_, i) => i),
       );
     }
   }, [appState.isShuffled, filteredCards.length]);
@@ -260,7 +272,7 @@ export default function FlashcardApp() {
         setAppState((prev) => ({ ...prev, currentCardIndex: index }));
       }
     },
-    [displayCards.length, setAppState]
+    [displayCards.length, setAppState],
   );
 
   useEffect(() => {
@@ -299,7 +311,7 @@ export default function FlashcardApp() {
 
   const updateCardState = (
     cardId: string,
-    updates: Partial<UserCardState[string]>
+    updates: Partial<UserCardState[string]>,
   ) => {
     setAppState((prev) => ({
       ...prev,
@@ -329,12 +341,18 @@ export default function FlashcardApp() {
     }));
   };
 
+  const handleStartAIQuiz = (questions: any[]) => {
+    if (questions.length > 0) {
+      setCurrentQuiz({
+        questions,
+        config: currentQuiz?.config || ({} as QuizConfigType),
+      });
+      setAppState((prev) => ({ ...prev, quizMode: "session" }));
+    }
+  };
+
   const handleStartQuiz = (config: QuizConfigType) => {
-    const questions = generateQuiz(
-      decks.map((deck) => deck.cards).flat() || [],
-      config
-    );
-    console.log("Generated questions:", questions);
+    const questions = generateQuiz(allDecks || [], config);
     if (questions.length > 0) {
       setCurrentQuiz({ questions, config });
       setAppState((prev) => ({ ...prev, quizMode: "session" }));
@@ -350,7 +368,7 @@ export default function FlashcardApp() {
     if (currentQuiz) {
       const questions = generateQuiz(
         currentDeck?.cards || [],
-        currentQuiz.config
+        currentQuiz?.config || ({} as QuizConfigType),
       );
       setCurrentQuiz({ ...currentQuiz, questions });
       setAppState((prev) => ({ ...prev, quizMode: "session" }));
@@ -363,10 +381,20 @@ export default function FlashcardApp() {
     setAppState((prev) => ({ ...prev, quizMode: null }));
   };
 
+  if (appState.quizMode === "ai-config") {
+    return (
+      <AIQuizSetup
+        cards={allDecks || []}
+        onStartQuiz={handleStartAIQuiz}
+        onCancel={handleExitQuiz}
+      />
+    );
+  }
+
   if (appState.quizMode === "config") {
     return (
       <QuizSetup
-        cards={decks.map((deck) => deck.cards).flat() || []}
+        cards={allDecks || []}
         onStartQuiz={handleStartQuiz}
         onCancel={handleExitQuiz}
       />
@@ -485,9 +513,6 @@ export default function FlashcardApp() {
       />
     );
   }
-
-  // Hick's Law: deck limiting state
-  const visibleDecks = showAllDecks ? decks : decks.slice(0, 5);
 
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
@@ -626,6 +651,24 @@ export default function FlashcardApp() {
                   <Target className="h-3 w-3 mr-1" />
                   Quiz
                 </Button>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() =>
+                    setAppState((prev) => ({ ...prev, quizMode: "ai-config" }))
+                  }
+                  disabled={displayCards.length === 0}
+                  sx={{
+                    width: "100%",
+                    fontSize: "0.75rem",
+                    color: displayCards.length === 0 ? "#888" : "inherit",
+                    borderColor: "white.main",
+                    py: 0.5,
+                  }}
+                >
+                  <Sparkles className="h-3 w-3 mr-1" />
+                  AI Quiz
+                </Button>
               </Stack>
 
               <ViewModeToggle
@@ -639,7 +682,7 @@ export default function FlashcardApp() {
         </Box>
         <Box sx={{ mb: 1.5 }}>
           <DeckSelector
-            decks={visibleDecks}
+            decks={decks}
             currentDeckId={appState.currentDeckId}
             onDeckChange={(deckId) =>
               setAppState((prev) => ({
@@ -649,16 +692,6 @@ export default function FlashcardApp() {
               }))
             }
           />
-          {decks.length > 5 && (
-            <Button
-              size="small"
-              onClick={() => setShowAllDecks((prev) => !prev)}
-              sx={{ mt: 1 }}
-              aria-label={showAllDecks ? "Show less decks" : "Show all decks"}
-            >
-              {showAllDecks ? "Show Less" : "Show All Decks"}
-            </Button>
-          )}
         </Box>
       </Container>
       <Container maxWidth="xl" sx={{ py: 2 }}>

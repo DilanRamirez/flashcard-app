@@ -1,65 +1,77 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Flag, Check, X, Lightbulb, BookOpen, RotateCcw } from "lucide-react"
-import type { Flashcard, UserCardState } from "@/app/page"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Flag, Check, X, Lightbulb, BookOpen, RotateCcw } from "lucide-react";
+import type { Flashcard, UserCardState } from "@/app/page";
 
 interface GridViewProps {
-  cards: Flashcard[]
-  userCardStates: UserCardState
-  onUpdateCardState: (cardId: string, updates: Partial<UserCardState[string]>) => void
+  cards: Flashcard[];
+  userCardStates: UserCardState;
+  onUpdateCardState: (
+    cardId: string,
+    updates: Partial<UserCardState[string]>,
+  ) => void;
 }
 
-export function GridView({ cards, userCardStates, onUpdateCardState }: GridViewProps) {
-  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set())
+export function GridView({
+  cards,
+  userCardStates,
+  onUpdateCardState,
+}: GridViewProps) {
+  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
 
   const toggleCard = (cardId: string) => {
     setFlippedCards((prev) => {
-      const newSet = new Set(prev)
+      const newSet = new Set(prev);
       if (newSet.has(cardId)) {
-        newSet.delete(cardId)
+        newSet.delete(cardId);
       } else {
-        newSet.add(cardId)
+        newSet.add(cardId);
       }
-      return newSet
-    })
-  }
+      return newSet;
+    });
+  };
 
   const handleMarkKnown = (card: Flashcard, e: React.MouseEvent) => {
-    e.stopPropagation()
-    const currentState = userCardStates[card.id]
+    e.stopPropagation();
+    const currentState = userCardStates[card.id];
     onUpdateCardState(card.id, {
       known: true,
       confidence: Math.min((currentState?.confidence || 0) + 1, 5),
-    })
-  }
+    });
+  };
 
   const handleMarkUnknown = (card: Flashcard, e: React.MouseEvent) => {
-    e.stopPropagation()
-    const currentState = userCardStates[card.id]
+    e.stopPropagation();
+    const currentState = userCardStates[card.id];
     onUpdateCardState(card.id, {
       known: false,
       confidence: Math.max((currentState?.confidence || 0) - 1, 0),
-    })
-  }
+    });
+  };
 
   const handleToggleFlag = (card: Flashcard, e: React.MouseEvent) => {
-    e.stopPropagation()
-    const currentState = userCardStates[card.id]
-    onUpdateCardState(card.id, { flagged: !(currentState?.flagged || false) })
-  }
+    e.stopPropagation();
+    const currentState = userCardStates[card.id];
+    onUpdateCardState(card.id, { flagged: !(currentState?.flagged || false) });
+  };
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">All Cards ({cards.length})</h2>
-        <Button variant="outline" size="sm" onClick={() => setFlippedCards(new Set())} className="text-xs">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setFlippedCards(new Set())}
+          className="text-xs"
+        >
           <RotateCcw className="h-3 w-3 mr-1" />
           Reset All
         </Button>
@@ -67,8 +79,8 @@ export function GridView({ cards, userCardStates, onUpdateCardState }: GridViewP
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {cards.map((card) => {
-          const isFlipped = flippedCards.has(card.id)
-          const cardState = userCardStates[card.id]
+          const isFlipped = flippedCards.has(card.id);
+          const cardState = userCardStates[card.id];
 
           return (
             <Card
@@ -128,7 +140,9 @@ export function GridView({ cards, userCardStates, onUpdateCardState }: GridViewP
                         <BookOpen className="h-3 w-3" />
                         Question
                       </div>
-                      <div className="text-sm font-medium leading-relaxed line-clamp-6">{card.front}</div>
+                      <div className="text-sm font-medium leading-relaxed line-clamp-6">
+                        {card.front}
+                      </div>
                     </div>
                   ) : (
                     <div className="space-y-3">
@@ -137,7 +151,9 @@ export function GridView({ cards, userCardStates, onUpdateCardState }: GridViewP
                           <Check className="h-3 w-3" />
                           Answer
                         </div>
-                        <div className="text-sm leading-relaxed line-clamp-4">{card.back}</div>
+                        <div className="text-sm leading-relaxed line-clamp-4">
+                          {card.back}
+                        </div>
                       </div>
 
                       {card.example && (
@@ -148,7 +164,9 @@ export function GridView({ cards, userCardStates, onUpdateCardState }: GridViewP
                               <BookOpen className="h-3 w-3" />
                               Example
                             </div>
-                            <div className="text-xs text-muted-foreground italic line-clamp-2">{card.example}</div>
+                            <div className="text-xs text-muted-foreground italic line-clamp-2">
+                              {card.example}
+                            </div>
                           </div>
                         </>
                       )}
@@ -161,7 +179,9 @@ export function GridView({ cards, userCardStates, onUpdateCardState }: GridViewP
                               <Lightbulb className="h-3 w-3" />
                               Memory Aid
                             </div>
-                            <div className="text-xs font-medium text-primary line-clamp-1">{card.mnemonic}</div>
+                            <div className="text-xs font-medium text-primary line-clamp-1">
+                              {card.mnemonic}
+                            </div>
                           </div>
                         </>
                       )}
@@ -198,12 +218,14 @@ export function GridView({ cards, userCardStates, onUpdateCardState }: GridViewP
                   </div>
                 )}
 
-                <div className="text-center text-xs text-muted-foreground mt-2">{card.subject}</div>
+                <div className="text-center text-xs text-muted-foreground mt-2">
+                  {card.subject}
+                </div>
               </CardContent>
             </Card>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

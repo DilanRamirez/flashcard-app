@@ -21,7 +21,7 @@ interface StudySessionProps {
   userCardStates: UserCardState;
   onUpdateCardState: (
     cardId: string,
-    updates: Partial<UserCardState[string]>
+    updates: Partial<UserCardState[string]>,
   ) => void;
   onExit: () => void;
 }
@@ -127,7 +127,7 @@ export function StudySession({
   };
 
   const sessionDuration = Math.floor(
-    (Date.now() - sessionStats.startTime) / 1000
+    (Date.now() - sessionStats.startTime) / 1000,
   );
   const minutes = Math.floor(sessionDuration / 60);
   const seconds = sessionDuration % 60;
@@ -139,7 +139,7 @@ export function StudySession({
         ? Math.round(
             (sessionStats.correct /
               (sessionStats.correct + sessionStats.incorrect)) *
-              100
+              100,
           )
         : 0;
 

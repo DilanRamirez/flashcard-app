@@ -55,8 +55,8 @@ export function QuizSession({
         const correctWords = currentQuestion.blanks || [];
         isCorrect = correctWords.every((word) =>
           userWords.some(
-            (userWord) => userWord.includes(word) || word.includes(userWord)
-          )
+            (userWord) => userWord.includes(word) || word.includes(userWord),
+          ),
         );
         break;
       case "true-false":
@@ -66,7 +66,7 @@ export function QuizSession({
         const userMatches = currentAnswer as { [key: string]: string };
         const correctMatches = JSON.parse(currentQuestion.correctAnswer);
         isCorrect = Object.keys(correctMatches).every(
-          (key) => userMatches[key] === correctMatches[key]
+          (key) => userMatches[key] === correctMatches[key],
         );
         break;
     }

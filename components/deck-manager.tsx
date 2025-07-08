@@ -23,7 +23,7 @@ export function DeckManager({ onAddDeck, onRefreshDecks }: DeckManagerProps) {
   const [showJsonInput, setShowJsonInput] = useState(false);
 
   const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
     if (!file) return;

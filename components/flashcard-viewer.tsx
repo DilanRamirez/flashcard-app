@@ -136,8 +136,8 @@ export function FlashcardViewer({
                       card.difficulty === "Beginner"
                         ? "default"
                         : card.difficulty === "Intermediate"
-                        ? "secondary"
-                        : "destructive"
+                          ? "secondary"
+                          : "destructive"
                     }
                     className="text-xs"
                   >

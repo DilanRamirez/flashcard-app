@@ -3,7 +3,7 @@ import { QuizConfig, QuizQuestion } from "@/types/quiz";
 
 export function filterCards(
   allCards: Flashcard[],
-  config: QuizConfig
+  config: QuizConfig,
 ): Flashcard[] {
   return allCards.filter((card) => {
     let keep = true;
@@ -31,7 +31,7 @@ export function filterCards(
 
 export function generateQuiz(
   allCards: Flashcard[],
-  config: QuizConfig
+  config: QuizConfig,
 ): QuizQuestion[] {
   const filteredCards = filterCards(allCards, config);
   if (filteredCards.length === 0) {
@@ -42,7 +42,7 @@ export function generateQuiz(
   const shuffledCards = [...filteredCards].sort(() => Math.random() - 0.5);
   const selectedCards = shuffledCards.slice(
     0,
-    Math.min(config.questionCount, filteredCards.length)
+    Math.min(config.questionCount, filteredCards.length),
   );
 
   const questions: QuizQuestion[] = [];
@@ -80,7 +80,7 @@ export function generateQuiz(
 
 function generateMultipleChoice(
   card: Flashcard,
-  allCards: Flashcard[]
+  allCards: Flashcard[],
 ): QuizQuestion {
   const correctAnswer = card.back;
 
@@ -89,12 +89,14 @@ function generateMultipleChoice(
     (c) =>
       c.id !== card.id &&
       (c.category === card.category ||
-        (card.tags && c.tags && card.tags.some((tag) => c.tags?.includes(tag))))
+        (card.tags &&
+          c.tags &&
+          card.tags.some((tag) => c.tags?.includes(tag)))),
   );
 
   // Get 3 random distractors
   const shuffledDistractors = potentialDistractors.sort(
-    () => Math.random() - 0.5
+    () => Math.random() - 0.5,
   );
   const distractors = shuffledDistractors.slice(0, 3).map((c) => c.back);
 
@@ -108,7 +110,7 @@ function generateMultipleChoice(
 
   // Shuffle options
   const options = [correctAnswer, ...distractors].sort(
-    () => Math.random() - 0.5
+    () => Math.random() - 0.5,
   );
 
   return {
@@ -131,7 +133,7 @@ function generateFillInBlank(card: Flashcard): QuizQuestion {
   // First try to use tags as key words
   if (card.tags) {
     keyWords = card.tags.filter((tag) =>
-      text.toLowerCase().includes(tag.toLowerCase())
+      text.toLowerCase().includes(tag.toLowerCase()),
     );
   }
 
@@ -141,7 +143,7 @@ function generateFillInBlank(card: Flashcard): QuizQuestion {
       .filter(
         (word) =>
           word.length > 3 &&
-          !/^(the|and|or|but|in|on|at|to|for|of|with|by)$/i.test(word)
+          !/^(the|and|or|but|in|on|at|to|for|of|with|by)$/i.test(word),
       )
       .sort((a, b) => b.length - a.length);
     keyWords = sortedWords.slice(0, Math.min(2, sortedWords.length));
@@ -172,7 +174,7 @@ function generateFillInBlank(card: Flashcard): QuizQuestion {
 
 function generateTrueFalse(
   card: Flashcard,
-  allCards: Flashcard[]
+  allCards: Flashcard[],
 ): QuizQuestion {
   const isTrue = Math.random() > 0.5;
   let statement = card.back;
@@ -217,7 +219,7 @@ function generateMatching(cards: Flashcard[]): QuizQuestion {
 
   // Shuffle the right column
   const shuffledRights = [...pairs.map((p) => p.right)].sort(
-    () => Math.random() - 0.5
+    () => Math.random() - 0.5,
   );
   const shuffledPairs = pairs.map((pair, index) => ({
     ...pair,
@@ -230,10 +232,13 @@ function generateMatching(cards: Flashcard[]): QuizQuestion {
     cardId: cards[0].id, // Use first card's ID as primary
     question: "Match each question with its correct answer:",
     correctAnswer: JSON.stringify(
-      pairs.reduce((acc, pair) => {
-        acc[pair.left] = pair.right;
-        return acc;
-      }, {} as { [key: string]: string })
+      pairs.reduce(
+        (acc, pair) => {
+          acc[pair.left] = pair.right;
+          return acc;
+        },
+        {} as { [key: string]: string },
+      ),
     ),
     pairs: shuffledPairs,
   };

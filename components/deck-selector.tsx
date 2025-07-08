@@ -30,15 +30,16 @@ export function DeckSelector({
   currentDeckId,
   onDeckChange,
 }: DeckSelectorProps) {
-  console.log("decks", decks);
-
   // Group decks by course
-  const groupedDecks: Record<string, Deck[]> = decks.reduce((acc, deck) => {
-    const course = deck.course;
-    if (!acc[course]) acc[course] = [];
-    acc[course].push(deck);
-    return acc;
-  }, {} as Record<string, Deck[]>);
+  const groupedDecks: Record<string, Deck[]> = decks.reduce(
+    (acc, deck) => {
+      const course = deck.course;
+      if (!acc[course]) acc[course] = [];
+      acc[course].push(deck);
+      return acc;
+    },
+    {} as Record<string, Deck[]>,
+  );
 
   // Sort decks in each course group by id
   Object.values(groupedDecks).forEach((group) => {

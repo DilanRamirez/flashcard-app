@@ -1,19 +1,24 @@
-"use client"
+"use client";
 
-import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Shuffle, ArrowUpDown } from "lucide-react"
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Shuffle, ArrowUpDown } from "lucide-react";
 
 interface ProgressIndicatorProps {
-  currentIndex: number
-  total: number
-  isShuffled: boolean
-  onShuffleToggle: () => void
+  currentIndex: number;
+  total: number;
+  isShuffled: boolean;
+  onShuffleToggle: () => void;
 }
 
-export function ProgressIndicator({ currentIndex, total, isShuffled, onShuffleToggle }: ProgressIndicatorProps) {
-  const progress = total > 0 ? ((currentIndex + 1) / total) * 100 : 0
+export function ProgressIndicator({
+  currentIndex,
+  total,
+  isShuffled,
+  onShuffleToggle,
+}: ProgressIndicatorProps) {
+  const progress = total > 0 ? ((currentIndex + 1) / total) * 100 : 0;
 
   return (
     <div className="space-y-3">
@@ -47,5 +52,5 @@ export function ProgressIndicator({ currentIndex, total, isShuffled, onShuffleTo
       </div>
       <Progress value={progress} className="h-2" />
     </div>
-  )
+  );
 }

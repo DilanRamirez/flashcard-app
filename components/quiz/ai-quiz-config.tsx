@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -11,37 +12,48 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { X, Play, Settings } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { X, Sparkles, AlertCircle } from "lucide-react";
 import type { Flashcard } from "@/app/page";
+import type { QuizConfig } from "@/types/quiz";
 import { getAvailableFilters } from "@/lib/quiz-generator";
-import { QuestionType, QuizConfig } from "@/types/quiz";
-import { Checkbox } from "@mui/material";
+import {
+  generateAIQuiz,
+  generateCacheKey,
+  getCachedAIQuiz,
+  setCachedAIQuiz,
+} from "@/lib/ai-quiz-generator";
 
-interface QuizConfigProps {
+interface AIQuizSetupProps {
   cards: Flashcard[];
-  onStartQuiz: (config: QuizConfig) => void;
+  onStartQuiz: (questions: any[]) => void;
   onCancel: () => void;
 }
 
-const questionTypeLabels: Record<QuestionType, string> = {
-  "multiple-choice": "Multiple Choice",
-  "fill-in-blank": "Fill in the Blank",
-  "true-false": "True/False",
-  matching: "Matching",
-};
-
-export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
+export function AIQuizSetup({
+  cards,
+  onStartQuiz,
+  onCancel,
+}: AIQuizSetupProps) {
   const [config, setConfig] = useState<QuizConfig>({
     subjects: [],
     courses: [],
     modules: [],
     categories: [],
     tags: [],
-    questionTypes: ["multiple-choice"],
+    questionTypes: ["multiple-choice"], // AI only supports multiple choice for now
     questionCount: 10,
   });
+
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [status, setStatus] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
+  const [useCache, setUseCache] = useState(true);
 
   const filters = getAvailableFilters(cards);
 
@@ -73,15 +85,6 @@ export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
     }));
   };
 
-  const toggleQuestionType = (type: QuestionType) => {
-    setConfig((prev) => ({
-      ...prev,
-      questionTypes: prev.questionTypes.includes(type)
-        ? prev.questionTypes.filter((t) => t !== type)
-        : [...prev.questionTypes, type],
-    }));
-  };
-
   const filteredCardCount = cards.filter((card) => {
     let keep = true;
     if (config.subjects.length > 0)
@@ -98,7 +101,62 @@ export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
     return keep;
   }).length;
 
-  const canStartQuiz = filteredCardCount > 0 && config.questionTypes.length > 0;
+  const canStartQuiz = filteredCardCount > 0 && config.questionCount > 0;
+
+  const handleGenerateQuiz = async () => {
+    setIsGenerating(true);
+    setProgress(0);
+    setStatus("Initializing...");
+    setErrors([]);
+
+    try {
+      // Check cache first
+      const cacheKey = generateCacheKey(config);
+      const questions = useCache ? getCachedAIQuiz(cacheKey) : null;
+
+      if (questions && questions.length > 0) {
+        setStatus("Using cached questions...");
+        setProgress(100);
+        setTimeout(() => {
+          onStartQuiz(questions);
+        }, 500);
+        return;
+      }
+
+      // Generate new questions
+      const result = await generateAIQuiz(cards, config, (prog, stat) => {
+        setProgress(prog);
+        setStatus(stat);
+      });
+
+      if (result.questions.length > 0) {
+        // Cache the results
+        if (useCache) {
+          setCachedAIQuiz(cacheKey, result.questions);
+        }
+
+        setStatus("Quiz ready!");
+        setTimeout(() => {
+          onStartQuiz(result.questions);
+        }, 500);
+      } else {
+        setErrors([
+          "No questions were generated. Please try again or check your API configuration.",
+        ]);
+      }
+
+      if (result.errors.length > 0) {
+        setErrors(result.errors);
+      }
+    } catch (error) {
+      console.error("AI Quiz generation failed:", error);
+      setErrors([
+        error instanceof Error ? error.message : "Unknown error occurred",
+      ]);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -106,10 +164,18 @@ export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
         <div className="container mx-auto px-3 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Settings className="h-5 w-5" />
-              <h1 className="text-lg font-bold">Quiz Configuration</h1>
+              <Sparkles className="h-5 w-5 text-primary" />
+              <h1 className="text-lg font-bold">AI Quiz Generator</h1>
+              <Badge variant="secondary" className="text-xs">
+                Powered by Gemini
+              </Badge>
             </div>
-            <Button variant="outline" size="sm" onClick={onCancel}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onCancel}
+              disabled={isGenerating}
+            >
               <X className="h-4 w-4 mr-1" />
               Cancel
             </Button>
@@ -119,29 +185,54 @@ export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
 
       <main className="container mx-auto px-3 py-4">
         <div className="max-w-2xl mx-auto space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Question Types</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {(Object.keys(questionTypeLabels) as QuestionType[]).map(
-                (type) => (
-                  <div key={type} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={type}
-                      checked={config.questionTypes.includes(type)}
-                      onChange={() => toggleQuestionType(type)}
-                    />
-                    <Label htmlFor={type}>{questionTypeLabels[type]}</Label>
-                  </div>
-                ),
-              )}
-            </CardContent>
-          </Card>
+          {/* API Key Warning */}
+          {!process.env.NEXT_PUBLIC_GEMINI_API_KEY && (
+            <Alert>
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>
+                Gemini API key not configured. Add{" "}
+                <code>NEXT_PUBLIC_GEMINI_API_KEY</code> to your environment
+                variables.
+              </AlertDescription>
+            </Alert>
+          )}
 
+          {/* Progress */}
+          {isGenerating && (
+            <Card>
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="h-4 w-4 animate-spin text-primary" />
+                    <span className="font-medium">
+                      Generating AI Quiz Questions...
+                    </span>
+                  </div>
+                  <Progress value={progress} className="h-2" />
+                  <p className="text-sm text-muted-foreground">{status}</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Errors */}
+          {errors.length > 0 && (
+            <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>
+                <div className="space-y-1">
+                  {errors.map((error, index) => (
+                    <div key={index}>{error}</div>
+                  ))}
+                </div>
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {/* Filters */}
           <Card>
             <CardHeader>
-              <CardTitle>Filters</CardTitle>
+              <CardTitle>Content Filters</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Subjects */}
@@ -172,38 +263,6 @@ export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
                         size="sm"
                         className="h-auto p-0 ml-1"
                         onClick={() => removeFilter("subjects", subject)}
-                      >
-                        <X className="h-3 w-3" />
-                      </Button>
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-
-              {/* Courses */}
-              <div className="space-y-2">
-                <Label>Courses</Label>
-                <Select onValueChange={(value) => addFilter("courses", value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Add course filter..." />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {filters.courses.map((course) => (
-                      <SelectItem key={course} value={course}>
-                        {course}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <div className="flex flex-wrap gap-1">
-                  {config.courses.map((course) => (
-                    <Badge key={course} variant="secondary" className="text-xs">
-                      {course}
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-auto p-0 ml-1"
-                        onClick={() => removeFilter("courses", course)}
                       >
                         <X className="h-3 w-3" />
                       </Button>
@@ -284,9 +343,10 @@ export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
             </CardContent>
           </Card>
 
+          {/* Quiz Settings */}
           <Card>
             <CardHeader>
-              <CardTitle>Quiz Settings</CardTitle>
+              <CardTitle>AI Quiz Settings</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
@@ -295,7 +355,7 @@ export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
                   id="questionCount"
                   type="number"
                   min="1"
-                  max={filteredCardCount}
+                  max={Math.min(filteredCardCount, 50)}
                   value={config.questionCount}
                   onChange={(e) =>
                     setConfig((prev) => ({
@@ -311,23 +371,60 @@ export function QuizSetup({ cards, onStartQuiz, onCancel }: QuizConfigProps) {
                   Available cards with current filters: {filteredCardCount}
                 </p>
               </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="useCache"
+                  checked={useCache}
+                  onCheckedChange={(checked) => setUseCache(checked === true)}
+                />
+                <Label htmlFor="useCache" className="text-sm">
+                  Use cached questions when available (faster)
+                </Label>
+              </div>
+
+              <div className="p-3 bg-muted rounded-lg text-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="h-4 w-4 text-primary" />
+                  <span className="font-medium">AI Enhancement Features:</span>
+                </div>
+                <ul className="space-y-1 text-muted-foreground">
+                  <li>
+                    • Intelligent multiple-choice questions with plausible
+                    distractors
+                  </li>
+                  <li>• Context-aware wrong answers from related concepts</li>
+                  <li>• Difficulty-matched question complexity</li>
+                  <li>• Enhanced question phrasing for clarity</li>
+                </ul>
+              </div>
             </CardContent>
           </Card>
 
+          {/* Generate Button */}
           <div className="flex gap-3">
             <Button
-              onClick={() => onStartQuiz(config)}
-              disabled={!canStartQuiz}
+              onClick={handleGenerateQuiz}
+              disabled={
+                !canStartQuiz ||
+                isGenerating ||
+                !process.env.NEXT_PUBLIC_GEMINI_API_KEY
+              }
               className="flex-1"
             >
-              <Play className="h-4 w-4 mr-2" />
-              Start Quiz ({Math.min(
-                config.questionCount,
-                filteredCardCount,
-              )}{" "}
-              questions)
+              <Sparkles className="h-4 w-4 mr-2" />
+              {isGenerating
+                ? "Generating..."
+                : `Generate AI Quiz (${Math.min(
+                    config.questionCount,
+                    filteredCardCount,
+                  )} questions)`}
             </Button>
-            <Button variant="outline" onClick={onCancel}>
+            <Button
+              variant="outline"
+              onClick={onCancel}
+              disabled={isGenerating}
+            >
               Cancel
             </Button>
           </div>

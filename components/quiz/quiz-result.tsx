@@ -73,7 +73,7 @@ export function QuizResults({
               <div className="text-center space-y-4">
                 <div
                   className={`text-6xl font-bold ${getScoreColor(
-                    result.percentage
+                    result.percentage,
                   )}`}
                 >
                   {result.percentage}%
@@ -128,7 +128,7 @@ export function QuizResults({
               <CardContent className="space-y-4">
                 {wrongAnswers.map((answer, index) => {
                   const question = result.questions.find(
-                    (q) => q.id === answer.questionId
+                    (q) => q.id === answer.questionId,
                   );
                   if (!question) return null;
 
