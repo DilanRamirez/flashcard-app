@@ -4,6 +4,7 @@ export interface CardStats {
   times_seen: number;
   answered_correctly: boolean | null;
   last_seen: string;
+  known?: boolean; // Optional field to indicate if the card is known
   // Optional extended fields for advanced analytics
   confidence_history?: { date: string; value: number }[];
   quiz_attempts?: number;

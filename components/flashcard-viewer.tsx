@@ -160,13 +160,13 @@ export function FlashcardViewer({
                     {card.difficulty}
                   </Badge>
                 )}
-                {cardState?.flagged && (
+                {card.stats?.flagged && (
                   <Badge variant="destructive" className="text-xs">
                     <Flag className="h-2 w-2 mr-1" />
                     Flagged
                   </Badge>
                 )}
-                {cardState?.known && (
+                {card.stats?.known && (
                   <Badge variant="default" className="text-xs">
                     <Check className="h-2 w-2 mr-1" />
                     Known

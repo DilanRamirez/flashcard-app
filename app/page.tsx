@@ -39,7 +39,12 @@ import { StudyPathDashboard } from "@/components/study-plan/study-plan-dashboard
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 // Import the tracking functions
-import { trackQuizAnswer, updateCardStats } from "@/lib/learning-analytics";
+import {
+  CardStats,
+  getAllCardStats,
+  trackQuizAnswer,
+  updateCardStats,
+} from "@/lib/learning-analytics";
 
 export interface Flashcard {
   id: string;
@@ -59,6 +64,7 @@ export interface Flashcard {
     | "Intermediate"
     | "Advanced";
   tags?: string[];
+  stats?: CardStats;
 }
 
 export interface UserCardState {
@@ -136,15 +142,38 @@ export default function FlashcardApp() {
       setIsLoading(true);
       setLoadError(null);
 
+      // Load the base deck data
       const loadedDecks = await loadDecks();
-      setDecks(loadedDecks);
+
+      // Get all flashcard stats from localStorage
+      const flashcardStats = getAllCardStats();
+
+      // Enrich each card with its stats if available
+      const enrichedDecks = loadedDecks.map((deck) => ({
+        ...deck,
+        cards: deck.cards.map((card) => {
+          // Check if we have stats for this card ID
+          const cardStats = flashcardStats[card.id];
+
+          return {
+            ...card,
+            // Add stats field if we have data for this card
+            stats: cardStats || undefined,
+          };
+        }),
+      }));
+
+      setDecks(enrichedDecks);
 
       // Set initial deck if none selected
       if (
-        loadedDecks.length > 0 &&
-        !loadedDecks.find((deck) => deck.id === appState.currentDeckId)
+        enrichedDecks.length > 0 &&
+        !enrichedDecks.find((deck) => deck.id === appState.currentDeckId)
       ) {
-        setAppState((prev) => ({ ...prev, currentDeckId: loadedDecks[0].id }));
+        setAppState((prev) => ({
+          ...prev,
+          currentDeckId: enrichedDecks[0].id,
+        }));
       }
     } catch (error) {
       console.error("Error loading decks:", error);
@@ -215,7 +244,7 @@ export default function FlashcardApp() {
     });
 
   const filteredCards =
-    currentDeck?.cards.filter((card) => {
+    allDecks.filter((card) => {
       // If we have specific card IDs to show, filter by those first
       if (
         appState.filteredCardIds &&
@@ -330,7 +359,6 @@ export default function FlashcardApp() {
     cardId: string,
     updates: Partial<UserCardState[string]>,
   ) => {
-    console.log(`Updating card state for ${cardId}:`, updates);
     setAppState((prev) => ({
       ...prev,
       userCardStates: {
@@ -651,12 +679,6 @@ export default function FlashcardApp() {
                   <SettingsIcon fontSize="small" sx={{ mr: 1 }} />
                   Filter
                 </Button>
-              </Stack>
-              <Stack
-                direction={{ xs: "row", sm: "row" }}
-                sx={{ width: "100%", mb: 1 }}
-                spacing={1}
-              >
                 <Button
                   color="primary"
                   variant="outlined"
@@ -679,6 +701,12 @@ export default function FlashcardApp() {
                   <DescriptionIcon fontSize="small" sx={{ mr: 1 }} />
                   Decks
                 </Button>
+              </Stack>
+              <Stack
+                direction={{ xs: "row", sm: "row" }}
+                sx={{ width: "100%", mb: 1 }}
+                spacing={1}
+              >
                 <Button
                   variant="outlined"
                   size="small"
@@ -801,7 +829,7 @@ export default function FlashcardApp() {
                   <AccordionDetails>
                     <Card sx={{ p: 2 }}>
                       <FilterPanel
-                        cards={currentDeck?.cards || []}
+                        cards={allDecks || []}
                         searchQuery={appState.searchQuery}
                         filters={appState.filters}
                         onSearchChange={(query) =>

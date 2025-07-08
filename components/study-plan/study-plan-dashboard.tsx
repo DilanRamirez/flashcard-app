@@ -404,25 +404,23 @@ export function StudyPathDashboard({
                     </Alert>
                   )}
 
-                  {!aiPlan && !isGeneratingAI && (
-                    <div className="text-center py-8">
-                      <Sparkles className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <h3 className="text-lg font-semibold mb-2">
-                        Get Personalized AI Insights
-                      </h3>
-                      <p className="text-muted-foreground mb-4">
-                        Let AI analyze your learning patterns and create a
-                        customized study plan.
-                      </p>
-                      <Button
-                        onClick={generateAIPlan}
-                        disabled={!process.env.NEXT_PUBLIC_GEMINI_API_KEY}
-                      >
-                        <Sparkles className="h-4 w-4 mr-2" />
-                        Generate AI Study Plan
-                      </Button>
-                    </div>
-                  )}
+                  <div className="text-center py-8">
+                    <Sparkles className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                    <h3 className="text-lg font-semibold mb-2">
+                      Get Personalized AI Insights
+                    </h3>
+                    <p className="text-muted-foreground mb-4">
+                      Let AI analyze your learning patterns and create a
+                      customized study plan.
+                    </p>
+                    <Button
+                      onClick={generateAIPlan}
+                      disabled={!process.env.NEXT_PUBLIC_GEMINI_API_KEY}
+                    >
+                      <Sparkles className="h-4 w-4 mr-2" />
+                      Generate AI Study Plan
+                    </Button>
+                  </div>
 
                   {isGeneratingAI && (
                     <div className="text-center py-8">
