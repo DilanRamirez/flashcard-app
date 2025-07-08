@@ -40,7 +40,7 @@ export function GridView({
         newSet.delete(cardId);
       } else {
         newSet.add(cardId);
-        trackCardFlip(cardId);
+        trackCardFlip(cardId, !prev.has(cardId));
       }
       return newSet;
     });
