@@ -19,6 +19,13 @@ import {
 } from "lucide-react";
 import type { Flashcard, UserCardState } from "@/app/page";
 
+// Import the tracking functions
+import {
+  trackCardFlip,
+  trackConfidenceRating,
+  trackCardFlag,
+} from "@/lib/learning-analytics";
+
 interface FlashcardViewerProps {
   card: Flashcard;
   cardState?: UserCardState[string];
@@ -89,22 +96,31 @@ export function FlashcardViewer({
 
   if (!card) return null;
 
-  const handleMarkKnown = () => {
-    onUpdateCardState({
-      known: true,
-      confidence: Math.min((cardState?.confidence || 0) + 1, 5),
-    });
-  };
-
-  const handleMarkUnknown = () => {
-    onUpdateCardState({
-      known: false,
-      confidence: Math.max((cardState?.confidence || 0) - 1, 0),
-    });
+  // In the FlashcardViewer component, add tracking to the flip handler
+  const handleCardFlip = () => {
+    setIsFlipped(!isFlipped);
+    if (card && isFlipped) {
+      // Track the flip interaction when revealing the answer
+      trackCardFlip(card.id, isFlipped);
+    }
   };
 
   const handleToggleFlag = () => {
-    onUpdateCardState({ flagged: !(cardState?.flagged || false) });
+    const newFlaggedState = !(cardState?.flagged || false);
+    onUpdateCardState({ flagged: newFlaggedState });
+    trackCardFlag(card.id, newFlaggedState);
+  };
+
+  const handleMarkKnown = () => {
+    const newConfidence = Math.min((cardState?.confidence || 0) + 0.2, 1.0);
+    onUpdateCardState({ known: true, confidence: newConfidence });
+    trackConfidenceRating(card.id, newConfidence);
+  };
+
+  const handleMarkUnknown = () => {
+    const newConfidence = Math.max((cardState?.confidence || 0) - 0.2, 0.0);
+    onUpdateCardState({ known: false, confidence: newConfidence });
+    trackConfidenceRating(card.id, newConfidence);
   };
 
   return (
@@ -115,7 +131,7 @@ export function FlashcardViewer({
           className={`min-h-[320px] sm:min-h-[400px] cursor-pointer transition-all duration-300 hover:shadow-lg active:scale-[0.98] ${
             isFlipped ? "bg-muted/50" : ""
           }`}
-          onClick={() => setIsFlipped(!isFlipped)}
+          onClick={handleCardFlip}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}

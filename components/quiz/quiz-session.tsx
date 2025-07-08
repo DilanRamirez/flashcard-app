@@ -10,6 +10,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Clock, ArrowRight } from "lucide-react";
 import type { QuizQuestion, QuizAnswer, QuizResult } from "@/types/quiz";
+// Import tracking function
+import { trackQuizAnswer } from "@/lib/learning-analytics";
 
 interface QuizSessionProps {
   questions: QuizQuestion[];
@@ -80,6 +82,9 @@ export function QuizSession({
 
     const newAnswers = [...answers, answer];
     setAnswers(newAnswers);
+
+    // Track the quiz answer in analytics
+    trackQuizAnswer(currentQuestion.id, isCorrect);
 
     if (isLastQuestion) {
       // Complete quiz

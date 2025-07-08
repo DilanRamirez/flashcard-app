@@ -10,6 +10,13 @@ import { Separator } from "@/components/ui/separator";
 import { Flag, Check, X, Lightbulb, BookOpen, RotateCcw } from "lucide-react";
 import type { Flashcard, UserCardState } from "@/app/page";
 
+// Import tracking functions
+import {
+  trackCardFlip,
+  trackConfidenceRating,
+  trackCardFlag,
+} from "@/lib/learning-analytics";
+
 interface GridViewProps {
   cards: Flashcard[];
   userCardStates: UserCardState;
@@ -33,6 +40,7 @@ export function GridView({
         newSet.delete(cardId);
       } else {
         newSet.add(cardId);
+        trackCardFlip(cardId);
       }
       return newSet;
     });
@@ -41,25 +49,31 @@ export function GridView({
   const handleMarkKnown = (card: Flashcard, e: React.MouseEvent) => {
     e.stopPropagation();
     const currentState = userCardStates[card.id];
+    const newConfidence = Math.min((currentState?.confidence || 0) + 0.2, 1.0);
     onUpdateCardState(card.id, {
       known: true,
       confidence: Math.min((currentState?.confidence || 0) + 1, 5),
     });
+    trackConfidenceRating(card.id, newConfidence);
   };
 
   const handleMarkUnknown = (card: Flashcard, e: React.MouseEvent) => {
     e.stopPropagation();
     const currentState = userCardStates[card.id];
+    const newConfidence = Math.max((currentState?.confidence || 0) - 0.2, 0.0);
     onUpdateCardState(card.id, {
       known: false,
       confidence: Math.max((currentState?.confidence || 0) - 1, 0),
     });
+    trackConfidenceRating(card.id, newConfidence);
   };
 
   const handleToggleFlag = (card: Flashcard, e: React.MouseEvent) => {
     e.stopPropagation();
     const currentState = userCardStates[card.id];
+    const newFlaggedState = !(currentState?.flagged || false);
     onUpdateCardState(card.id, { flagged: !(currentState?.flagged || false) });
+    trackCardFlag(card.id, newFlaggedState);
   };
 
   return (
@@ -126,7 +140,9 @@ export function GridView({
                       {Array.from({ length: 5 }, (_, i) => (
                         <div
                           key={i}
-                          className={`w-1 h-1 rounded-full ${i < cardState.confidence ? "bg-primary" : "bg-muted"}`}
+                          className={`w-1 h-1 rounded-full ${
+                            i < cardState.confidence ? "bg-primary" : "bg-muted"
+                          }`}
                         />
                       ))}
                     </div>
@@ -195,7 +211,9 @@ export function GridView({
                       variant="outline"
                       size="sm"
                       onClick={(e) => handleToggleFlag(card, e)}
-                      className={`h-7 px-2 ${cardState?.flagged ? "bg-destructive/10" : ""}`}
+                      className={`h-7 px-2 ${
+                        cardState?.flagged ? "bg-destructive/10" : ""
+                      }`}
                     >
                       <Flag className="h-3 w-3" />
                     </Button>

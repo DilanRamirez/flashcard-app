@@ -33,8 +33,13 @@ import type { QuizConfig as QuizConfigType, QuizResult } from "@/types/quiz";
 import { QuizSetup } from "@/components/quiz/quiz-config";
 import { QuizSession } from "@/components/quiz/quiz-session";
 import { QuizResults } from "@/components/quiz/quiz-result";
-import { Sparkles, Target } from "lucide-react";
+import { Brain, Sparkles, Target } from "lucide-react";
 import { AIQuizSetup } from "@/components/quiz/ai-quiz-config";
+import { StudyPathDashboard } from "@/components/study-plan/study-plan-dashboard";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+
+// Import the tracking functions
+import { trackQuizAnswer, updateCardStats } from "@/lib/learning-analytics";
 
 export interface Flashcard {
   id: string;
@@ -83,6 +88,8 @@ export interface AppState {
   viewMode: "single" | "grid" | "list";
   quizMode: "config" | "session" | "results" | "ai-config" | null;
   showDeckManager: boolean;
+  showStudyPath: boolean;
+  filteredCardIds: string[] | null; // For study path filtering
 }
 
 export default function FlashcardApp() {
@@ -114,6 +121,8 @@ export default function FlashcardApp() {
       viewMode: "single",
       showDeckManager: false,
       quizMode: null, // "config", "session", "results" or null
+      showStudyPath: false,
+      filteredCardIds: null,
     },
   );
 
@@ -207,6 +216,14 @@ export default function FlashcardApp() {
 
   const filteredCards =
     currentDeck?.cards.filter((card) => {
+      // If we have specific card IDs to show, filter by those first
+      if (
+        appState.filteredCardIds &&
+        !appState.filteredCardIds.includes(card.id)
+      ) {
+        return false;
+      }
+
       const matchesSearch =
         !appState.searchQuery ||
         card.front.toLowerCase().includes(appState.searchQuery.toLowerCase()) ||
@@ -313,6 +330,7 @@ export default function FlashcardApp() {
     cardId: string,
     updates: Partial<UserCardState[string]>,
   ) => {
+    console.log(`Updating card state for ${cardId}:`, updates);
     setAppState((prev) => ({
       ...prev,
       userCardStates: {
@@ -324,6 +342,8 @@ export default function FlashcardApp() {
         },
       },
     }));
+
+    updateCardStats(cardId, updates);
   };
 
   const resetFilters = () => {
@@ -362,6 +382,13 @@ export default function FlashcardApp() {
   const handleQuizComplete = (result: QuizResult) => {
     setQuizResult(result);
     setAppState((prev) => ({ ...prev, quizMode: "results" }));
+    // Track quiz performance for each question
+    result.answers.forEach((answer) => {
+      const question = result.questions.find((q) => q.id === answer.questionId);
+      if (question) {
+        trackQuizAnswer(question.cardId, answer.isCorrect);
+      }
+    });
   };
 
   const handleRetakeQuiz = () => {
@@ -380,6 +407,25 @@ export default function FlashcardApp() {
     setQuizResult(null);
     setAppState((prev) => ({ ...prev, quizMode: null }));
   };
+
+  if (appState.showStudyPath) {
+    return (
+      <StudyPathDashboard
+        cards={currentDeck?.cards || []}
+        onFilterCards={(cardIds) => {
+          setAppState((prev) => ({
+            ...prev,
+            showStudyPath: false,
+            filteredCardIds: cardIds,
+            currentCardIndex: 0,
+          }));
+        }}
+        onClose={() =>
+          setAppState((prev) => ({ ...prev, showStudyPath: false }))
+        }
+      />
+    );
+  }
 
   if (appState.quizMode === "ai-config") {
     return (
@@ -669,6 +715,25 @@ export default function FlashcardApp() {
                   <Sparkles className="h-3 w-3 mr-1" />
                   AI Quiz
                 </Button>
+
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() =>
+                    setAppState((prev) => ({ ...prev, showStudyPath: true }))
+                  }
+                  disabled={displayCards.length === 0}
+                  sx={{
+                    width: "100%",
+                    fontSize: "0.75rem",
+                    color: displayCards.length === 0 ? "#888" : "inherit",
+                    borderColor: "white.main",
+                    py: 0.5,
+                  }}
+                >
+                  <Brain className="h-3 w-3 mr-1" />
+                  Study Path
+                </Button>
               </Stack>
 
               <ViewModeToggle
@@ -696,6 +761,32 @@ export default function FlashcardApp() {
       </Container>
       <Container maxWidth="xl" sx={{ py: 2 }}>
         <Stack spacing={2}>
+          {appState.filteredCardIds && (
+            <div className="mb-4">
+              <Alert>
+                <Target className="h-4 w-4" />
+                <AlertDescription className="flex items-center justify-between">
+                  <span>
+                    Showing {filteredCards.length} cards from your study plan
+                  </span>
+                  <Button
+                    sx={{ mt: 2 }}
+                    size="small"
+                    aria-label="Show All Cards"
+                    onClick={() =>
+                      setAppState((prev) => ({
+                        ...prev,
+                        filteredCardIds: null,
+                      }))
+                    }
+                  >
+                    Show All Cards
+                  </Button>
+                </AlertDescription>
+              </Alert>
+            </div>
+          )}
+
           {(appState.showFilters || appState.showDeckManager) && (
             <Stack spacing={2}>
               {appState.showFilters && (

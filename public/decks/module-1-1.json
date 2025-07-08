@@ -4,7 +4,7 @@
   "category": "AWS Cloud Technical Essentials",
   "cards": [
     {
-      "id": "1",
+      "id": "1sdfs",
       "front": "Why should you upload critical files like photos to AWS instead of storing them only on your laptop?",
       "back": "Uploading to AWS ensures redundant copies exist in data centers, protecting against laptop failure and enabling access from anywhere.",
       "example": "I uploaded my family photos to an S3 bucket so I can view them from my phone even if my laptop crashes.",
@@ -17,7 +17,7 @@
       "tags": ["Storage", "S3"]
     },
     {
-      "id": "2",
+      "id": "2sdfsd",
       "front": "What is an AWS data center?",
       "back": "A facility containing servers, networking, and power infrastructure where AWS stores customer data and runs services.",
       "example": "My photos are stored on servers in an AWS data center in Northern Virginia.",
@@ -30,7 +30,7 @@
       "tags": ["Infrastructure", "DataCenter"]
     },
     {
-      "id": "3",
+      "id": "3sdfsqa",
       "front": "What is an AWS Availability Zone (AZ)?",
       "back": "A group of one or more data centers within a region, connected by redundant power and networking, providing high availability.",
       "example": "We deployed our web servers in two AZs to stay online even if one data center has an outage.",
@@ -43,7 +43,7 @@
       "tags": ["AvailabilityZone", "Redundancy"]
     },
     {
-      "id": "4",
+      "id": "xvxcv4",
       "front": "What defines an AWS region?",
       "back": "A geographic area made up of multiple Availability Zones, offering customers choice of where to host resources.",
       "example": "We chose the Europe (London) region to comply with UK data residency requirements.",
@@ -56,7 +56,7 @@
       "tags": ["Region", "Geography"]
     },
     {
-      "id": "5",
+      "id": "xvxcvxvc",
       "front": "What are the four main factors to consider when choosing an AWS region?",
       "back": "Compliance requirements, latency to users, regional pricing, and availability of services in that region.",
       "example": "We picked the Oregon region because it met our low-latency needs and offered the newest services at a good price.",
@@ -75,7 +75,7 @@
       ]
     },
     {
-      "id": "6",
+      "id": "6werwe",
       "front": "Why is compliance the first factor when selecting an AWS region?",
       "back": "Regulatory or legal requirements may mandate data to remain within specific geographic boundaries.",
       "example": "Our healthcare app must store patient data in the Canada Central region to meet Canadian privacy laws.",
@@ -88,7 +88,7 @@
       "tags": ["Compliance", "Regulatory"]
     },
     {
-      "id": "7",
+      "id": "sfddfsd7",
       "front": "How does latency influence AWS region choice?",
       "back": "Lower latency is achieved by placing resources closer to end users, improving application responsiveness.",
       "example": "We host our gaming servers in the Oregon region to minimize delay for West Coast players.",
@@ -101,7 +101,7 @@
       "tags": ["Latency", "Performance"]
     },
     {
-      "id": "8",
+      "id": "8qweqwe",
       "front": "Why can pricing vary between AWS regions?",
       "back": "Different regions have varying operational costs, taxes, and demand, affecting service prices.",
       "example": "Storing data in the São Paulo region costs more than in US East due to local taxes.",
@@ -114,7 +114,7 @@
       "tags": ["Pricing", "CostOptimization"]
     },
     {
-      "id": "9",
+      "id": "9hfghfg",
       "front": "What is service availability in an AWS region?",
       "back": "Not all AWS services launch in every region immediately, so you must verify needed services exist where you plan to run.",
       "example": "We delayed using a new AI service until it was available in our chosen region.",
@@ -127,7 +127,7 @@
       "tags": ["ServiceAvailability", "Features"]
     },
     {
-      "id": "10",
+      "id": "1gfhjhgj0",
       "front": "What is the AWS Global Edge Network?",
       "back": "A worldwide network of Edge locations and regional Edge caches that cache content closer to users to reduce latency.",
       "example": "Our website uses CloudFront to deliver images from the nearest Edge location, speeding up page loads for global visitors.",
@@ -140,7 +140,7 @@
       "tags": ["Edge", "CloudFront", "CDN"]
     },
     {
-      "id": "11",
+      "id": "1sdfsd1",
       "front": "What is an AWS Edge location?",
       "back": "A site within the Global Edge Network that caches content closer to end users to speed up data delivery.",
       "example": "Users in Tokyo fetch cached video segments from the Tokyo Edge location instead of Australia.",
@@ -153,7 +153,7 @@
       "tags": ["Edge", "Caching"]
     },
     {
-      "id": "12",
+      "id": "1qwe21342",
       "front": "How does Amazon CloudFront use the Global Edge Network?",
       "back": "CloudFront distributes and caches content at Edge locations and regional caches, automatically routing user requests to the nearest site.",
       "example": "We set up CloudFront for our S3 bucket, so static assets load quickly worldwide.",
