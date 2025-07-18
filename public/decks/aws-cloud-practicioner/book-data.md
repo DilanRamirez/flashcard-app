@@ -2,148 +2,159 @@
 
 ## Core Cloud Concepts
 
-1. **Deployment Models for Cloud Computing**
-2. **Benefits of Cloud Computing**
+- [Chapter 1: Deployment Models for Cloud Computing](#chapter-1-deployment-models-for-cloud-computing)
+- [Chapter 2: Benefits of Cloud Computing](#chapter-2-benefits-of-cloud-computing)
 
 ## Compute Services & Scaling
 
-3. **Amazon EC2 Pricing Models**
-4. **Scaling Amazon EC2**
-5. **Elastic Load Balancer**
-6. **Serverless and Container Computing**
+- [Chapter 3: Amazon EC2 Pricing Models](#chapter-3-amazon-ec2-pricing-models)
+- [Chapter 4: Scaling Amazon EC2](#chapter-4-scaling-amazon-ec2)
+- [Chapter 5: Elastic Load Balancer](#chapter-5-elastic-load-balancer)
+- [Chapter 6: Serverless and Container Computing](#chapter-6-serverless-and-container-computing)
 
 ## Messaging & Queuing
 
-7. **Amazon SNS – Sending the Right Message to the Right Crowd**
-8. **Amazon SQS – Letting the Orders Line Up Automatically**
+- [Chapter 7: Amazon SNS – Sending the Right Message to the Right Crowd](#chapter-7-amazon-sns--sending-the-right-message-to-the-right-crowd)
+- [Chapter 8: Amazon SQS – Letting the Orders Line Up Automatically](#chapter-8-amazon-sqs--letting-the-orders-line-up-automatically)
 
 ## Global Infrastructure
 
-9. **Selecting an AWS Region**
-10. **Availability Zones**
-11. **Edge Locations**
+- [Chapter 9: Selecting an AWS Region](#chapter-9-selecting-an-aws-region)
+- [Chapter 10: Availability Zones](#chapter-10-availability-zones)
+- [Chapter 11: Edge Locations](#chapter-11-edge-locations)
 
 ## Access & Management
 
-12. **Ways to Interact with AWS Services**
-13. **AWS Elastic Beanstalk and AWS CloudFormation**
-14. **Connectivity to AWS**
-15. **Subnets, Network ACLs, and Security Groups**
+- [Chapter 12: Ways to Interact with AWS Services](#chapter-12-ways-to-interact-with-aws-services)
+- [Chapter 13: AWS Elastic Beanstalk and AWS CloudFormation](#chapter-13-aws-elastic-beanstalk-and-aws-cloudformation)
+- [Chapter 14: Connectivity to AWS](#chapter-14-connectivity-to-aws)
+- [Chapter 15: Subnets, Network ACLs, and Security Groups](#chapter-15-subnets-network-acls-and-security-groups)
 
 ## Storage Services
 
-16. **Storage That Stays or Goes**
-17. **Storing Data Like a Pizza Shop Owner**
+- [Chapter 16: Storage That Stays or Goes](#chapter-16-storage-that-stays-or-goes)
+- [Chapter 17: Storing Data Like a Pizza Shop Owner](#chapter-17-storing-data-like-a-pizza-shop-owner)
 
 ## Database Services (Narrative Format)
 
-18. **The Shared Recipe Book** _(Relational Databases – Amazon RDS)_
-19. **The Coffee Shop Ledger** _(Amazon DynamoDB)_
-20. **The Flexible Clipboard** _(Amazon Redshift)_
-21. **The Data Super-Highway** _(AWS DMS)_
-22. **The Database Delivery Van** _(AWS Snow Family)_
-23. **The Specialty Shops of Data Town** _(Other Database Services)_
+- [Chapter 18: The Shared Recipe Book](#chapter-18-the-shared-recipe-book)
+- [Chapter 19: The Coffee Shop Ledger](#chapter-19-the-coffee-shop-ledger)
+- [Chapter 20: The Flexible Clipboard](#chapter-20-the-flexible-clipboard)
+- [Chapter 21: The Data Super-Highway](#chapter-21-the-data-super-highway)
+- [Chapter 22: The Database Delivery Van](#chapter-22-the-database-delivery-van)
+- [Chapter 23: The Specialty Shops of Data Town](#chapter-23-the-specialty-shops-of-data-town)
 
-## Security & Identity
+## Security & Compliance
 
-24. **Who’s Got the Keys?** _(IAM & MFA)_
-25. **“Only the Right Apron Gets In”** _(IAM Policies, Users, Groups, Roles)_
-26. **“The Umbrella Company”** _(AWS Organizations & SCPs)_
-27. **“The Compliance Cabinet”** _(AWS Artifact & Regulatory Compliance)_
+- [Chapter 24: Who’s Got the Keys?](#chapter-24-whos-got-the-keys)
+- [Chapter 25: “Only the Right Apron Gets In”](#chapter-25-only-the-right-apron-gets-in)
+- [Chapter 26: “The Umbrella Company”](#chapter-26-the-umbrella-company)
+- [Chapter 27: “The Compliance Cabinet”](#chapter-27-the-compliance-cabinet)
+- [Chapter 28: “The Coffee Shop Control Room”](#chapter-28-the-coffee-shop-control-room)
+- [Chapter 29: “The Coffee Shop Security Camera”](#chapter-29-the-coffee-shop-security-camera)
+- [Chapter 30: “The Café Health Inspector”](#chapter-30-the-café-health-inspector)
+- [Chapter 31: “Welcome to the Free Sample Bar”](#chapter-31-welcome-to-the-free-sample-bar)
+
+## Billing & Pricing
+
+- [Chapter 33: “Pay-As-You-Order Coffee: AWS Pricing Made Simple”](#chapter-33-pay-as-you-order-coffee-aws-pricing-made-simple)
+- [Chapter 34: “One Coffee Bill for the Whole Crew: Understanding AWS Consolidated Billing”](#chapter-34-one-coffee-bill-for-the-whole-crew-understanding-aws-consolidated-billing)
+- [Chapter 35: “Coffee Shop Spending Caps: Mastering AWS Budgets”](#chapter-35-coffee-shop-spending-caps-mastering-aws-budgets)
+- [Chapter 36: “The Coffee Shop Ledger: Tracking AWS Spending with Cost Explorer”](#chapter-36-the-coffee-shop-ledger-tracking-aws-spending-with-cost-explorer)
+
+## Support & Migration
+
+- [Chapter 38: “The Tech Café Helpdesk: AWS Support Plans Explained”](#chapter-38-the-tech-café-helpdesk-aws-support-plans-explained)
+- [Chapter 39: “Blueprint for the Cloud Café: Understanding AWS CAF”](#chapter-39-blueprint-for-the-cloud-café-understanding-aws-caf)
+- [Chapter 40: “Migration Menu: The 6 R’s of Moving to the Cloud”](#chapter-40-migration-menu-the-6-rs-of-moving-to-the-cloud)
+- [Chapter 41: “The Data Delivery Fleet: Meet the AWS Snow Family”](#chapter-41-the-data-delivery-fleet-meet-the-aws-snow-family)
 
 ## Architecture & Best Practices
 
-43. **The AWS Well-Architected Framework**
+- [Chapter 43: The AWS Well-Architected Framework](#chapter-43-the-aws-well-architected-framework)
 
 ## Cloud Value Proposition
 
-44. **Why the Cloud?**
+- [Chapter 44: Why the Cloud?](#chapter-44-why-the-cloud)
 
 ## Certification Preparation
 
-45. **Guide to Passing the AWS Certified Cloud Practitioner Exam**
-46. **Exam Strategies for the AWS Certified Cloud Practitioner**
+- [Chapter 45: Guide to Passing the AWS Certified Cloud Practitioner Exam](#chapter-45-guide-to-passing-the-aws-certified-cloud-practitioner-exam)
+- [Chapter 46: Exam Strategies for the AWS Certified Cloud Practitioner](#chapter-46-exam-strategies-for-the-aws-certified-cloud-practitioner)
 
 ---
+
+# Table of Contents
 
 # 📚 Table of Contents (Grouped by Exam Domains)
 
-## 1. Cloud Concepts
+---
 
-**Understanding of the AWS Cloud value** – _26% of exam_
+## 1. Cloud Concepts (26%)
 
-- Chapter 1: **Deployment Models for Cloud Computing**
-- Chapter 2: **Benefits of Cloud Computing**
-- Chapter 9: **Selecting an AWS Region**
-- Chapter 10: **Availability Zones**
-- Chapter 11: **Edge Locations**
-- Chapter 44: **Why the Cloud?**
+- [Chapter 1: Deployment Models for Cloud Computing](#chapter-1-deployment-models-for-cloud-computing)
+- [Chapter 2: Benefits of Cloud Computing](#chapter-2-benefits-of-cloud-computing)
+- [Chapter 9: Selecting an AWS Region](#chapter-9-selecting-an-aws-region)
+- [Chapter 10: Availability Zones](#chapter-10-availability-zones)
+- [Chapter 11: Edge Locations](#chapter-11-edge-locations)
+- [Chapter 44: Why the Cloud?](#chapter-44-why-the-cloud)
 
 ---
 
-## 2. Security and Compliance
+## 2. Security and Compliance (25%)
 
-**AWS shared responsibility model, IAM, compliance, and governance** – _25% of exam_
-
-- Chapter 24: **Who’s Got the Keys?** _(IAM & MFA)_
-- Chapter 25: **“Only the Right Apron Gets In”** _(IAM Policies, Users, Groups, Roles)_
-- Chapter 26: **“The Umbrella Company”** _(AWS Organizations & SCPs)_
-- Chapter 27: **“The Compliance Cabinet”** _(AWS Artifact & Regulatory Compliance)_
-- Chapter 15: **Subnets, Network ACLs, and Security Groups**
-- Chapter 43: **The AWS Well-Architected Framework** _(Security Pillar)_
-
----
-
-## 3. Technology
-
-**Core AWS services, infrastructure, and methods of deployment** – _33% of exam_
-
-### Compute & Scaling
-
-- Chapter 3: **Amazon EC2 Pricing Models**
-- Chapter 4: **Scaling Amazon EC2**
-- Chapter 5: **Elastic Load Balancer**
-- Chapter 6: **Serverless and Container Computing**
-
-### Messaging & Decoupling
-
-- Chapter 7: **Amazon SNS – Sending the Right Message to the Right Crowd**
-- Chapter 8: **Amazon SQS – Letting the Orders Line Up Automatically**
-
-### Storage & Data Transfer
-
-- Chapter 16: **Storage That Stays or Goes**
-- Chapter 17: **Storing Data Like a Pizza Shop Owner**
-
-### Databases
-
-- Chapter 18: **The Shared Recipe Book** _(Relational Databases – Amazon RDS)_
-- Chapter 19: **The Coffee Shop Ledger** _(Amazon DynamoDB)_
-- Chapter 20: **The Flexible Clipboard** _(Amazon Redshift)_
-- Chapter 21: **The Data Super-Highway** _(AWS DMS)_
-- Chapter 22: **The Database Delivery Van** _(AWS Snow Family)_
-- Chapter 23: **The Specialty Shops of Data Town** _(DocumentDB, QLDB, ElastiCache, etc.)_
-
-### Management & Orchestration
-
-- Chapter 12: **Ways to Interact with AWS Services**
-- Chapter 13: **AWS Elastic Beanstalk and AWS CloudFormation**
-- Chapter 14: **Connectivity to AWS**
+- [Chapter 24: Who’s Got the Keys?](#chapter-24-whos-got-the-keys)
+- [Chapter 25: “Only the Right Apron Gets In”](#chapter-25-only-the-right-apron-gets-in)
+- [Chapter 26: “The Umbrella Company”](#chapter-26-the-umbrella-company)
+- [Chapter 27: “The Compliance Cabinet”](#chapter-27-the-compliance-cabinet)
+- [Chapter 28: “The Coffee Shop Control Room”](#chapter-28-the-coffee-shop-control-room)
+- [Chapter 29: “The Coffee Shop Security Camera”](#chapter-29-the-coffee-shop-security-camera)
+- [Chapter 30: “The Café Health Inspector”](#chapter-30-the-café-health-inspector)
 
 ---
 
-## 4. Billing and Pricing
+## 3. Technology (33%)
 
-**Understanding pricing, cost management tools, and support plans** – _16% of exam_
+- [Chapter 3: Amazon EC2 Pricing Models](#chapter-3-amazon-ec2-pricing-models)
+- [Chapter 4: Scaling Amazon EC2](#chapter-4-scaling-amazon-ec2)
+- [Chapter 5: Elastic Load Balancer](#chapter-5-elastic-load-balancer)
+- [Chapter 6: Serverless and Container Computing](#chapter-6-serverless-and-container-computing)
+- [Chapter 7: Amazon SNS – Sending the Right Message to the Right Crowd](#chapter-7-amazon-sns--sending-the-right-message-to-the-right-crowd)
+- [Chapter 8: Amazon SQS – Letting the Orders Line Up Automatically](#chapter-8-amazon-sqs--letting-the-orders-line-up-automatically)
+- [Chapter 12: Ways to Interact with AWS Services](#chapter-12-ways-to-interact-with-aws-services)
+- [Chapter 13: AWS Elastic Beanstalk and AWS CloudFormation](#chapter-13-aws-elastic-beanstalk-and-aws-cloudformation)
+- [Chapter 14: Connectivity to AWS](#chapter-14-connectivity-to-aws)
+- [Chapter 15: Subnets, Network ACLs, and Security Groups](#chapter-15-subnets-network-acls-and-security-groups)
+- [Chapter 16: Storage That Stays or Goes](#chapter-16-storage-that-stays-or-goes)
+- [Chapter 17: Storing Data Like a Pizza Shop Owner](#chapter-17-storing-data-like-a-pizza-shop-owner)
+- [Chapter 18: The Shared Recipe Book](#chapter-18-the-shared-recipe-book)
+- [Chapter 19: The Coffee Shop Ledger](#chapter-19-the-coffee-shop-ledger)
+- [Chapter 20: The Flexible Clipboard](#chapter-20-the-flexible-clipboard)
+- [Chapter 21: The Data Super-Highway](#chapter-21-the-data-super-highway)
+- [Chapter 22: The Database Delivery Van](#chapter-22-the-database-delivery-van)
+- [Chapter 23: The Specialty Shops of Data Town](#chapter-23-the-specialty-shops-of-data-town)
+- [Chapter 31: “Welcome to the Free Sample Bar”](#chapter-31-welcome-to-the-free-sample-bar)
+- [Chapter 38: “The Tech Café Helpdesk: AWS Support Plans Explained”](#chapter-38-the-tech-café-helpdesk-aws-support-plans-explained)
+- [Chapter 39: “Blueprint for the Cloud Café: Understanding AWS CAF”](#chapter-39-blueprint-for-the-cloud-café-understanding-aws-caf)
+- [Chapter 40: “Migration Menu: The 6 R’s of Moving to the Cloud”](#chapter-40-migration-menu-the-6-rs-of-moving-to-the-cloud)
+- [Chapter 41: “The Data Delivery Fleet: Meet the AWS Snow Family”](#chapter-41-the-data-delivery-fleet-meet-the-aws-snow-family)
+- [Chapter 43: The AWS Well-Architected Framework](#chapter-43-the-aws-well-architected-framework)
 
-- Chapter 45: **Guide to Passing the AWS Certified Cloud Practitioner Exam**
-- Chapter 46: **Exam Strategies for the AWS Certified Cloud Practitioner**
-- Chapter 42: **AWS Pricing Concepts**
-- Chapter 41: **AWS Free Tier**
-- Chapter 39: **AWS Budgets**
-- Chapter 40: **AWS Cost Explorer**
-- Chapter 38: **Consolidated Billing**
-- Chapter 37: **AWS Support Plans**
+---
+
+## 4. Billing and Pricing (16%)
+
+- [Chapter 33: “Pay-As-You-Order Coffee: AWS Pricing Made Simple”](#chapter-33-pay-as-you-order-coffee-aws-pricing-made-simple)
+- [Chapter 34: “One Coffee Bill for the Whole Crew: Understanding AWS Consolidated Billing”](#chapter-34-one-coffee-bill-for-the-whole-crew-understanding-aws-consolidated-billing)
+- [Chapter 35: “Coffee Shop Spending Caps: Mastering AWS Budgets”](#chapter-35-coffee-shop-spending-caps-mastering-aws-budgets)
+- [Chapter 36: “The Coffee Shop Ledger: Tracking AWS Spending with Cost Explorer”](#chapter-36-the-coffee-shop-ledger-tracking-aws-spending-with-cost-explorer)
+
+---
+
+## Certification Preparation
+
+- [Chapter 45: Guide to Passing the AWS Certified Cloud Practitioner Exam](#chapter-45-guide-to-passing-the-aws-certified-cloud-practitioner-exam)
+- [Chapter 46: Exam Strategies for the AWS Certified Cloud Practitioner](#chapter-46-exam-strategies-for-the-aws-certified-cloud-practitioner)
 
 ---
 
@@ -2789,7 +2800,7 @@ If your developers need proof that AWS complies with **SOC 2**, **ISO 27001**, o
 
 ---
 
-## Chapter 28: “The Coffee Shop Control Room”
+# Chapter 28: “The Coffee Shop Control Room”
 
 ### Subtitle: Monitoring, reacting, and visualizing your AWS environment with Amazon CloudWatch
 
@@ -2839,7 +2850,7 @@ You _watch_ metrics, set _alarms_, and _act_ automatically.
 
 ---
 
-## Chapter 29: “The Coffee Shop Security Camera”
+# Chapter 29: “The Coffee Shop Security Camera”
 
 ### Subtitle: Tracking and reviewing everything that happens in your AWS environment with AWS CloudTrail
 
@@ -2889,7 +2900,7 @@ You _track_ every change, _trace_ it to the source, and _trust_ your environment
 
 ---
 
-## Chapter 30: “The Café Health Inspector”
+# Chapter 30: “The Café Health Inspector”
 
 ### Subtitle: Get expert recommendations for your AWS environment with AWS Trusted Advisor
 
@@ -2949,7 +2960,7 @@ Use **Trusted Advisor** when you're launching something new or want to improve w
 
 ---
 
-## Chapter 31: “Welcome to the Free Sample Bar”
+# Chapter 31: “Welcome to the Free Sample Bar”
 
 ### Subtitle: Explore AWS services risk-free with the AWS Free Tier
 
@@ -3006,7 +3017,7 @@ These options help new customers explore AWS safely, and let experienced users t
 
 ---
 
-## Chapter 33: “Pay-As-You-Order Coffee: AWS Pricing Made Simple”
+# Chapter 33: “Pay-As-You-Order Coffee: AWS Pricing Made Simple”
 
 ### Subtitle: Learn how AWS pricing adapts to what you use, when, and how you use it
 
@@ -3145,7 +3156,7 @@ Amazon S3 costs include:
 
 ---
 
-## Chapter 34: “One Coffee Bill for the Whole Crew: Understanding AWS Consolidated Billing”
+# Chapter 34: “One Coffee Bill for the Whole Crew: Understanding AWS Consolidated Billing”
 
 ### Subtitle: Simplify payments and save more by combining AWS accounts under one bill
 
@@ -3249,7 +3260,7 @@ After consolidation:
 
 ---
 
-## Chapter 35: “Coffee Shop Spending Caps: Mastering AWS Budgets”
+# Chapter 35: “Coffee Shop Spending Caps: Mastering AWS Budgets”
 
 ### Subtitle: Stay in control of your AWS spending with smart planning and alerts
 
@@ -3314,7 +3325,7 @@ This lets you **take action early**—either cut back on usage or adjust your bu
 
 ---
 
-## Chapter 36: “The Coffee Shop Ledger: Tracking AWS Spending with Cost Explorer”
+# Chapter 36: “The Coffee Shop Ledger: Tracking AWS Spending with Cost Explorer”
 
 ### Subtitle: Visualize your AWS usage like a bar graph of coffee orders
 
@@ -3385,7 +3396,7 @@ This insight lets you:
 
 ---
 
-## Chapter 38: “The Tech Café Helpdesk: AWS Support Plans Explained”
+# Chapter 38: “The Tech Café Helpdesk: AWS Support Plans Explained”
 
 ### Subtitle: Pick the right level of help for your cloud journey
 
@@ -3486,7 +3497,7 @@ Now you’re a franchise. You want a **dedicated TAM**, **custom Game Days** for
 
 ---
 
-## Chapter 39: “Blueprint for the Cloud Café: Understanding AWS CAF”
+# Chapter 39: “Blueprint for the Cloud Café: Understanding AWS CAF”
 
 ### Subtitle: Align business and tech with the six Cloud Adoption Perspectives
 
@@ -3662,7 +3673,7 @@ You schedule maintenance, monitor inventory, and review daily reports. The **Ope
 
 ---
 
-## Chapter 40: “Migration Menu: The 6 R’s of Moving to the Cloud”
+# Chapter 40: “Migration Menu: The 6 R’s of Moving to the Cloud”
 
 ### Subtitle: Choose the right path when relocating your IT applications
 
@@ -3726,7 +3737,7 @@ This mirrors AWS’s **6 cloud migration strategies**, often called the **“6 R
 
 ---
 
-## Chapter 41: “The Data Delivery Fleet: Meet the AWS Snow Family”
+# Chapter 41: “The Data Delivery Fleet: Meet the AWS Snow Family”
 
 ### Subtitle: When your data’s too big for the internet, AWS sends a truck
 
