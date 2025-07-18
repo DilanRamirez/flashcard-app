@@ -1,0 +1,127 @@
+{
+  "name": "Cloud Deployment Models and Business Benefits",
+  "description": "Flashcards covering cloud, on-premises, and hybrid deployment models and the strategic business benefits of cloud adoption.",
+  "category": "Deployment Models",
+  "cards": [
+    {
+      "id": "K9D8WPT4XE",
+      "front": "A startup wants to avoid investing in physical servers and instead build and host their new app entirely using cloud-native services. What deployment model does this represent?",
+      "back": "This represents a **cloud-based deployment** model, where all components of the application run in the cloud, offering scalability and reduced infrastructure management.",
+      "example": "The startup uses AWS Lambda, Amazon RDS, and Amazon S3 to build a serverless backend entirely in the cloud.",
+      "mnemonic": "Cloud-based = Cloud Only",
+      "category": "Deployment Models",
+      "subject": "Deployment Models for Cloud Computing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["cloud-deployment", "startup", "cloud-native"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Cloud-based Deployment",
+          "definition": "A model where all components of an application run in the cloud, either newly built or migrated."
+        }
+      ]
+    },
+    {
+      "id": "MPT72XZLJD",
+      "front": "A healthcare company must keep patient records in-house due to regulations, but also wants to analyze those records using cloud-based machine learning. What deployment model fits best?",
+      "back": "This is a **hybrid deployment**, which connects cloud-based services with on-premises infrastructure to meet business and compliance requirements.",
+      "example": "Patient data is stored in an on-premises database, while AWS SageMaker is used in the cloud for model training.",
+      "mnemonic": "Hybrid = Here and There",
+      "category": "Deployment Models",
+      "subject": "Deployment Models for Cloud Computing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["hybrid", "compliance", "integration"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Hybrid Deployment",
+          "definition": "A deployment model where cloud resources are integrated with on-premises infrastructure."
+        }
+      ]
+    },
+    {
+      "id": "XNV74PRMAY",
+      "front": "An enterprise uses virtualization tools to manage applications within its own data center. What cloud deployment model does this describe?",
+      "back": "This is an **on-premises deployment**, also known as private cloud, where infrastructure is hosted and managed internally.",
+      "example": "The company uses VMware and Hyper-V in their data center to run business-critical apps without using public cloud resources.",
+      "mnemonic": "On-Prem = Own Premises",
+      "category": "Deployment Models",
+      "subject": "Deployment Models for Cloud Computing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["on-premises", "private-cloud", "virtualization"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "On-premises Deployment",
+          "definition": "A model where resources are deployed and managed in an organization’s own data center using virtualization and management tools."
+        }
+      ]
+    },
+    {
+      "id": "QPKDWM4CXT",
+      "front": "Why do businesses prefer cloud computing when they want to avoid overprovisioning and underutilized resources?",
+      "back": "Cloud computing allows businesses to **stop guessing capacity**, scaling resources in or out on demand and only paying for what they use.",
+      "example": "A retailer uses Amazon EC2 Auto Scaling to handle spikes in traffic during Black Friday without paying for unused capacity the rest of the year.",
+      "mnemonic": "Cloud = Capacity When Needed",
+      "category": "Deployment Models",
+      "subject": "Deployment Models for Cloud Computing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["capacity", "scaling", "pay-as-you-go"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Stop Guessing Capacity",
+          "definition": "A cloud benefit where you dynamically scale resources instead of estimating infrastructure needs in advance."
+        }
+      ]
+    },
+    {
+      "id": "V2CRPYL9UM",
+      "front": "A company is looking to reduce time spent managing data centers and focus on building new customer features. Which cloud benefit applies?",
+      "back": "The benefit is **stopping spending money on running and maintaining data centers**, allowing more focus on application development and innovation.",
+      "example": "By migrating to AWS, the company decommissions its physical servers and assigns the IT team to new cloud projects.",
+      "mnemonic": "No Data Centers = More Innovation",
+      "category": "Deployment Models",
+      "subject": "Deployment Models for Cloud Computing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["data-center", "maintenance", "focus"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Stop Spending on Data Centers",
+          "definition": "A cloud benefit that eliminates the need to manage physical infrastructure, shifting focus to value creation."
+        }
+      ]
+    },
+    {
+      "id": "NBX14HGDYC",
+      "front": "How does cloud computing enable global reach for an online education platform within minutes?",
+      "back": "By leveraging AWS’s global infrastructure, businesses can **go global in minutes**, deploying applications close to users for low latency and high performance.",
+      "example": "An ed-tech company launches their application in AWS Regions across Asia and Europe within hours to serve international students.",
+      "mnemonic": "Global in Minutes = AWS Regions Ready",
+      "category": "Deployment Models",
+      "subject": "Deployment Models for Cloud Computing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["global", "latency", "multi-region"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Go Global in Minutes",
+          "definition": "A benefit of cloud computing where applications can be deployed worldwide using AWS’s global infrastructure."
+        }
+      ]
+    }
+  ]
+}

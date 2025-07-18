@@ -1,0 +1,77 @@
+{
+  "name": "Choosing the Right AWS Storage Service",
+  "description": "Key scenarios for selecting the appropriate AWS storage service: EBS, S3, EFS, FSx, or EC2 Instance Store.",
+  "category": "Storage",
+  "cards": [
+    {
+      "id": "a2v3hpx9kd",
+      "front": "You're building a high-throughput analytics application that processes large log files sequentially. Which AWS storage service is best suited for this workload?",
+      "back": "Use HDD-backed Amazon EBS volumes, which are ideal for throughput-intensive, sequential data access workloads such as big data and log processing.",
+      "example": "A data pipeline writes large log files to a Throughput Optimized HDD EBS volume for batch processing.",
+      "mnemonic": "HDD = Heavy Data Downloads",
+      "category": "Storage",
+      "subject": "Choose the Right Storage Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["EBS", "HDD", "log processing"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "n7zql4repu",
+      "front": "You're hosting a temporary caching layer for a high-performance compute job. The data doesn't need to persist after instance termination. Which storage should you use?",
+      "back": "Use Amazon EC2 Instance Store, which is ephemeral and optimized for temporary, fast-changing data like caches and scratch files.",
+      "example": "An EC2 instance processes real-time video frames and stores temporary frame buffers in instance store volumes.",
+      "mnemonic": "Instance Store = Instant, Short-Term",
+      "category": "Storage",
+      "subject": "Choose the Right Storage Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["EC2 Instance Store", "ephemeral", "temporary data"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "fw8zkr6y31",
+      "front": "You need highly durable storage for media files that are accessed occasionally and must be retained indefinitely. Which service best meets this need?",
+      "back": "Amazon S3 is best for media storage with high durability and scalability. It supports object storage for infrequently accessed but persistent data.",
+      "example": "A video production company archives its raw footage and final edits in Amazon S3 for long-term storage.",
+      "mnemonic": "S3 = Store, Scale, Serve",
+      "category": "Storage",
+      "subject": "Choose the Right Storage Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["S3", "object storage", "media backup"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "lq9c83fpve",
+      "front": "Your application requires a shared file system accessible from multiple EC2 instances. Which AWS storage option should you choose?",
+      "back": "Use Amazon EFS or Amazon FSx, both of which support file storage that can be mounted by multiple EC2 instances.",
+      "example": "A microservices app uses Amazon EFS for shared configuration files across services running on separate EC2 instances.",
+      "mnemonic": "EFS = Everyone Files Shared",
+      "category": "Storage",
+      "subject": "Choose the Right Storage Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["EFS", "FSx", "file storage", "multi-instance"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "d5mpq2a47x",
+      "front": "You're running a database on EC2 that requires consistent, fast read/write access and needs to persist through reboots. Which storage service fits best?",
+      "back": "Amazon EBS (SSD-backed) is best for persistent, transactional workloads like databases. It offers fast IOPS and retains data after instance reboots.",
+      "example": "A MySQL database stores its data files on a Provisioned IOPS SSD EBS volume for high throughput.",
+      "mnemonic": "EBS = Elastic Block for SQL",
+      "category": "Storage",
+      "subject": "Choose the Right Storage Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["EBS", "database", "SSD", "persistent"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

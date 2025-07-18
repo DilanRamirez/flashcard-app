@@ -1,0 +1,91 @@
+{
+  "name": "Amazon CloudWatch Deep Dive",
+  "description": "Covers how CloudWatch collects, visualizes, and automates responses to metrics and logs.",
+  "category": "Monitoring & Observability",
+  "cards": [
+    {
+      "id": "dka39mpvzw",
+      "front": "A developer wants to track how many users visit a webpage per second. This is not a built-in AWS metric. Which CloudWatch feature should they use?",
+      "back": "They should use high-resolution custom metrics with CloudWatch, which allows metrics to be collected at 1-second intervals using the PutMetricData API.",
+      "example": "Using PutMetricData to send page view counts every second from a backend service.",
+      "mnemonic": "Custom = Count Stuff Manually",
+      "category": "Monitoring & Observability",
+      "subject": "Amazon CloudWatch",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["custom metrics", "putmetricdata", "granularity"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "v2j5mrnq07",
+      "front": "You want to be alerted when your EC2 instance's CPU remains above 80% for more than 5 minutes. What should you configure?",
+      "back": "Create a CloudWatch alarm for the CPUUtilization metric with a threshold of 80% and a 5-minute evaluation period.",
+      "example": "Setting an alarm that triggers an SNS notification if CPUUtilization > 80% for 5 minutes.",
+      "mnemonic": "Metric + Threshold + Time = Alarm",
+      "category": "Monitoring & Observability",
+      "subject": "Amazon CloudWatch",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["cloudwatch", "alarm", "cpu"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "rhg78xv2c9",
+      "front": "How does CloudWatch organize log data received from EC2 and Lambda applications?",
+      "back": "CloudWatch organizes logs into log events, which are grouped into log streams. Log streams are further organized into log groups with shared settings.",
+      "example": "Each EC2 instance sends logs to a stream; streams from similar services are grouped into a log group named 'AppLogs'.",
+      "mnemonic": "Event → Stream → Group (ESG)",
+      "category": "Monitoring & Observability",
+      "subject": "Amazon CloudWatch",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "beginner",
+      "tags": ["logs", "log structure", "ec2", "lambda"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "m0sqpfrnd2",
+      "front": "An application logs 500 errors. How can you get alerted when too many errors occur within one hour?",
+      "back": "Set up a metric filter in CloudWatch Logs to count 500 error codes and define an alarm that triggers when the count exceeds your threshold.",
+      "example": "Alarm triggers if more than five 500-errors are logged in one hour, sending an SNS notification.",
+      "mnemonic": "Filter Logs → Count → Alarm",
+      "category": "Monitoring & Observability",
+      "subject": "Amazon CloudWatch",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["log metrics", "alarms", "sns"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "b8g62mnrtz",
+      "front": "You want to visualize metrics from EC2 and S3 across multiple regions on a single dashboard. What AWS service should you use?",
+      "back": "Use Amazon CloudWatch Dashboards to visualize metrics from different AWS services and regions in one place using widgets.",
+      "example": "Dashboard showing EC2 CPUUtilization from us-east-1 and S3 request counts from eu-west-1.",
+      "mnemonic": "One Panel, Many Places",
+      "category": "Monitoring & Observability",
+      "subject": "Amazon CloudWatch",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "beginner",
+      "tags": ["dashboards", "metrics", "visualization"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "z4c3km7x9f",
+      "front": "How can you automatically push logs from your EC2 instance to CloudWatch Logs?",
+      "back": "Install and configure the CloudWatch Logs agent on the EC2 instance to push logs automatically.",
+      "example": "CloudWatch agent installed via CLI script that sends `/var/log/app.log` to CloudWatch Logs.",
+      "mnemonic": "Agent Sends Activity",
+      "category": "Monitoring & Observability",
+      "subject": "Amazon CloudWatch",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["logs", "cloudwatch agent", "ec2"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

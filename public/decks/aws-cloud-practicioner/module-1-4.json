@@ -1,0 +1,111 @@
+{
+  "name": "Amazon EC2 Auto Scaling Basics",
+  "description": "Flashcards explaining key Auto Scaling group concepts and how EC2 scaling improves cost-efficiency and availability.",
+  "category": "Compute",
+  "cards": [
+    {
+      "id": "X8ZT97WPQD",
+      "front": "You're deploying an application that must always have at least one EC2 instance running but should scale during traffic spikes. What AWS feature ensures this?",
+      "back": "**Amazon EC2 Auto Scaling** lets you set a minimum number of EC2 instances and scale out as demand increases, ensuring high availability.",
+      "example": "An app is launched with a minimum capacity of 1 and maximum capacity of 4. Auto Scaling maintains 1 instance but adds more during peak hours.",
+      "mnemonic": "Auto Scaling = Always On + Adaptive",
+      "category": "Compute",
+      "subject": "Scaling Amazon EC2",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["auto-scaling", "availability", "minimum-instances"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Amazon EC2 Auto Scaling",
+          "definition": "A service that automatically adjusts the number of EC2 instances in a group based on demand."
+        },
+        {
+          "term": "Minimum Capacity",
+          "definition": "The smallest number of EC2 instances to maintain in an Auto Scaling group at all times."
+        }
+      ]
+    },
+    {
+      "id": "PMN9J6TZKA",
+      "front": "You want to ensure your application never exceeds a specific number of EC2 instances during auto scaling. What configuration parameter handles this?",
+      "back": "Set the **maximum capacity** in your Auto Scaling group to restrict the total number of EC2 instances that can run concurrently.",
+      "example": "An Auto Scaling group with a max capacity of 4 ensures no more than 4 EC2 instances run, even during high load.",
+      "mnemonic": "Max Capacity = Maximum Count",
+      "category": "Compute",
+      "subject": "Scaling Amazon EC2",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["maximum-capacity", "scaling-limits", "auto-scaling"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Maximum Capacity",
+          "definition": "The upper limit of EC2 instances allowed in an Auto Scaling group."
+        }
+      ]
+    },
+    {
+      "id": "VLW3EK59YR",
+      "front": "Your traffic typically increases every weekday at 9 AM. Which Auto Scaling strategy helps you prepare EC2 instances ahead of time?",
+      "back": "**Predictive scaling** in Amazon EC2 Auto Scaling uses machine learning to schedule instance launches based on historical patterns.",
+      "example": "Predictive scaling adds instances at 8:45 AM based on observed daily traffic increases at 9 AM.",
+      "mnemonic": "Predictive = Preemptive Planning",
+      "category": "Compute",
+      "subject": "Scaling Amazon EC2",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["predictive-scaling", "forecasting", "auto-scaling"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Predictive Scaling",
+          "definition": "Automatically adjusts EC2 capacity based on predicted demand using machine learning."
+        }
+      ]
+    },
+    {
+      "id": "R39MJX7WPT",
+      "front": "Your Auto Scaling group shows a desired capacity of 2, a minimum of 1, and a max of 4. What happens during normal operation?",
+      "back": "Amazon EC2 Auto Scaling will maintain **2 EC2 instances** unless dynamic or predictive scaling requires scaling in or out within the min-max range.",
+      "example": "The desired capacity ensures 2 instances run most of the time, scaling up to 4 during spikes and never below 1.",
+      "mnemonic": "Desired = Default Running Count",
+      "category": "Compute",
+      "subject": "Scaling Amazon EC2",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["desired-capacity", "scaling-baseline", "auto-scaling"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Desired Capacity",
+          "definition": "The number of EC2 instances that Auto Scaling tries to maintain during steady state."
+        }
+      ]
+    },
+    {
+      "id": "TZV5WQLNDX",
+      "front": "What is the primary advantage of using Amazon EC2 Auto Scaling from a cost perspective?",
+      "back": "**You pay only for the instances you use**, scaling in during low demand periods to reduce cost while maintaining availability during spikes.",
+      "example": "A video platform saves on compute costs by running 2 instances overnight and 5 during peak traffic using Auto Scaling.",
+      "mnemonic": "Scale Smart = Spend Less",
+      "category": "Compute",
+      "subject": "Scaling Amazon EC2",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["cost-optimization", "scaling-in", "auto-scaling"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Cost Optimization",
+          "definition": "Minimizing cloud expenses by automatically scaling resources based on actual usage needs."
+        }
+      ]
+    }
+  ]
+}

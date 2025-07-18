@@ -1,0 +1,87 @@
+{
+  "name": "Troubleshooting Methodologies",
+  "description": "Flashcards explaining structured methods to identify and resolve technical issues in cloud support environments.",
+  "category": "Support Operations",
+  "cards": [
+    {
+      "id": "RXL3K72VMW",
+      "front": "You're addressing a slow upload issue in a file-sharing app. You start by checking the user's network and hardware. Which troubleshooting approach are you using?",
+      "back": "The **Bottom-Up Method**, which begins at the lowest infrastructure levels (network, device) and works up through the stack to the application.",
+      "example": "A customer experiences slow uploads. You first check their router speed and bandwidth before inspecting server performance.",
+      "mnemonic": "Start from the Bottom, Build Up",
+      "category": "Support Operations",
+      "subject": "Troubleshooting Methodologies",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["bottom-up", "network", "device"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Bottom-Up Method",
+          "definition": "A troubleshooting strategy that starts at the lowest system layers (network, hardware) and progresses upward to applications."
+        }
+      ]
+    },
+    {
+      "id": "VQ7DTX9LGF",
+      "front": "You're troubleshooting an intermittent web app outage by checking both server and client components separately. What method are you using?",
+      "back": "You're applying the **Divide and Conquer Method**, where the problem space is split into smaller parts like server-side and client-side for targeted investigation.",
+      "example": "You examine server logs and browser behavior separately to isolate the cause of app downtime.",
+      "mnemonic": "Divide to Decide",
+      "category": "Support Operations",
+      "subject": "Troubleshooting Methodologies",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["divide-and-conquer", "isolation", "root-cause"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Divide and Conquer Method",
+          "definition": "A problem-solving method that breaks issues into smaller domains to isolate and resolve root causes efficiently."
+        }
+      ]
+    },
+    {
+      "id": "TY6LQ3MWNZ",
+      "front": "A customer reports their app is slow. You ask repeatedly 'why' to trace the issue to unoptimized database indexing. What method are you using?",
+      "back": "This is the **Five Whys Method**, which helps identify the root cause of an issue through recursive questioning.",
+      "example": "You trace high response time to slow queries, which are caused by outdated schema design and lack of indexing.",
+      "mnemonic": "Ask 'Why?' Until You Know Why",
+      "category": "Support Operations",
+      "subject": "Troubleshooting Methodologies",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 4",
+      "difficulty": "beginner",
+      "tags": ["five-whys", "root-cause", "inquiry"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Five Whys",
+          "definition": "A root cause analysis method involving asking 'why' multiple times to reach the underlying problem."
+        }
+      ]
+    },
+    {
+      "id": "MG82PTX7JH",
+      "front": "You begin your investigation of email delivery delays by checking service logs and overall email system behavior. Which approach are you using?",
+      "back": "The **Top-Down Method**, which starts at the highest system level and works downward through service layers and components.",
+      "example": "You examine the email service status, then drill into delivery routes and recipient mail servers.",
+      "mnemonic": "Top Down to Drill Down",
+      "category": "Support Operations",
+      "subject": "Troubleshooting Methodologies",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["top-down", "systematic", "delivery"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Top-Down Method",
+          "definition": "A troubleshooting strategy that begins with system-level behavior and narrows down to specific components or causes."
+        }
+      ]
+    }
+  ]
+}

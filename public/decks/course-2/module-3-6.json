@@ -1,0 +1,77 @@
+{
+  "name": "Amazon RDS Essentials",
+  "description": "Key features and configurations for Amazon RDS relational databases on AWS.",
+  "category": "Databases",
+  "cards": [
+    {
+      "id": "r91k5bmvlc",
+      "front": "Your development team wants to reduce time spent on managing database infrastructure like patching, backups, and scaling. Which AWS service best addresses this need?",
+      "back": "Amazon RDS is the best fit, as it offloads infrastructure management tasks like provisioning, patching, backups, and scaling.",
+      "example": "A healthcare startup uses Amazon RDS to host their PostgreSQL database so they can focus on patient data features instead of DB maintenance.",
+      "mnemonic": "RDS = Relieve Database Stress",
+      "category": "Databases",
+      "subject": "Amazon Relational Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["RDS", "automation", "provisioning", "scaling"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "x8lmhdp94r",
+      "front": "A critical compliance policy requires you to retain database backups for over one year. What backup feature in Amazon RDS should you use?",
+      "back": "Use manual snapshots, which allow indefinite retention and are managed manually via the RDS console.",
+      "example": "A financial institution stores monthly manual snapshots of its SQL Server database to comply with 7-year retention policies.",
+      "mnemonic": "Manual = Me Manage Lifespan",
+      "category": "Databases",
+      "subject": "Amazon Relational Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["manual snapshots", "compliance", "retention"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "vt3qewjznu",
+      "front": "Your application requires automatic failover support in case of database outages. Which Amazon RDS feature should you enable?",
+      "back": "Enable Amazon RDS Multi-AZ to maintain a synchronous standby replica in another Availability Zone with automatic failover.",
+      "example": "An e-commerce app uses RDS Multi-AZ for its MySQL database to maintain availability during outages.",
+      "mnemonic": "Multi-AZ = Mirrored Availability Zone",
+      "category": "Databases",
+      "subject": "Amazon Relational Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["multi-az", "availability", "failover"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "kf9ps0xm8y",
+      "front": "You're designing a secure architecture where only backend EC2 instances should access the database. How do you restrict network access in Amazon RDS?",
+      "back": "Use private subnets in your DB subnet group and apply security groups and network ACLs to control inbound traffic.",
+      "example": "A SaaS platform places its RDS PostgreSQL database in private subnets, accessible only to application servers via security group rules.",
+      "mnemonic": "Private Subnets = Protect SQL",
+      "category": "Databases",
+      "subject": "Amazon Relational Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "expert",
+      "tags": ["security", "vpc", "private subnet", "security group"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "nhx9e4brcz",
+      "front": "Which Amazon RDS engine should you choose if you want a cloud-native relational database with better durability and performance than MySQL?",
+      "back": "Use Amazon Aurora, which is a MySQL- and PostgreSQL-compatible cloud-native database optimized for performance and durability.",
+      "example": "A logistics company migrates to Amazon Aurora MySQL to benefit from faster performance and better availability.",
+      "mnemonic": "Aurora = AWS Optimized Relational Architecture",
+      "category": "Databases",
+      "subject": "Amazon Relational Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["aurora", "performance", "durability"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

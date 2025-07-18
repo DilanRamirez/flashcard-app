@@ -1,0 +1,77 @@
+{
+  "name": "AWS Database Service Overview",
+  "description": "Covers AWS purpose-built databases for various application needs.",
+  "category": "Databases",
+  "cards": [
+    {
+      "id": "e1uz8q3pwl",
+      "front": "Your app needs fast key-based access to millions of shopping cart entries per second. Which AWS database service is purpose-built for this use case?",
+      "back": "Amazon DynamoDB is designed for high-throughput, key-value access with single-digit millisecond performance.",
+      "example": "An e-commerce site stores customer shopping carts in DynamoDB for fast read/write during flash sales.",
+      "mnemonic": "DynamoDB = Dynamic Shopping Carts DB",
+      "category": "Databases",
+      "subject": "AWS Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["key-value", "dynamodb", "performance"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "gqf7nkxe29",
+      "front": "A social media platform needs to analyze complex relationships like user follows, likes, and recommendations. Which AWS database should you use?",
+      "back": "Amazon Neptune is the graph database service designed for handling relationship-based queries efficiently.",
+      "example": "A professional networking platform uses Amazon Neptune to suggest new connections based on mutual links.",
+      "mnemonic": "Neptune = Navigate People Network",
+      "category": "Databases",
+      "subject": "AWS Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["graph", "relationships", "neptune"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "lxwhnpvzdo",
+      "front": "You're building an industrial IoT solution that logs temperature data every second from thousands of sensors. Which AWS database service is optimized for this pattern?",
+      "back": "Amazon Timestream is optimized for time series data, making it ideal for telemetry and IoT workloads.",
+      "example": "A factory monitors equipment health metrics using Amazon Timestream for historical trend analysis.",
+      "mnemonic": "Timestream = Time-Stamped Readings",
+      "category": "Databases",
+      "subject": "AWS Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["iot", "time-series", "timestream"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "zw40j7q2sd",
+      "front": "Your DevOps team wants to cache frequently accessed API responses to improve performance. Which in-memory AWS database service should they use?",
+      "back": "Amazon ElastiCache for Redis is a fully managed in-memory data store ideal for caching and real-time analytics.",
+      "example": "An API gateway caches user authentication tokens in ElastiCache Redis to reduce database load.",
+      "mnemonic": "ElastiCache = Elastic Fast Cache",
+      "category": "Databases",
+      "subject": "AWS Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["caching", "redis", "in-memory"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "v3u20y8bsi",
+      "front": "Your compliance department needs a cryptographically verifiable record of banking transactions. Which AWS database service should you choose?",
+      "back": "Amazon QLDB is a ledger database that provides an immutable, cryptographically verifiable transaction log.",
+      "example": "A fintech app logs every customer transaction in Amazon QLDB to support regulatory audits.",
+      "mnemonic": "QLDB = Query Ledger Data Base",
+      "category": "Databases",
+      "subject": "AWS Database Service",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "expert",
+      "tags": ["ledger", "immutable", "compliance"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "Amazon VPC Routing and Security",
+  "description": "Key concepts for routing and securing network traffic within an Amazon VPC using route tables, ACLs, and security groups",
+  "category": "Networking",
+  "cards": [
+    {
+      "id": "p7xq2mdt9l",
+      "front": "You want to allow traffic from the internet to reach your public subnet in a VPC. What component must you configure to direct traffic to the correct destination?",
+      "back": "You must create a custom route table with a route to the internet gateway (0.0.0.0/0) and associate it with the public subnet.",
+      "example": "A web server in a public subnet serves content after a route table is created with a route to the internet gateway.",
+      "mnemonic": "Route = Road to Resource",
+      "category": "Networking",
+      "subject": "Amazon VPC Routing and Security",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["routing", "VPC", "internet gateway"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "a0k9s8wzqv",
+      "front": "What does the default main route table in a newly created VPC allow?",
+      "back": "It allows local traffic between all subnets in the VPC, enabling internal communication without explicit routes.",
+      "example": "Two EC2 instances in different subnets can ping each other using the local route defined in the main route table.",
+      "mnemonic": "Main = Mutual Access Internally Native",
+      "category": "Networking",
+      "subject": "Amazon VPC Routing and Security",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["main route table", "local routing", "VPC"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "n2vb7c5lqx",
+      "front": "You want to restrict what traffic can enter or leave a subnet. Which VPC security mechanism should you use?",
+      "back": "Use a Network ACL, which acts as a stateless firewall at the subnet level allowing you to define both allow and deny rules for inbound and outbound traffic.",
+      "example": "An ACL blocks all inbound traffic except HTTPS (port 443), and allows only outbound responses on ephemeral ports 1025–65535.",
+      "mnemonic": "ACL = Access Control Layer",
+      "category": "Networking",
+      "subject": "Amazon VPC Routing and Security",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["ACL", "subnet", "security"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "k1pt4ez9rm",
+      "front": "What makes a security group different from a network ACL in AWS?",
+      "back": "Security groups are stateful and apply at the instance level, allowing only allow rules, while network ACLs are stateless, apply at the subnet level, and support both allow and deny rules.",
+      "example": "A security group allows inbound HTTP traffic and automatically allows return traffic without needing outbound rules.",
+      "mnemonic": "SG = Smart Gate, ACL = All Check List",
+      "category": "Networking",
+      "subject": "Amazon VPC Routing and Security",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["security group", "ACL", "stateful", "stateless"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "w3zy7df4xt",
+      "front": "You're configuring a firewall for an EC2 instance to allow public web traffic. Which inbound rules should you apply to its security group?",
+      "back": "Allow inbound TCP traffic on ports 80 (HTTP) and 443 (HTTPS) from 0.0.0.0/0 and ::/0.",
+      "example": "A public EC2 instance uses a security group rule to accept HTTP/HTTPS requests from users worldwide.",
+      "mnemonic": "80 & 443 = Open Web Doors",
+      "category": "Networking",
+      "subject": "Amazon VPC Routing and Security",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["security group", "HTTP", "HTTPS", "EC2"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

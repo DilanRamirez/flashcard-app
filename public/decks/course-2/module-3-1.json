@@ -1,0 +1,77 @@
+{
+  "name": "AWS Storage Types Explained",
+  "description": "Understanding block, file, and object storage models in AWS and their real-world use cases",
+  "category": "Storage",
+  "cards": [
+    {
+      "id": "v9tm4xq28p",
+      "front": "You're setting up a shared development environment where multiple servers need access to the same hierarchical file system. Which AWS storage type is most appropriate?",
+      "back": "Use file storage. It supports a folder-based hierarchy and is ideal for shared access scenarios such as development environments and user directories.",
+      "example": "An AWS Elastic File System (EFS) is mounted to multiple EC2 instances, each reading and writing to shared code repositories.",
+      "mnemonic": "File = Folders For Many",
+      "category": "Storage",
+      "subject": "Storage Types on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["file storage", "shared access", "EFS"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "q7rzs3mk1f",
+      "front": "You need low-latency storage for a transactional database that performs many small reads and writes. What AWS storage type should you choose?",
+      "back": "Block storage is best for low-latency, high-performance workloads like databases. It accesses data in fixed-size blocks with minimal overhead.",
+      "example": "Amazon EBS is used to store data for a MySQL database running on an EC2 instance, ensuring fast read/write operations.",
+      "mnemonic": "Block = Blazing-fast Bits",
+      "category": "Storage",
+      "subject": "Storage Types on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["block storage", "EBS", "database"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "x4jvkdqe7y",
+      "front": "Your application needs to store large volumes of static media like images and videos with flexible metadata tagging. Which AWS storage model fits best?",
+      "back": "Object storage is ideal for storing unstructured, static data like media files. It stores data in a flat structure with metadata and a unique identifier.",
+      "example": "Photos uploaded to a serverless web app are stored in Amazon S3 using object storage for scalability and durability.",
+      "mnemonic": "Object = One ID, One File",
+      "category": "Storage",
+      "subject": "Storage Types on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["object storage", "S3", "media"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "k8ny5hbc2m",
+      "front": "Which AWS storage type would make updating a single character in a large file most efficient?",
+      "back": "Block storage is the most efficient because it allows updates to specific blocks without rewriting the entire file.",
+      "example": "An ERP system updates individual records stored on Amazon EBS volumes without reloading entire data files.",
+      "mnemonic": "Block = Byte-Level Control",
+      "category": "Storage",
+      "subject": "Storage Types on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["block storage", "performance", "updates"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "r3l5qx7bpt",
+      "front": "You need a scalable storage solution for petabytes of archived image files that don’t change. What AWS storage approach should you use?",
+      "back": "Use object storage, such as Amazon S3, which is designed for scalability and storing immutable static files.",
+      "example": "A media agency archives millions of photos in Amazon S3, organizing them using metadata tags.",
+      "mnemonic": "Object = Optimal for Archives",
+      "category": "Storage",
+      "subject": "Storage Types on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["object storage", "S3", "archival"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

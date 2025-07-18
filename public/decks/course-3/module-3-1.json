@@ -1,0 +1,167 @@
+{
+  "name": "Cloud Support Terminology Essentials",
+  "description": "Key AWS and support concepts every Cloud Support Associate must understand for technical communication and troubleshooting.",
+  "category": "Support Operations",
+  "cards": [
+    {
+      "id": "AJ2L58MFWR",
+      "front": "A customer contacts you about their web application content not loading globally with low latency. What AWS service would you recommend investigating first and why?",
+      "back": "Amazon CloudFront, AWS’s content delivery network (CDN), is designed to deliver static and dynamic web content with low latency and high transfer speeds. It's optimized for global distribution.",
+      "example": "A video streaming platform sees reduced buffering after properly configuring CloudFront with their S3 bucket origin.",
+      "mnemonic": "CloudFront = Content Frontline",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["cloudfront", "cdn", "performance"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Amazon CloudFront",
+          "definition": "A fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to users globally."
+        }
+      ]
+    },
+    {
+      "id": "B7VLGK2PXQ",
+      "front": "While reviewing a customer's backup strategy, you notice they aren’t using snapshots on their EC2 storage. How would you explain the value of this feature to them?",
+      "back": "Snapshots are point-in-time backups of EBS volumes, providing a quick restore path in case of data loss or configuration errors. They are essential for data durability and operational recovery.",
+      "example": "Before a system upgrade, a customer takes a snapshot of their EBS volume. After the upgrade fails, they restore the volume using the snapshot.",
+      "mnemonic": "Snap It Before You Crack It",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["ebs", "snapshot", "backup"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "EBS Volume and Snapshots",
+          "definition": "EBS volumes are block storage for EC2; snapshots are backup copies of those volumes."
+        }
+      ]
+    },
+    {
+      "id": "F3NPDZ84WT",
+      "front": "A user reports that their application lost data after an EC2 instance reboot. What AWS storage service should you check to ensure persistent data storage?",
+      "back": "Amazon EBS volumes should be attached for persistent block storage. Unlike instance store, EBS retains data even after instance shutdown or reboot.",
+      "example": "A customer uses EBS volumes to store MySQL data for their app, ensuring data survives reboots or instance replacements.",
+      "mnemonic": "EBS = Everlasting Block Storage",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["ebs", "persistence", "ec2"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Amazon EBS",
+          "definition": "Elastic Block Store provides persistent block storage volumes for use with EC2 instances."
+        }
+      ]
+    },
+    {
+      "id": "R28N5KLCYW",
+      "front": "During a customer interaction, you want to provide guidance before an issue happens rather than reacting to a failure. What support approach are you applying?",
+      "back": "Proactive Support involves identifying and addressing potential issues before they impact the customer, improving reliability and trust.",
+      "example": "You recommend enabling S3 lifecycle rules to transition data to Glacier to reduce costs and avoid future storage billing complaints.",
+      "mnemonic": "Proactive = Prevent Problems",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["proactive", "support", "customer-satisfaction"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Proactive Support",
+          "definition": "A support strategy that focuses on preventing problems before they occur by monitoring and advising proactively."
+        }
+      ]
+    },
+    {
+      "id": "T9VCP47KDM",
+      "front": "You’re unable to resolve an AWS networking issue and need to engage a senior engineer. What process should you initiate?",
+      "back": "You should perform **Escalation Management**, which involves handing off the issue to a more experienced tier or specialized team when beyond your scope.",
+      "example": "You escalate a complex Direct Connect BGP configuration issue to the Network Engineering team after basic troubleshooting.",
+      "mnemonic": "When in doubt, escalate out",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["escalation", "support-tier", "complex-issues"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Escalation Management",
+          "definition": "The process of transferring a support case to higher-level experts or engineers when it's outside your expertise."
+        }
+      ]
+    },
+    {
+      "id": "GKW5ZM92YH",
+      "front": "A customer asks for a detailed explanation of a past S3 outage affecting their data uploads. What document are they likely referring to?",
+      "back": "They’re requesting a **Root Cause Analysis (RCA)**, which provides a formal explanation of the cause of an incident and how to prevent recurrence.",
+      "example": "After an API rate-limiting issue, AWS provides an RCA detailing the contributing factors and mitigation steps.",
+      "mnemonic": "RCA = Reveal Cause & Actions",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["rca", "incident-analysis", "transparency"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Root Cause Analysis (RCA)",
+          "definition": "A method for identifying the underlying cause of an incident and documenting remediation steps."
+        }
+      ]
+    },
+    {
+      "id": "WDZTL8EYOP",
+      "front": "Your team receives hundreds of recurring support tickets related to permissions misconfiguration. What practice could reduce repetitive work and improve consistency?",
+      "back": "Implementing **Automation in Support** can help address repetitive issues with predefined scripts or tools, freeing time for complex cases.",
+      "example": "You automate the reset of IAM policies for sandbox accounts using Lambda and a ticketing webhook.",
+      "mnemonic": "Automate to Alleviate",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["automation", "efficiency", "support-tools"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Automation in Support",
+          "definition": "Using tools or scripts to perform repetitive support tasks automatically, reducing manual effort and errors."
+        }
+      ]
+    },
+    {
+      "id": "KZT5MC1UJB",
+      "front": "A customer is using S3 to store logs from their application. They ask if this is a good approach. How should you respond?",
+      "back": "Amazon S3 is ideal for storing large volumes of unstructured data like logs. It's highly durable, scalable, and integrates well with analytics services.",
+      "example": "A customer uses S3 to store CloudTrail logs and runs Athena queries directly on them for audit reviews.",
+      "mnemonic": "S3 = Store, Scale, Search",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["s3", "storage", "logging"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Amazon S3",
+          "definition": "Amazon Simple Storage Service is an object storage service that offers scalability, data availability, and security."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "name": "Cloud Support Workflow Fundamentals",
+  "description": "Flashcards covering the foundational workflow of cloud support operations, including issue handling and resolution.",
+  "category": "Support Operations",
+  "cards": [
+    {
+      "id": "9F7DLQ2WVP",
+      "front": "You're handling a new AWS support case where the customer says, 'My EC2 instance is not reachable.' What's the first step you should take in the support workflow?",
+      "back": "Begin with **Customer Issue Identification**, which includes receiving the ticket and understanding the initial description of the issue.",
+      "example": "A customer opens a support ticket stating that their web server is unresponsive. The support associate starts by logging the issue details as described.",
+      "mnemonic": "Start With the Ticket – Issue Identification comes first.",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["issue-identification", "support-process"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Customer Issue Identification",
+          "definition": "Initial phase of support where the issue is logged and basic understanding is formed."
+        }
+      ]
+    },
+    {
+      "id": "M8X3R2JWZT",
+      "front": "While handling a complex support case, you realize you need more technical context about the user's setup. What stage of the support workflow are you performing?",
+      "back": "You're in the **Information Gathering** phase, which involves collecting technical details like OS, architecture, and configurations.",
+      "example": "You ask the customer for their VPC configuration and EC2 instance metadata to understand the networking issue.",
+      "mnemonic": "Info First, Fix Later – Gather before solving.",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["information-gathering", "customer-context"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Information Gathering",
+          "definition": "Collecting relevant technical and environmental information to better understand the issue."
+        }
+      ]
+    },
+    {
+      "id": "ZQ6UL8R1HB",
+      "front": "After receiving environment details from the customer, you review documentation, consult internal tools, and speak with a colleague. What part of the support workflow are you performing?",
+      "back": "You're in the **Investigation and Research** phase, where root causes are explored through documentation and expert collaboration.",
+      "example": "You compare the reported error to known issues in the AWS forums and check internal tickets for similar symptoms.",
+      "mnemonic": "IR = Investigate & Research",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["research", "investigation", "support-workflow"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Investigation and Research",
+          "definition": "Phase focused on analyzing data and researching documentation to identify possible solutions."
+        }
+      ]
+    },
+    {
+      "id": "V3RND7AZJK",
+      "front": "You've formed a hypothesis that a customer's S3 bucket policy is causing access issues. You test changes in a sandbox environment to confirm. What workflow phase is this?",
+      "back": "This is the **Experimentation** phase, where hypotheses are tested through controlled changes and observations.",
+      "example": "You reproduce the customer's S3 bucket configuration in a lab account and confirm that a missing condition block causes the issue.",
+      "mnemonic": "E for Experiments – Test before fixing.",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["troubleshooting", "experimentation"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Experimentation",
+          "definition": "The process of validating a hypothesis through controlled testing and analysis."
+        }
+      ]
+    },
+    {
+      "id": "JTN2Z3W8KY",
+      "front": "After validating your hypothesis with a test, you’re ready to help the customer apply the fix. What support workflow phase is next?",
+      "back": "Move into **Solution Implementation**, where the solution is clearly communicated and applied with customer support.",
+      "example": "You send the customer the exact steps to update their IAM policy and offer to walk them through the changes on a call.",
+      "mnemonic": "I = Implement the Fix",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["solution", "implementation", "fix"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Solution Implementation",
+          "definition": "Stage where validated solutions are communicated and applied with the customer's cooperation."
+        }
+      ]
+    },
+    {
+      "id": "Y5LC98VX0B",
+      "front": "You’ve helped the customer resolve an issue with their EC2 launch templates. To benefit future cases, you write up steps and screenshots. What part of the support workflow are you in?",
+      "back": "You're completing the **Documenting the Solution** phase to ensure the fix is available for others through shared documentation.",
+      "example": "You publish a knowledge base article outlining how to update EC2 launch templates to resolve boot errors.",
+      "mnemonic": "D for Docs – Don’t forget to write it down.",
+      "category": "Support Operations",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["documentation", "knowledge-base"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Documenting the Solution",
+          "definition": "Creating clear, reusable documentation of solutions for internal or external reference."
+        }
+      ]
+    }
+  ]
+}

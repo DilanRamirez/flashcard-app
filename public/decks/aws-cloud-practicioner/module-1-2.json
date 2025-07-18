@@ -1,0 +1,111 @@
+{
+  "name": "Amazon EC2 Instance Types",
+  "description": "Flashcards covering the five primary EC2 instance families and their use cases based on workload requirements.",
+  "category": "Compute",
+  "cards": [
+    {
+      "id": "QW8RZL6PMX",
+      "front": "You’re deploying a web backend application with balanced compute, memory, and network needs. Which EC2 instance type is the best fit?",
+      "back": "**General purpose instances** are ideal for balanced workloads and can efficiently support web, gaming, and backend servers as well as medium databases.",
+      "example": "Using a t3.medium instance for a corporate website backend that doesn’t require specialized performance in compute or memory.",
+      "mnemonic": "GP = Good for Pretty much everything",
+      "category": "Compute",
+      "subject": "Amazon EC2 instance types",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["general-purpose", "ec2", "balanced"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "General Purpose Instances",
+          "definition": "EC2 instances with a balance of compute, memory, and networking resources suited for a variety of applications."
+        }
+      ]
+    },
+    {
+      "id": "DLK3MP9WAV",
+      "front": "A customer runs high-performance compute workloads for batch processing and scientific modeling. Which EC2 instance type is most suitable?",
+      "back": "**Compute optimized instances** are ideal for workloads requiring high-performance processors, such as batch processing or compute-bound web servers.",
+      "example": "Using c7g instances to render simulations in a scientific computing pipeline.",
+      "mnemonic": "Compute = Crunching Power",
+      "category": "Compute",
+      "subject": "Amazon EC2 instance types",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["compute-optimized", "ec2", "batch-processing"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Compute Optimized Instances",
+          "definition": "EC2 instances that offer high-performance processing for compute-heavy tasks like batch jobs or game servers."
+        }
+      ]
+    },
+    {
+      "id": "UTN2ZL3WCE",
+      "front": "A financial company needs to process large in-memory datasets with minimal delay. Which EC2 instance family should they choose?",
+      "back": "**Memory optimized instances** are designed for workloads that require high memory throughput and in-memory data processing like real-time analytics.",
+      "example": "Deploying r6i instances to host an in-memory database like Redis for fast caching and lookups.",
+      "mnemonic": "Memory = Massive RAM",
+      "category": "Compute",
+      "subject": "Amazon EC2 instance types",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["memory-optimized", "real-time", "analytics"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Memory Optimized Instances",
+          "definition": "Instances built for high-performance workloads that process large datasets in memory."
+        }
+      ]
+    },
+    {
+      "id": "ZY73XCN5QV",
+      "front": "A media startup is developing a GPU-intensive game streaming service. Which EC2 instance type should they select?",
+      "back": "**Accelerated computing instances** use hardware accelerators like GPUs to handle intensive tasks like graphics rendering or ML model inference.",
+      "example": "g4dn instances are chosen for real-time video rendering in a game streaming platform.",
+      "mnemonic": "Accelerated = Add-on Speed (GPU/FPGA)",
+      "category": "Compute",
+      "subject": "Amazon EC2 instance types",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["accelerated-computing", "gpu", "streaming"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Accelerated Computing Instances",
+          "definition": "Instances that use GPUs or FPGAs to perform calculations faster than general-purpose CPUs for graphics, ML, or simulation."
+        }
+      ]
+    },
+    {
+      "id": "APX49GTLRU",
+      "front": "You’re managing a distributed database with high IOPS requirements for read/write access. What EC2 instance type is recommended?",
+      "back": "**Storage optimized instances** are designed for workloads needing high throughput to local storage, such as OLTP databases and data warehousing.",
+      "example": "i3en instances are used for a time-series database requiring consistent high-speed disk access.",
+      "mnemonic": "Storage = Speedy IOPS",
+      "category": "Compute",
+      "subject": "Amazon EC2 instance types",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["storage-optimized", "iops", "databases"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Storage Optimized Instances",
+          "definition": "Instances tailored for workloads requiring high, sequential read/write access and high IOPS from local disks."
+        },
+        {
+          "term": "IOPS",
+          "definition": "Input/Output Operations Per Second — a performance metric for storage throughput."
+        }
+      ]
+    }
+  ]
+}

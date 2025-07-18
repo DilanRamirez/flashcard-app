@@ -1,0 +1,77 @@
+{
+  "name": "VPC Network Troubleshooting for Public EC2 Access",
+  "description": "Essential checks and diagnostics when an EC2-hosted web application is not accessible over the internet",
+  "category": "Networking",
+  "cards": [
+    {
+      "id": "p93x7bqk5r",
+      "front": "Your public EC2 instance is not reachable over the internet. What is the first network-level component to verify in your VPC?",
+      "back": "Check that an Internet Gateway is attached to your VPC. Without it, no traffic can enter or exit the VPC.",
+      "example": "You launched a web server but forgot to attach an IGW to the VPC—users cannot access the site.",
+      "mnemonic": "IGW = Internet Gateway Works",
+      "category": "Networking",
+      "subject": "Common network troubleshooting steps for Amazon VPC",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["VPC", "IGW", "troubleshooting"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "t6nq4xuj2w",
+      "front": "Your EC2 instance has a public IP and an IGW is attached, but it’s still inaccessible. What should you check in the route table?",
+      "back": "Ensure the route table associated with the subnet has a 0.0.0.0/0 route pointing to the internet gateway.",
+      "example": "The subnet’s route table was missing the internet route; adding it enabled public access.",
+      "mnemonic": "Route to 0.0.0.0 = Open to World",
+      "category": "Networking",
+      "subject": "Common network troubleshooting steps for Amazon VPC",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["route table", "subnet", "IGW"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "z3kxp8vdmn",
+      "front": "Traffic is reaching your EC2 instance, but no responses are sent back. You’ve already configured security groups. What’s another layer to check?",
+      "back": "Check the Network ACLs. Because they are stateless, you must explicitly allow both inbound and outbound traffic for ports 80 and 443.",
+      "example": "An ACL allowed inbound HTTP but not outbound traffic, so responses never left the subnet.",
+      "mnemonic": "ACL = Allow Both Ways",
+      "category": "Networking",
+      "subject": "Common network troubleshooting steps for Amazon VPC",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["ACL", "stateless", "VPC"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "g7lvq3zbwn",
+      "front": "You're using a browser to access a web app, but it keeps failing to connect. The app is running over HTTP. What should you check in the browser?",
+      "back": "Ensure the browser is not forcing HTTPS. Manually type the URL using 'http://' in the address bar.",
+      "example": "The browser auto-redirected to HTTPS, but the app didn’t support it, causing failed connections.",
+      "mnemonic": "HTTP ≠ HTTPS (yet)",
+      "category": "Networking",
+      "subject": "Common network troubleshooting steps for Amazon VPC",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["HTTP", "HTTPS", "protocol"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "mj52txubcv",
+      "front": "Your user data script was supposed to install a web server at launch, but the site doesn’t load. What should you verify?",
+      "back": "Check the EC2 instance logs (e.g., /var/log/cloud-init-output.log) to confirm the user data script ran successfully.",
+      "example": "A typo in the user data script prevented Apache from installing, resulting in no web server.",
+      "mnemonic": "Script Success? Check the Logs!",
+      "category": "Networking",
+      "subject": "Common network troubleshooting steps for Amazon VPC",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["user data", "logs", "EC2"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

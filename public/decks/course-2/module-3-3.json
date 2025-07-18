@@ -1,0 +1,77 @@
+{
+  "name": "Object Storage with Amazon S3",
+  "description": "Key concepts, use cases, security, and storage classes for Amazon S3",
+  "category": "Storage",
+  "cards": [
+    {
+      "id": "b7xpwj9q3e",
+      "front": "You're tasked with storing user-uploaded images that must be publicly accessible via URL and scaled to petabytes over time. Which AWS storage solution best meets this need?",
+      "back": "Amazon S3 is ideal for this use case. It's an object storage service with virtually unlimited scalability, supports direct web access via URL, and allows public access through bucket policies.",
+      "example": "A photo-sharing app uses Amazon S3 to store user photos with public URLs for display in mobile apps.",
+      "mnemonic": "S3 = Scalable, Shareable Storage",
+      "category": "Storage",
+      "subject": "Object Storage with Amazon S3",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["S3", "object storage", "scalability", "public access"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "q2vmx9cn7k",
+      "front": "Your compliance team needs to retain customer records for 10 years, and retrieval is needed only once a year. Which S3 storage class should you use?",
+      "back": "Amazon S3 Glacier Deep Archive is designed for long-term storage with infrequent access and is the lowest-cost option for archival needs.",
+      "example": "A healthcare company archives patient records in S3 Glacier Deep Archive to meet HIPAA compliance.",
+      "mnemonic": "Deep Archive = Decade Storage",
+      "category": "Storage",
+      "subject": "Object Storage with Amazon S3",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["S3", "archive", "compliance", "Glacier Deep Archive"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "t9czf8mk1y",
+      "front": "You want to automate the movement of rarely accessed documents from S3 Standard to a lower-cost storage class. What S3 feature should you use?",
+      "back": "Use S3 Lifecycle Management to define transition rules that automatically move objects to more cost-effective storage classes over time.",
+      "example": "Logs stored in S3 are set to transition to S3 Glacier after 90 days using lifecycle policies.",
+      "mnemonic": "Lifecycle = Let It Flow Over Time",
+      "category": "Storage",
+      "subject": "Object Storage with Amazon S3",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["S3", "lifecycle", "automation", "cost optimization"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "j45txzvkmu",
+      "front": "A developer accidentally overwrote an important image in an S3 bucket. What feature could have prevented data loss by preserving previous versions?",
+      "back": "S3 Versioning enables you to keep multiple versions of an object in the same bucket, allowing recovery from accidental overwrites or deletions.",
+      "example": "Versioning is enabled on an S3 bucket, allowing a developer to restore a prior version of employeephoto.jpg after it was accidentally replaced.",
+      "mnemonic": "Versioning = Versions Save Variants",
+      "category": "Storage",
+      "subject": "Object Storage with Amazon S3",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["S3", "versioning", "data protection"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "lgqz3vctu9",
+      "front": "You're setting up cross-account access to allow another AWS account to upload objects to your S3 bucket. Which access control method should you use?",
+      "back": "Use an S3 Bucket Policy to grant cross-account permissions directly on the bucket, without needing IAM roles.",
+      "example": "An S3 bucket policy allows AWS Account B to write objects into a bucket owned by Account A.",
+      "mnemonic": "Bucket Policy = Bucket-Level Permissions",
+      "category": "Storage",
+      "subject": "Object Storage with Amazon S3",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "expert",
+      "tags": ["S3", "bucket policy", "cross-account", "security"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "name": "Amazon SQS Basics",
+  "description": "Covers core concepts of Amazon Simple Queue Service (SQS) with real-world scenarios and visual metaphors.",
+  "category": "Messaging & Integration",
+  "cards": [
+    {
+      "id": "A7F2G4D9PK",
+      "front": "A popular coffee shop separates the roles of cashiers and baristas. To avoid delays when baristas are unavailable, they place orders on a shared board that baristas check when ready. Which AWS service models this decoupled communication strategy?",
+      "back": "Amazon Simple Queue Service (Amazon SQS) models this pattern. It enables asynchronous message passing between loosely coupled components using a queue system.",
+      "example": "A web application processes customer uploads by queuing tasks in Amazon SQS, which are then picked up and processed by backend workers.",
+      "mnemonic": "SQS = 'Simple Queue Service' like a Sticky Queue System in a café!",
+      "category": "Messaging & Integration",
+      "subject": "Amazon Simple Queue Service (Amazon SQS)",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["sqs", "decoupling", "queue", "messaging"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon SQS",
+          "definition": "A fully managed message queuing service that enables you to decouple and scale microservices, distributed systems, and serverless applications."
+        },
+        {
+          "term": "Decoupling",
+          "definition": "Design principle where individual components operate independently, enhancing scalability and fault tolerance."
+        },
+        {
+          "term": "Message Queue",
+          "definition": "A system where messages are stored temporarily until the receiving system is ready to process them."
+        }
+      ]
+    },
+    {
+      "id": "K8X7M1R2TL",
+      "front": "You’re designing an architecture where your application must continue taking new orders even if the backend service is temporarily unavailable. Which AWS service ensures message reliability and prevents loss during temporary downtime?",
+      "back": "Amazon SQS ensures message durability and enables message delivery between components even when one side is temporarily unavailable.",
+      "example": "When your order processing system goes offline for updates, Amazon SQS keeps new customer orders in queue until it comes back online.",
+      "mnemonic": "SQS = Safe Queue Storage — holds it till it's processed!",
+      "category": "Messaging & Integration",
+      "subject": "Amazon Simple Queue Service (Amazon SQS)",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["fault-tolerant", "asynchronous", "durability"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Durability",
+          "definition": "The ability of a service to retain data reliably over time."
+        },
+        {
+          "term": "Asynchronous Processing",
+          "definition": "Processing that occurs independently of the original request cycle or interaction."
+        }
+      ]
+    },
+    {
+      "id": "R3Y9Q6VPXM",
+      "front": "A developer is building an order system where messages (orders) must be processed in the exact order they are received. Which feature or type of Amazon SQS should they use?",
+      "back": "They should use Amazon SQS FIFO (First-In-First-Out) queues to preserve the exact message order.",
+      "example": "A financial transaction system requires that withdrawal requests are processed in the exact order submitted to avoid overdrafts.",
+      "mnemonic": "FIFO = First-In, First-Out — like a line at a coffee shop!",
+      "category": "Messaging & Integration",
+      "subject": "Amazon Simple Queue Service (Amazon SQS)",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["fifo", "queue", "ordered processing"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "FIFO Queue",
+          "definition": "A type of SQS queue that preserves the exact order of message delivery."
+        },
+        {
+          "term": "Standard Queue",
+          "definition": "The default SQS queue type that provides high throughput and at-least-once message delivery, but not guaranteed order."
+        }
+      ]
+    }
+  ]
+}

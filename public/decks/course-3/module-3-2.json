@@ -1,0 +1,147 @@
+{
+  "name": "Automation in Cloud Support",
+  "description": "Flashcards on automation concepts, benefits, and practical applications in cloud support roles.",
+  "category": "Support Operations",
+  "cards": [
+    {
+      "id": "X9T5FJ7WZL",
+      "front": "A cloud support associate is overwhelmed with repeating tasks like verifying EC2 instance status and analyzing logs. What solution can improve efficiency and consistency?",
+      "back": "Implementing **automation** can offload repetitive tasks using diagnostic scripts and monitoring integrations, improving efficiency and reducing manual errors.",
+      "example": "A support team automates EC2 health checks with Lambda functions triggered by CloudWatch alarms.",
+      "mnemonic": "Automate Repeats, Elevate Support",
+      "category": "Support Operations",
+      "subject": "Automation and Support",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["automation", "efficiency", "diagnostics"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Automation",
+          "definition": "The use of technology to execute tasks with minimal human intervention, enhancing speed, consistency, and scalability."
+        }
+      ]
+    },
+    {
+      "id": "L3KD92WPTA",
+      "front": "Your support team needs to analyze large volumes of alert data to find the root cause of incidents. What automation practice is best suited for this?",
+      "back": "Use **alert-based troubleshooting**, where scripts are triggered by monitoring alerts to correlate data and perform predefined analysis and remediation actions.",
+      "example": "When a CPU spike is detected, a script analyzes running processes and automatically scales the instance if needed.",
+      "mnemonic": "Alerts Trigger Action",
+      "category": "Support Operations",
+      "subject": "Automation and Support",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["alerts", "monitoring", "troubleshooting"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Alert-Based Troubleshooting",
+          "definition": "An automation technique where alerts initiate scripted diagnostics or fixes to reduce response time and improve reliability."
+        }
+      ]
+    },
+    {
+      "id": "R2CMZW49YH",
+      "front": "You want to standardize how your support team handles disk space issues on EC2 instances. What tool or approach would ensure consistency and quick resolution?",
+      "back": "Create and automate a **runbook**—a predefined, script-driven troubleshooting guide—to handle the issue uniformly across all incidents.",
+      "example": "A runbook script checks available disk space, clears cache files, and restarts the application automatically.",
+      "mnemonic": "Runbooks Run the Routine",
+      "category": "Support Operations",
+      "subject": "Automation and Support",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["runbook", "automation", "incident-response"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Runbook Automation",
+          "definition": "Automating the execution of documented procedures for common issues to improve speed and consistency."
+        }
+      ]
+    },
+    {
+      "id": "N5XAK3FWTZ",
+      "front": "Your monitoring tool sends an alert when latency exceeds a threshold. You want to automatically gather logs and restart a service. What should you integrate?",
+      "back": "Integrate **troubleshooting scripts with monitoring tools** to gather diagnostics and initiate corrective actions based on alert severity.",
+      "example": "A CloudWatch alarm triggers a Lambda function that collects logs and restarts a stuck ECS task.",
+      "mnemonic": "Monitor + Script = Smart Support",
+      "category": "Support Operations",
+      "subject": "Automation and Support",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["monitoring", "script-integration", "automation"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Integration with Monitoring Tools",
+          "definition": "Combining monitoring and alerting systems with automated scripts to enable responsive incident management workflows."
+        }
+      ]
+    },
+    {
+      "id": "ZQ94PKSULH",
+      "front": "You're setting up a system that categorizes incidents by severity and routes them to the right team with automatic response actions. What process are you implementing?",
+      "back": "**Incident management automation**, where triage, categorization, and routing are handled through scripts and workflows to improve response time.",
+      "example": "An incoming ticket labeled 'Critical' triggers a PagerDuty alert and runs a pre-defined escalation script.",
+      "mnemonic": "Auto-Incident Handling = Swift Resolution",
+      "category": "Support Operations",
+      "subject": "Automation and Support",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["incident-management", "triage", "automation"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Incident Management",
+          "definition": "Automated workflows that triage, classify, and respond to incidents to streamline support operations."
+        }
+      ]
+    },
+    {
+      "id": "Y7GJTPN5XR",
+      "front": "A security team wants to enforce encryption and run daily vulnerability scans without manual effort. What should a Cloud Support Associate recommend?",
+      "back": "Implement **security automation**, using scripts to enforce compliance policies, perform scans, and remediate vulnerabilities.",
+      "example": "A script checks for unencrypted S3 buckets and applies server-side encryption automatically.",
+      "mnemonic": "Secure with Scripts",
+      "category": "Support Operations",
+      "subject": "Automation and Support",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["security", "compliance", "automation"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Security and Compliance",
+          "definition": "Automating enforcement of security controls and compliance audits across cloud environments."
+        }
+      ]
+    },
+    {
+      "id": "M8ZRK2QW0S",
+      "front": "Your customer asks how to save costs in their AWS environment without manually checking usage every week. What automation solution can you propose?",
+      "back": "Use **cost optimization automation**—scripts that analyze usage patterns, recommend rightsizing, and schedule resource downtime to reduce spend.",
+      "example": "A script identifies idle EC2 instances and sends a weekly report or terminates them automatically.",
+      "mnemonic": "Cut Costs with Code",
+      "category": "Support Operations",
+      "subject": "Automation and Support",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["cost-optimization", "resource-management", "automation"],
+      "createdOn": "2025-07-15",
+      "glossary": [
+        {
+          "term": "Cost Optimization and Resource Management",
+          "definition": "Automation that identifies opportunities to reduce cloud costs by analyzing usage and managing resource lifecycle."
+        }
+      ]
+    }
+  ]
+}

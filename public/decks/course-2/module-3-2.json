@@ -1,0 +1,77 @@
+{
+  "name": "EC2 Instance Storage and Amazon EBS",
+  "description": "Understanding the differences, use cases, and benefits of EC2 Instance Store and Amazon Elastic Block Store (EBS)",
+  "category": "Storage",
+  "cards": [
+    {
+      "id": "f9k4xqb7rz",
+      "front": "You are running a temporary caching service on EC2 that doesn’t need to persist after instance termination. What AWS storage type is most appropriate?",
+      "back": "Amazon EC2 Instance Store is ideal for temporary data like caches and buffers. It provides block-level storage that is deleted when the instance is terminated.",
+      "example": "A Hadoop cluster uses instance store for fast temporary data replication between nodes.",
+      "mnemonic": "Instance Store = Impermanent Storage",
+      "category": "Storage",
+      "subject": "Amazon EC2 Instance Storage and Amazon Elastic Block Store",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["instance store", "ephemeral", "caching"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "q3zvkb5mtp",
+      "front": "You want to ensure data on an EC2 instance persists even if the instance is stopped or terminated. What storage type should you use?",
+      "back": "Use Amazon EBS, which provides persistent block storage that can be detached from one EC2 instance and attached to another.",
+      "example": "A production EC2 instance stores database files on EBS to ensure persistence after restarts.",
+      "mnemonic": "EBS = Eternal Block Storage",
+      "category": "Storage",
+      "subject": "Amazon EC2 Instance Storage and Amazon Elastic Block Store",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["EBS", "persistence", "block storage"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "m5b1rdgqxt",
+      "front": "Which Amazon EBS volume type is best for latency-sensitive, high-transaction workloads like databases?",
+      "back": "EBS Provisioned IOPS SSD is optimized for I/O-intensive workloads requiring low latency and high throughput.",
+      "example": "A NoSQL database requires consistent performance, so it’s backed by a Provisioned IOPS SSD volume.",
+      "mnemonic": "PIOPS = Performance In Overdrive",
+      "category": "Storage",
+      "subject": "Amazon EC2 Instance Storage and Amazon Elastic Block Store",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["EBS", "PIOPS", "databases"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "r8nxw2cvsl",
+      "front": "You need to back up your EC2 data regularly and only want to store changed data to save space. What AWS feature should you use?",
+      "back": "Use EBS Snapshots. They are incremental backups that only store changes since the last snapshot and are stored redundantly in Amazon S3.",
+      "example": "An admin takes daily snapshots of a 100 GB volume; after a small update, only 2 GB is stored in the new snapshot.",
+      "mnemonic": "Snapshots = Smart Saves",
+      "category": "Storage",
+      "subject": "Amazon EC2 Instance Storage and Amazon Elastic Block Store",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["EBS", "snapshots", "backups"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "yk7b2hzmpc",
+      "front": "Which feature allows you to attach a single EBS volume to multiple EC2 instances simultaneously?",
+      "back": "EBS Multi-Attach allows a volume to be attached to multiple EC2 instances in the same Availability Zone, though not all instance types support it.",
+      "example": "Two EC2 instances in the same AZ share access to a multi-attach EBS volume for clustered file system use.",
+      "mnemonic": "Multi-Attach = Many Mounts",
+      "category": "Storage",
+      "subject": "Amazon EC2 Instance Storage and Amazon Elastic Block Store",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "expert",
+      "tags": ["EBS", "multi-attach", "advanced"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "name": "Monitoring with Amazon CloudWatch",
+  "description": "Covers the fundamentals and benefits of monitoring AWS resources using Amazon CloudWatch.",
+  "category": "Monitoring & Observability",
+  "cards": [
+    {
+      "id": "q7vr83k2sd",
+      "front": "Your EC2-hosted web application experiences performance degradation at peak hours. You want to track CPU spikes and set alerts. Which AWS service should you use?",
+      "back": "Use Amazon CloudWatch to monitor CPU utilization metrics, set alarms for thresholds, and take automated actions to mitigate performance issues.",
+      "example": "A CloudWatch alarm triggers an Auto Scaling policy when CPU utilization exceeds 80% for 5 minutes.",
+      "mnemonic": "CloudWatch = Cloud’s Watchdog",
+      "category": "Monitoring & Observability",
+      "subject": "Monitoring on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["cloudwatch", "ec2", "cpu", "alarm"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "md4lg0ntv9",
+      "front": "An operations team wants to detect unusual access patterns and traffic spikes to improve security posture. What AWS feature enables this?",
+      "back": "Monitoring metrics over time builds a baseline, allowing you to detect anomalies like unusual traffic or IP addresses. CloudWatch enables setting alarms and triggering actions based on anomalies.",
+      "example": "Detecting unexpected access from foreign IPs to an S3 bucket based on baseline traffic patterns.",
+      "mnemonic": "Baseline + Spike = Red Flag",
+      "category": "Monitoring & Observability",
+      "subject": "Monitoring on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["security", "baseline", "anomalies", "cloudwatch"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "kg8ywqed5n",
+      "front": "Your business wants to know if users are adopting a new feature in your application. How can monitoring help with this?",
+      "back": "Application-level monitoring allows collection of usage metrics that reveal how many users interact with a new feature, enabling data-driven business decisions.",
+      "example": "Tracking daily active users who click a new 'Upload Cat Photo' feature through custom metrics.",
+      "mnemonic": "Monitor Metrics ➝ Market Moves",
+      "category": "Monitoring & Observability",
+      "subject": "Monitoring on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "intermediate",
+      "tags": ["business", "metrics", "feature adoption"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "jn2tm5yrbo",
+      "front": "How does Amazon CloudWatch help improve cost-efficiency in AWS resource usage?",
+      "back": "By monitoring resource utilization, CloudWatch helps identify underused resources so you can rightsize instances and reduce costs.",
+      "example": "CloudWatch reveals an EC2 instance has consistent CPU usage under 10%, prompting a downgrade to a smaller instance type.",
+      "mnemonic": "Watch → Waste → Optimize",
+      "category": "Monitoring & Observability",
+      "subject": "Monitoring on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "beginner",
+      "tags": ["cost optimization", "cloudwatch", "resource usage"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "pfh0z6a9xu",
+      "front": "What is a metric in the context of AWS monitoring, and how is it useful?",
+      "back": "A metric is a time-ordered set of data points related to a specific resource or application. Monitoring metrics helps detect issues and optimize system performance.",
+      "example": "Monitoring 'NetworkIn' and 'CPUUtilization' metrics for an EC2 instance to detect heavy load patterns.",
+      "mnemonic": "Metrics = Meaningful Measurements",
+      "category": "Monitoring & Observability",
+      "subject": "Monitoring on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "beginner",
+      "tags": ["metrics", "cloudwatch", "monitoring"],
+      "createdOn": "2025-07-08"
+    },
+    {
+      "id": "be7t32yrml",
+      "front": "What are some key benefits of monitoring AWS workloads using Amazon CloudWatch?",
+      "back": "Monitoring enables early detection of operational issues, improved system performance, enhanced security, data-driven decisions, and cost optimization.",
+      "example": "Proactively scaling an Auto Scaling group when CloudWatch detects a CPU utilization spike.",
+      "mnemonic": "RISEC – Reliability, Insights, Security, Efficiency, Cost",
+      "category": "Monitoring & Observability",
+      "subject": "Monitoring on AWS",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 4",
+      "difficulty": "beginner",
+      "tags": ["benefits", "cloudwatch", "visibility"],
+      "createdOn": "2025-07-08"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "name": "Amazon EC2 Pricing Models",
+  "description": "Flashcards explaining different EC2 pricing options and their ideal use cases for cost optimization and flexibility.",
+  "category": "Compute",
+  "cards": [
+    {
+      "id": "FQ7Z3MPC9T",
+      "front": "You’re launching a test server for 2 days to validate an application’s performance. Which EC2 pricing option is most suitable?",
+      "back": "**On-Demand Instances** are ideal for short-term or unpredictable workloads with no upfront payment and pay-per-use pricing.",
+      "example": "A QA team runs a test suite on an EC2 instance for 48 hours, paying only for the compute time used.",
+      "mnemonic": "On-Demand = Only When Needed",
+      "category": "Compute",
+      "subject": "Amazon EC2 Pricing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["on-demand", "short-term", "testing"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "On-Demand Instances",
+          "definition": "EC2 instances billed by the second or hour with no long-term commitment, suitable for short-term or unpredictable workloads."
+        }
+      ]
+    },
+    {
+      "id": "PRN6DZJQTY",
+      "front": "Your company wants to reduce EC2 costs over the next 3 years by committing to consistent compute usage. What pricing model fits best?",
+      "back": "**EC2 Savings Plans** provide up to 72% savings by committing to a specific usage amount for 1 or 3 years, applied across EC2 regardless of instance family or Region.",
+      "example": "A company commits to $20/hour for compute over 3 years and receives discounts on matching EC2 usage.",
+      "mnemonic": "Savings Plan = Set and Save",
+      "category": "Compute",
+      "subject": "Amazon EC2 Pricing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["savings-plans", "long-term", "cost-optimization"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "EC2 Savings Plans",
+          "definition": "Flexible pricing models offering discounted rates for a committed hourly compute usage across EC2 services."
+        }
+      ]
+    },
+    {
+      "id": "KJ9RQLCMZ4",
+      "front": "You’re planning to run a high-availability application for 3 years. What EC2 pricing model can offer cost savings with commitment?",
+      "back": "**Reserved Instances** offer significant discounts (especially 3-year terms) and are best for steady-state or predictable workloads.",
+      "example": "A retail company runs its ecommerce platform on Reserved Instances to reduce compute costs long-term.",
+      "mnemonic": "Reserve to Reduce",
+      "category": "Compute",
+      "subject": "Amazon EC2 Pricing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["reserved-instances", "long-term", "predictable-workload"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Reserved Instances",
+          "definition": "Discounted EC2 pricing in exchange for a 1- or 3-year usage commitment for specific instance attributes."
+        }
+      ]
+    },
+    {
+      "id": "VWM2LPTC85",
+      "front": "You’re running data processing jobs that can tolerate interruptions and want the lowest cost. Which EC2 option fits best?",
+      "back": "**Spot Instances** use unused capacity and offer up to 90% savings but can be interrupted if AWS needs the capacity.",
+      "example": "A team uses Spot Instances to analyze marketing data in batches overnight when capacity is cheaper.",
+      "mnemonic": "Spot = Save a Lot (But Can Stop)",
+      "category": "Compute",
+      "subject": "Amazon EC2 Pricing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["spot-instances", "interruption-tolerant", "cost-saving"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Spot Instances",
+          "definition": "EC2 instances using spare capacity at discounted prices, suitable for interruptible or flexible jobs."
+        }
+      ]
+    },
+    {
+      "id": "MNT43ZK9WL",
+      "front": "A company must use its own software licenses and needs full control over the physical server. Which EC2 pricing option supports this?",
+      "back": "**Dedicated Hosts** provide a physical EC2 server fully allocated to one customer, allowing license compliance and hardware control.",
+      "example": "An enterprise runs Oracle software on a Dedicated Host to comply with per-core licensing agreements.",
+      "mnemonic": "Dedicated = Device is Yours",
+      "category": "Compute",
+      "subject": "Amazon EC2 Pricing",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "expert",
+      "tags": ["dedicated-host", "compliance", "licensing"],
+      "createdOn": "2025-07-16",
+      "glossary": [
+        {
+          "term": "Dedicated Host",
+          "definition": "A physical EC2 server dedicated to one customer, useful for licensing and compliance needs."
+        }
+      ]
+    }
+  ]
+}

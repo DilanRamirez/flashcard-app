@@ -1,0 +1,103 @@
+{
+  "name": "Selecting an AWS Region",
+  "description": "Key factors for selecting the appropriate AWS Region for your services and applications.",
+  "category": "Global Infrastructure",
+  "cards": [
+    {
+      "id": "X9L2K7RQJZ",
+      "front": "Your company's legal policy requires that all customer data be stored and processed within UK borders. When launching AWS services, which factor must you consider first when selecting a Region?",
+      "back": "Compliance with data governance and legal requirements is the first factor to consider. You would select the London Region to meet the requirement of keeping data within the UK.",
+      "example": "A healthcare provider in London uses AWS services exclusively in the London Region to comply with UK data residency laws.",
+      "mnemonic": "C.L.A.P. — Compliance, Location (proximity), Availability, Pricing.",
+      "category": "Global Infrastructure",
+      "subject": "Selecting a Region",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["region", "compliance", "data governance"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Region",
+          "definition": "A geographic area that contains multiple Availability Zones and supports AWS services for deployment."
+        },
+        {
+          "term": "Data Governance",
+          "definition": "The process of managing the availability, usability, integrity, and security of data based on internal policies and external regulations."
+        }
+      ]
+    },
+    {
+      "id": "B3TX58WLYK",
+      "front": "You are deploying a customer-facing web application and want to ensure low latency for users in Singapore. What should influence your choice of AWS Region?",
+      "back": "You should choose a Region geographically close to your customers, such as the Singapore Region, to reduce latency and improve performance.",
+      "example": "A company headquartered in the US deploys its app in the Singapore Region to serve its Southeast Asian user base more efficiently.",
+      "mnemonic": "Closer = Faster — proximity reduces latency.",
+      "category": "Global Infrastructure",
+      "subject": "Selecting a Region",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["latency", "customer experience", "region selection"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Latency",
+          "definition": "The delay before a transfer of data begins following an instruction for its transfer."
+        },
+        {
+          "term": "Proximity",
+          "definition": "The physical closeness of a data center to end users, which affects network speed and performance."
+        }
+      ]
+    },
+    {
+      "id": "F8DRL1C2NV",
+      "front": "Your development team wants to use Amazon Braket for quantum computing, but it's not available in your preferred Region. What Region selection factor is this related to?",
+      "back": "This scenario relates to 'Available services within a Region'. Not all AWS services are available in every Region.",
+      "example": "Developers in Paris must use the US West (Oregon) Region for Amazon Braket since it's not yet offered in Europe.",
+      "mnemonic": "Services may vary, so verify.",
+      "category": "Global Infrastructure",
+      "subject": "Selecting a Region",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["service availability", "Braket", "region support"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon Braket",
+          "definition": "A fully managed AWS service that provides a development environment to explore and design quantum algorithms."
+        },
+        {
+          "term": "Service Availability",
+          "definition": "The presence of specific AWS services within a Region."
+        }
+      ]
+    },
+    {
+      "id": "Z5KP31NQAE",
+      "front": "You are comparing costs between deploying to the Oregon Region and the São Paulo Region and notice a significant price difference. Which factor is this related to in Region selection?",
+      "back": "This relates to the 'Pricing' factor. Pricing for AWS services can vary by Region due to infrastructure, taxes, and local market conditions.",
+      "example": "A startup reduces operational costs by choosing the Oregon Region instead of São Paulo, avoiding Brazil’s higher regional tax overhead.",
+      "mnemonic": "Price tags change by Region range.",
+      "category": "Global Infrastructure",
+      "subject": "Selecting a Region",
+      "course": "AWS Cloud Practitioner Essentials",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["cost optimization", "region pricing", "aws billing"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Pricing",
+          "definition": "The cost associated with running AWS services, which can vary across Regions based on multiple factors."
+        },
+        {
+          "term": "Region-Based Pricing",
+          "definition": "Differences in AWS service costs based on the geographic Region due to taxes, infrastructure, and demand."
+        }
+      ]
+    }
+  ]
+}
