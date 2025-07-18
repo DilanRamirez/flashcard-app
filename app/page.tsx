@@ -45,6 +45,7 @@ import {
   trackQuizAnswer,
   updateCardStats,
 } from "@/lib/learning-analytics";
+import Reader from "@/components/markdown-reader";
 
 export interface Flashcard {
   id: string;
@@ -95,6 +96,7 @@ export interface AppState {
   quizMode: "config" | "session" | "results" | "ai-config" | null;
   showDeckManager: boolean;
   showStudyPath: boolean;
+  reader: boolean; // For reader mode
   filteredCardIds: string[] | null; // For study path filtering
 }
 
@@ -129,6 +131,7 @@ export default function FlashcardApp() {
       quizMode: null, // "config", "session", "results" or null
       showStudyPath: false,
       filteredCardIds: null,
+      reader: false, // For reader mode
     },
   );
 
@@ -494,6 +497,19 @@ export default function FlashcardApp() {
       />
     );
   }
+  if (appState.quizMode === "results" && quizResult) {
+    return (
+      <QuizResults
+        result={quizResult}
+        onRetakeQuiz={handleRetakeQuiz}
+        onBackToHome={handleExitQuiz}
+      />
+    );
+  }
+
+  if (appState.reader) {
+    return <Reader />;
+  }
 
   if (isLoading) {
     return (
@@ -761,6 +777,25 @@ export default function FlashcardApp() {
                 >
                   <Brain className="h-3 w-3 mr-1" />
                   Study Path
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() =>
+                    setAppState((prev) => ({ ...prev, reader: true }))
+                  }
+                  disabled={displayCards.length === 0}
+                  sx={{
+                    width: "100%",
+                    fontSize: "0.75rem",
+                    color: displayCards.length === 0 ? "#888" : "inherit",
+                    borderColor: "white.main",
+                    py: 0.5,
+                  }}
+                >
+                  <Brain className="h-3 w-3 mr-1" />
+                  Reader
                 </Button>
               </Stack>
 

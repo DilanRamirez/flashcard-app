@@ -8,13 +8,12 @@ export async function loadDecks(): Promise<Deck[]> {
   // Try to load additional decks from public URLs (if available)
   const additionalDeckUrls = [
     // Add URLs to your JSON files here if hosted elsewhere
-    "/decks/module-1-1.json",
-    "/decks/module-1-2.json",
-    "/decks/module-1-3.json",
-    "/decks/module-1-4.json",
-    "/decks/module-1-5.json",
-    "/decks/module-1-6.json",
-    "/decks/module-2-1.json",
+    "decks/aws-cloud-practitioner/module-1-1.json",
+    "decks/aws-cloud-practitioner/module-1-2.json",
+    "decks/aws-cloud-practitioner/module-1-3.json",
+    "decks/aws-cloud-practitioner/module-1-4.json",
+    "decks/aws-cloud-practitioner/module-1-5.json",
+    "decks/aws-cloud-practitioner/module-1-6.json",
   ];
 
   for (const url of additionalDeckUrls) {
