@@ -14,7 +14,6 @@ export function useMarkdownLoader(path: string) {
         setError(null);
 
         const response = await fetch(path);
-        console.log(`Fetching markdown from: ${path}`);
         if (!response.ok) {
           throw new Error(
             `Failed to load markdown: ${response.status} ${response.statusText}`,

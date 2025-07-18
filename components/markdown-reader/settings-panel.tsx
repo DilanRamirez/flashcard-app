@@ -97,6 +97,7 @@ export function SettingsPanel({
             );
             window.location.reload(); // Reload to apply imported data
           }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
           alert("Invalid backup file format");
         }

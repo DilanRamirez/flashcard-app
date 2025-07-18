@@ -1,8 +1,6 @@
 "use client";
 
 import { forwardRef, useEffect, useRef, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import type { Chapter, StudyData, Highlight } from "@/types/study";
+import "../../styles/markdown.css"; // Import custom markdown styles
 
 interface ContentAreaProps {
   chapter: Chapter | undefined;
@@ -31,7 +30,14 @@ interface ContentAreaProps {
 
 export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
   (
-    { chapter, studyData, onUpdateProgress, onAddHighlight, onToggleSidebar },
+    {
+      chapter,
+      studyData,
+      onUpdateProgress,
+      onAddHighlight,
+      onRemoveHighlight,
+      onToggleSidebar,
+    },
     ref,
   ) => {
     const contentRef = useRef<HTMLDivElement>(null);
@@ -93,10 +99,27 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         endOffset: selectedText.text.length,
         note: withNote ? highlightNote : "",
       };
-
       onAddHighlight(chapter.id, highlight);
 
       // Clear selection
+      window.getSelection()?.removeAllRanges();
+      setShowHighlightPopover(false);
+      setSelectedText(null);
+      setHighlightNote("");
+    };
+
+    // Remove highlight
+    const handleRemoveHighlight = () => {
+      if (!selectedText || !chapter) return;
+      const highlightsList = studyData.highlights[chapter.id] || [];
+      // Find the matching highlight by text
+      const matching = highlightsList.find((h) => h.text === selectedText.text);
+      if (!matching) return;
+
+      // Invoke the removal callback
+      onRemoveHighlight(chapter.id, matching.id);
+
+      // Clear selection and popover state
       window.getSelection()?.removeAllRanges();
       setShowHighlightPopover(false);
       setSelectedText(null);
@@ -242,13 +265,8 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
           <div
             ref={contentRef}
             className="max-w-3xl mx-auto px-6 py-8 sm:py-10 prose prose-base sm:prose-lg prose-headings:mt-6 prose-headings:mb-2 prose-p:leading-relaxed prose-p:mt-2 prose-p:mb-4 prose-ul:mt-2 prose-ul:mb-4 prose-li:leading-relaxed prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:text-gray-600"
-          >
-            <div className="prose prose-lg max-w-none">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {chapter.content}
-              </ReactMarkdown>
-            </div>
-          </div>
+            dangerouslySetInnerHTML={{ __html: chapter.content }}
+          />
         </div>
 
         {/* Highlight Popover */}
@@ -283,14 +301,25 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
             </p>
 
             <div className="space-y-2">
-              <Button
-                size="sm"
-                className="w-full justify-start"
-                onClick={() => handleAddHighlight(false)}
-              >
-                <Highlighter className="h-4 w-4 mr-2" />
-                Highlight
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  className="w-full justify-start"
+                  onClick={() => handleAddHighlight(false)}
+                >
+                  <Highlighter className="h-4 w-4 mr-2" />
+                  Highlight
+                </Button>
+
+                <Button
+                  size="sm"
+                  className="w-full justify-start"
+                  onClick={() => handleRemoveHighlight()}
+                >
+                  <Highlighter className="h-4 w-4 mr-2" />
+                  Remove
+                </Button>
+              </div>
 
               <div className="space-y-2">
                 <Textarea

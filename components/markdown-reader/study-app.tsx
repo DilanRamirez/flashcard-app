@@ -6,7 +6,6 @@ import { Sidebar } from "./sidebar";
 import { ContentArea } from "./content-area";
 import { SearchPanel } from "./search-panel";
 import { SettingsPanel } from "./settings-panel";
-import { BackToTop } from "./back-to-top";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useMarkdownLoader } from "@/hooks/use-markdown-loader";
 import { useHighlighting } from "@/hooks/use-highlighting";
@@ -88,17 +87,16 @@ export function StudyApp() {
           "g",
         );
         const sectionMatch = markdownString.match(sectionRegex);
-        const chapterContent = sectionMatch ? sectionMatch[0] : "";
+        const rawContent = sectionMatch ? sectionMatch[0] : "";
+        const chapterContent = marked.parse(rawContent);
 
         return {
           id: slug,
           title: `Chapter ${chapterNumber}: ${title}`,
-          content: chapterContent,
+          content: chapterContent as string,
           order: index,
         };
       });
-
-      console.log("Extracted Chapters:", extractedChapters);
 
       setChapters(extractedChapters);
 
@@ -243,9 +241,6 @@ export function StudyApp() {
         onPreferencesChange={setPreferences}
         onResetData={resetData}
       />
-
-      {/* Back to Top */}
-      <BackToTop containerRef={contentRef} />
     </div>
   );
 }
