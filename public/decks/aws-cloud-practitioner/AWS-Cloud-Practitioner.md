@@ -82,6 +82,8 @@
 - [Chapter 45: Guide to Passing the AWS Certified Cloud Practitioner Exam](#chapter-45-guide-to-passing-the-aws-certified-cloud-practitioner-exam)
 - [Chapter 46: Exam Strategies for the AWS Certified Cloud Practitioner](#chapter-46-exam-strategies-for-the-aws-certified-cloud-practitioner)
 
+## End
+
 ---
 
 # Table of Contents
@@ -161,8 +163,6 @@
 # Chapter 1: Deployment Models for Cloud Computing
 
 ### Choosing the Right Cloud Kitchen for Your Business Recipe
-
----
 
 ## **Story 1: The Cloud-Only Pizza Shop**
 
@@ -4199,6 +4199,8 @@ While **no prior technical experience is required**, AWS suggests:
 
 🎯 **Score ≥ 70%** on a 65-question exam by understanding the foundational AWS Cloud concepts and applying real-world logic to each scenario.
 
+### chapter end
+
 ---
 
 # Chapter 46: Exam Strategies for the AWS Certified Cloud Practitioner
@@ -4283,3 +4285,5 @@ These sample questions include detailed explanations, helping you:
 With good preparation and the right mindset, you'll be well-positioned to succeed.
 
 **Good luck—you’ve got this! 🚀**
+
+# Chapter 47: End

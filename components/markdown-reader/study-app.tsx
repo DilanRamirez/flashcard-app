@@ -12,7 +12,6 @@ import { useMarkdownLoader } from "@/hooks/use-markdown-loader";
 import { useHighlighting } from "@/hooks/use-highlighting";
 import { useSearch } from "@/hooks/use-search";
 import type { StudyData, Chapter, Preferences } from "@/types/study";
-import { generateSlug } from "@/lib/utils";
 
 const defaultPreferences: Preferences = {
   theme: "light",
@@ -71,7 +70,7 @@ export function StudyApp() {
         /^- \[Chapter (\d+): (.*?)\]\(#(chapter-\d+.*?)\)$/gm;
 
       const tocMatch = markdownString.match(
-        /## Core Cloud Concepts[\s\S]+?## Certification Preparation/,
+        /## Core Cloud Concepts[\s\S]+?## End/,
       );
       if (!tocMatch) return;
 
@@ -91,12 +90,10 @@ export function StudyApp() {
         const sectionMatch = markdownString.match(sectionRegex);
         const chapterContent = sectionMatch ? sectionMatch[0] : "";
 
-        const html = marked.parse(chapterContent);
-
         return {
           id: slug,
           title: `Chapter ${chapterNumber}: ${title}`,
-          content: html,
+          content: chapterContent,
           order: index,
         };
       });

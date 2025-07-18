@@ -55,20 +55,20 @@ export function Sidebar({
     "Storage Services": chapters.filter((c) => c.order >= 15 && c.order <= 16),
     "Database Services": chapters.filter((c) => c.order >= 17 && c.order <= 22),
     "Security & Compliance": chapters.filter(
-      (c) => c.order >= 23 && c.order <= 30,
+      (c) => c.order >= 23 && c.order <= 34,
     ),
-    "Billing & Pricing": chapters.filter((c) => c.order >= 32 && c.order <= 35),
+    "Billing & Pricing": chapters.filter((c) => c.order >= 31 && c.order <= 34),
     "Support & Migration": chapters.filter(
-      (c) => c.order >= 37 && c.order <= 40,
+      (c) => c.order >= 35 && c.order <= 38,
     ),
     "Architecture & Best Practices": chapters.filter(
-      (c) => c.order >= 42 && c.order <= 42,
+      (c) => c.order >= 39 && c.order <= 39,
     ),
     "Cloud Value Proposition": chapters.filter(
-      (c) => c.order >= 43 && c.order <= 43,
+      (c) => c.order >= 40 && c.order <= 40,
     ),
     "Certification Preparation": chapters.filter(
-      (c) => c.order >= 44 && c.order <= 45,
+      (c) => c.order >= 41 && c.order <= 43,
     ),
   };
 
@@ -161,10 +161,7 @@ export function Sidebar({
                     onClick={() => onNavigate(chapter.id)}
                   >
                     {getProgressIcon(chapter.id)}
-                    <span
-                      className="flex-1 text-sm truncate"
-                      title={chapter.title}
-                    >
+                    <span className="flex-1 text-sm" title={chapter.title}>
                       {chapter.title}
                     </span>
                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

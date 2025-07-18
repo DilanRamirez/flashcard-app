@@ -6,7 +6,6 @@ import { StudyApp } from "./study-app";
 
 export default function Reader() {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Simulate initial load
@@ -19,19 +18,6 @@ export default function Reader() {
 
   if (isLoading) {
     return <LoadingSpinner />;
-  }
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">
-            Error Loading App
-          </h1>
-          <p className="text-gray-600">{error}</p>
-        </div>
-      </div>
-    );
   }
 
   return <StudyApp />;

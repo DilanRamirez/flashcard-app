@@ -1,6 +1,8 @@
 "use client";
 
 import { forwardRef, useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
@@ -163,7 +165,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
     const highlights = studyData.highlights[chapter.id] || [];
 
     return (
-      <div className="flex-1 flex flex-col relative">
+      <div className="flex-1 flex flex-col relative overflow-auto">
         {/* Header */}
         <div className="border-b bg-white p-3 sm:p-4">
           <div className="flex items-start justify-between gap-3">
@@ -236,12 +238,17 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         </div>
 
         {/* Content */}
-        <div ref={ref} className="flex-1 overflow-auto">
+        <div ref={ref} className="flex-1">
           <div
             ref={contentRef}
-            className="max-w-4xl mx-auto p-4 sm:p-6 prose prose-sm sm:prose-lg"
-            dangerouslySetInnerHTML={{ __html: chapter.content }}
-          />
+            className="max-w-3xl mx-auto px-6 py-8 sm:py-10 prose prose-base sm:prose-lg prose-headings:mt-6 prose-headings:mb-2 prose-p:leading-relaxed prose-p:mt-2 prose-p:mb-4 prose-ul:mt-2 prose-ul:mb-4 prose-li:leading-relaxed prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:text-gray-600"
+          >
+            <div className="prose prose-lg max-w-none">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {chapter.content}
+              </ReactMarkdown>
+            </div>
+          </div>
         </div>
 
         {/* Highlight Popover */}
