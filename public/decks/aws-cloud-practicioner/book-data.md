@@ -1,142 +1,149 @@
 # 📚 Table of Contents
 
-**AWS Cloud Essentials Study Book**
+## Core Cloud Concepts
+
+1. **Deployment Models for Cloud Computing**
+2. **Benefits of Cloud Computing**
+
+## Compute Services & Scaling
+
+3. **Amazon EC2 Pricing Models**
+4. **Scaling Amazon EC2**
+5. **Elastic Load Balancer**
+6. **Serverless and Container Computing**
+
+## Messaging & Queuing
+
+7. **Amazon SNS – Sending the Right Message to the Right Crowd**
+8. **Amazon SQS – Letting the Orders Line Up Automatically**
+
+## Global Infrastructure
+
+9. **Selecting an AWS Region**
+10. **Availability Zones**
+11. **Edge Locations**
+
+## Access & Management
+
+12. **Ways to Interact with AWS Services**
+13. **AWS Elastic Beanstalk and AWS CloudFormation**
+14. **Connectivity to AWS**
+15. **Subnets, Network ACLs, and Security Groups**
+
+## Storage Services
+
+16. **Storage That Stays or Goes**
+17. **Storing Data Like a Pizza Shop Owner**
+
+## Database Services (Narrative Format)
+
+18. **The Shared Recipe Book** _(Relational Databases – Amazon RDS)_
+19. **The Coffee Shop Ledger** _(Amazon DynamoDB)_
+20. **The Flexible Clipboard** _(Amazon Redshift)_
+21. **The Data Super-Highway** _(AWS DMS)_
+22. **The Database Delivery Van** _(AWS Snow Family)_
+23. **The Specialty Shops of Data Town** _(Other Database Services)_
+
+## Security & Identity
+
+24. **Who’s Got the Keys?** _(IAM & MFA)_
+25. **“Only the Right Apron Gets In”** _(IAM Policies, Users, Groups, Roles)_
+26. **“The Umbrella Company”** _(AWS Organizations & SCPs)_
+27. **“The Compliance Cabinet”** _(AWS Artifact & Regulatory Compliance)_
+
+## Architecture & Best Practices
+
+43. **The AWS Well-Architected Framework**
+
+## Cloud Value Proposition
+
+44. **Why the Cloud?**
+
+## Certification Preparation
+
+45. **Guide to Passing the AWS Certified Cloud Practitioner Exam**
+46. **Exam Strategies for the AWS Certified Cloud Practitioner**
 
 ---
 
-## 📦 **Storage Services**
+# 📚 Table of Contents (Grouped by Exam Domains)
 
-### Chapter 1: “Temporary vs. Permanent Storage”
+## 1. Cloud Concepts
 
-- **Instance Stores** vs **Amazon Elastic Block Store (Amazon EBS)**
+**Understanding of the AWS Cloud value** – _26% of exam_
 
-### Chapter 2: “Snapshots and Safety Nets”
-
-- **Amazon EBS Snapshots** and Incremental Backups
-
-### Chapter 3: “The Magic Dropbox”
-
-- **Amazon S3** and Object Storage
-
-### Chapter 4: “Smart Shelves and Storage Classes”
-
-- **Amazon S3 Storage Classes** (Standard, IA, Glacier, etc.)
-
-### Chapter 5: “S3 on Site”
-
-- **Amazon S3 Outposts** for On-Premises Storage
+- Chapter 1: **Deployment Models for Cloud Computing**
+- Chapter 2: **Benefits of Cloud Computing**
+- Chapter 9: **Selecting an AWS Region**
+- Chapter 10: **Availability Zones**
+- Chapter 11: **Edge Locations**
+- Chapter 44: **Why the Cloud?**
 
 ---
 
-## 📂 **File and Block Storage**
+## 2. Security and Compliance
 
-### Chapter 6: “One Shared Folder, Many Users”
+**AWS shared responsibility model, IAM, compliance, and governance** – _25% of exam_
 
-- **Amazon Elastic File System (Amazon EFS)**
-
-### Chapter 7: “Zone Rules”
-
-- Comparing **Amazon EBS vs Amazon EFS**
-
----
-
-## 🧠 **Database Services**
-
-### Chapter 8: “The Digital Filing Cabinet”
-
-- **Amazon Relational Database Service (Amazon RDS)**
-
-### Chapter 9: “Speedy and Smart”
-
-- **Amazon Aurora**: High-performance relational database
-
-### Chapter 10: “The Custom Cupboard”
-
-- **Amazon DynamoDB** and Nonrelational Databases
-
-### Chapter 11: “Speed Boost with a Memory Cache”
-
-- **Amazon DynamoDB Accelerator (DAX)**
-
-### Chapter 12: “The Data Superhighway”
-
-- **Amazon Redshift** and the Lakehouse
-
-### Chapter 13: “Moving Day for Databases”
-
-- **AWS Database Migration Service (AWS DMS)**
-
-### Chapter 14: “Beyond the Table”
-
-- **Amazon DocumentDB**, **Neptune**, **QLDB**, and **ElastiCache**
+- Chapter 24: **Who’s Got the Keys?** _(IAM & MFA)_
+- Chapter 25: **“Only the Right Apron Gets In”** _(IAM Policies, Users, Groups, Roles)_
+- Chapter 26: **“The Umbrella Company”** _(AWS Organizations & SCPs)_
+- Chapter 27: **“The Compliance Cabinet”** _(AWS Artifact & Regulatory Compliance)_
+- Chapter 15: **Subnets, Network ACLs, and Security Groups**
+- Chapter 43: **The AWS Well-Architected Framework** _(Security Pillar)_
 
 ---
 
-## 🔐 **Security and Identity**
+## 3. Technology
 
-### Chapter 15: “Dividing the House”
+**Core AWS services, infrastructure, and methods of deployment** – _33% of exam_
 
-- **The Shared Responsibility Model**
+### Compute & Scaling
 
-### Chapter 16: “Meet the Owner”
+- Chapter 3: **Amazon EC2 Pricing Models**
+- Chapter 4: **Scaling Amazon EC2**
+- Chapter 5: **Elastic Load Balancer**
+- Chapter 6: **Serverless and Container Computing**
 
-- **AWS Account Root User**
+### Messaging & Decoupling
 
-### Chapter 17: “Hiring and Permissions”
+- Chapter 7: **Amazon SNS – Sending the Right Message to the Right Crowd**
+- Chapter 8: **Amazon SQS – Letting the Orders Line Up Automatically**
 
-- **IAM Users** and Least Privilege
+### Storage & Data Transfer
 
-### Chapter 18: “Policy Power”
+- Chapter 16: **Storage That Stays or Goes**
+- Chapter 17: **Storing Data Like a Pizza Shop Owner**
 
-- Writing and Attaching **IAM Policies**
+### Databases
 
-### Chapter 19: “Team Access”
+- Chapter 18: **The Shared Recipe Book** _(Relational Databases – Amazon RDS)_
+- Chapter 19: **The Coffee Shop Ledger** _(Amazon DynamoDB)_
+- Chapter 20: **The Flexible Clipboard** _(Amazon Redshift)_
+- Chapter 21: **The Data Super-Highway** _(AWS DMS)_
+- Chapter 22: **The Database Delivery Van** _(AWS Snow Family)_
+- Chapter 23: **The Specialty Shops of Data Town** _(DocumentDB, QLDB, ElastiCache, etc.)_
 
-- Using **IAM Groups** for Permission Management
+### Management & Orchestration
 
-### Chapter 20: “Temporary Job Hats”
-
-- **IAM Roles** for Temporary Access
-
-### Chapter 21: “Double Lock the Door”
-
-- **Multi-Factor Authentication (MFA)**
-
----
-
-## 🏢 **Account Management**
-
-### Chapter 22: “All Under One Roof”
-
-- **AWS Organizations** and Central Account Management
-
-### Chapter 23: “Departments and Dividers”
-
-- Using **Organizational Units (OUs)** in AWS Organizations
+- Chapter 12: **Ways to Interact with AWS Services**
+- Chapter 13: **AWS Elastic Beanstalk and AWS CloudFormation**
+- Chapter 14: **Connectivity to AWS**
 
 ---
 
-## 📑 **Compliance and Governance**
+## 4. Billing and Pricing
 
-### Chapter 24: “The Compliance Cabinet”
+**Understanding pricing, cost management tools, and support plans** – _16% of exam_
 
-- **AWS Artifact** for Reports and Agreements
-
-### Chapter 25: “Sign on the Dotted Line”
-
-- **AWS Artifact Agreements**
-
-### Chapter 26: “Audit Proof”
-
-- **AWS Artifact Reports** and Regulatory Proof
-
----
-
-## 📍 **Networking & Access Control**
-
-### Chapter 27: “The Guest List and the Bouncer”
-
-- **Security Groups vs Network ACLs** and VPC Subnet Security
+- Chapter 45: **Guide to Passing the AWS Certified Cloud Practitioner Exam**
+- Chapter 46: **Exam Strategies for the AWS Certified Cloud Practitioner**
+- Chapter 42: **AWS Pricing Concepts**
+- Chapter 41: **AWS Free Tier**
+- Chapter 39: **AWS Budgets**
+- Chapter 40: **AWS Cost Explorer**
+- Chapter 38: **Consolidated Billing**
+- Chapter 37: **AWS Support Plans**
 
 ---
 
@@ -4064,7 +4071,7 @@ With AWS's global infrastructure, you can deploy applications worldwide with jus
 
 ---
 
-# 🎓 Guide to Passing the AWS Certified Cloud Practitioner Exam
+# Chapter 45: Guide to Passing the AWS Certified Cloud Practitioner Exam
 
 The **AWS Certified Cloud Practitioner** is the foundational AWS certification designed for individuals seeking to demonstrate a clear understanding of cloud concepts, AWS services, security, architecture, pricing, and support. This guide offers a structured approach to help you prepare and pass the exam confidently.
 
@@ -4183,7 +4190,7 @@ While **no prior technical experience is required**, AWS suggests:
 
 ---
 
-# 🧠 Exam Strategies for the AWS Certified Cloud Practitioner
+# Chapter 46: Exam Strategies for the AWS Certified Cloud Practitioner
 
 To maximize your chances of passing the **AWS Certified Cloud Practitioner** exam, it’s not just about knowledge—you need the right **test-taking strategies**. Below are key methods and tips to help you approach the exam with confidence and skill.
 
