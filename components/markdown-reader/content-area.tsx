@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef, useEffect, useRef, useState } from "react";
+import { useWithSpeech } from "@/hooks/use-with-speech";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,6 +15,9 @@ import {
   Sparkles,
   AlertCircle,
   Menu,
+  Speaker,
+  Play,
+  Pause,
 } from "lucide-react";
 import type { Chapter, StudyData, Highlight } from "@/types/study";
 import "../../styles/markdown.css"; // Import custom markdown styles
@@ -66,6 +70,16 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
     const [aiProgress, setProgress] = useState(0);
     const [status, setStatus] = useState("");
     const [errors, setErrors] = useState<string[]>([]);
+
+    // Speech integration
+    const {
+      synthesisSupported,
+      speaking,
+      paused,
+      speak,
+      pauseSpeaking,
+      resumeSpeaking,
+    } = useWithSpeech();
 
     // Handle text selection
     useEffect(() => {
@@ -329,6 +343,37 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                 <Sparkles className="h-3 w-3 mr-1" />
                 AI Quiz
               </Button>
+              {!speaking ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
+                  onClick={() => synthesisSupported && speak(chapter.content)}
+                  disabled={!synthesisSupported}
+                >
+                  <Speaker className="h-3 w-3 mr-1" />
+                </Button>
+              ) : paused ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
+                  onClick={() => synthesisSupported && resumeSpeaking()}
+                  disabled={!synthesisSupported}
+                >
+                  <Play className="h-3 w-3 mr-1" />
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
+                  onClick={() => synthesisSupported && pauseSpeaking()}
+                  disabled={!synthesisSupported}
+                >
+                  <Pause className="h-3 w-3 mr-1" />
+                </Button>
+              )}
               <Button
                 variant="outline"
                 size="sm"
