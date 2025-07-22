@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,6 +24,7 @@ import {
   QuestionExplanation,
   setCachedExplanation,
 } from "@/lib/ai-explanation-generator";
+import WrapWithMarkdown from "../wrap-with-markdown";
 
 interface QuestionExplanationProps {
   question: QuizQuestion;
@@ -115,7 +116,7 @@ export function QuestionExplanationComponent({
             </span>
             <Badge
               variant="destructive"
-              className="text-xs whitespace-normal break-words"
+              className="text-xs whitespace-normal break-words px-4 py-1"
             >
               {userAnswer}
             </Badge>
@@ -127,7 +128,7 @@ export function QuestionExplanationComponent({
             </span>
             <Badge
               variant="default"
-              className="text-xs bg-green-600 whitespace-normal break-words"
+              className="text-xs bg-green-600 whitespace-normal break-words px-4 py-1"
             >
               {question.correctAnswer}
             </Badge>
@@ -185,7 +186,7 @@ export function QuestionExplanationComponent({
                 </h4>
               </div>
               <div className="pl-6 text-sm text-muted-foreground leading-relaxed">
-                {explanation.correctAnswerExplanation}
+                <WrapWithMarkdown text={explanation.correctAnswerExplanation} />
               </div>
             </div>
 
@@ -200,7 +201,9 @@ export function QuestionExplanationComponent({
                 </h4>
               </div>
               <div className="pl-6 text-sm text-muted-foreground leading-relaxed">
-                {explanation.incorrectAnswerExplanation}
+                <WrapWithMarkdown
+                  text={explanation.incorrectAnswerExplanation}
+                />
               </div>
             </div>
 
@@ -222,8 +225,8 @@ export function QuestionExplanationComponent({
                         key={index}
                         className="text-sm text-muted-foreground flex items-start gap-2"
                       >
-                        <span className="text-yellow-600 mt-1">•</span>
-                        <span className="leading-relaxed">{misconception}</span>
+                        <span className="text-yellow-600 mt-2">•</span>
+                        {<WrapWithMarkdown text={misconception} />}
                       </li>
                     ),
                   )}
@@ -246,8 +249,8 @@ export function QuestionExplanationComponent({
                       key={index}
                       className="text-sm text-muted-foreground flex items-start gap-2"
                     >
-                      <span className="text-blue-600 mt-1">•</span>
-                      <span className="leading-relaxed">{point}</span>
+                      <span className="text-blue-600 mt-2">•</span>
+                      <WrapWithMarkdown text={point} />
                     </li>
                   ))}
                 </ul>
@@ -265,9 +268,13 @@ export function QuestionExplanationComponent({
                 </div>
                 <div className="pl-6 flex flex-wrap gap-1">
                   {explanation.relatedConcepts.map((concept, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
-                      {concept}
-                    </Badge>
+                    <li
+                      key={index}
+                      className="text-sm text-muted-foreground flex items-start gap-2"
+                    >
+                      <span className="text-blue-600 mt-2">•</span>
+                      <WrapWithMarkdown text={concept} />
+                    </li>
                   ))}
                 </div>
               </div>

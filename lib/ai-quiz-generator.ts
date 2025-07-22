@@ -1,5 +1,6 @@
 import type { Flashcard } from "@/app/page";
 import type { QuizQuestion, QuizConfig } from "@/types/quiz";
+import { Chapter } from "@/types/study";
 import { GoogleGenAI } from "@google/genai";
 
 export const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
@@ -216,6 +217,7 @@ async function processBatch(
 function convertAIQuestionToAppFormat(
   aiQuestion: AIQuizQuestion,
 ): QuizQuestion {
+  console.log("Converting AI question to app format:", aiQuestion);
   return {
     id: `ai-mc-${aiQuestion.metadata.original_card_id}-${Date.now()}`,
     type: "multiple-choice",
@@ -374,4 +376,113 @@ export function generateCacheKey(config: QuizConfig): string {
   }
 
   return Math.abs(hash).toString(36);
+}
+
+/**
+ * Generate an AI-powered quiz for a single chapter.
+ *
+ * @param chapter - The chapter to quiz on.
+ * @param onProgress - Optional callback for progress updates.
+ * @returns A promise resolving to generated questions and any errors.
+ */
+export async function generateChapterAIQuiz(
+  chapter: Chapter,
+  onProgress?: (progress: number, status: string) => void,
+): Promise<{ questions: QuizQuestion[]; errors: string[] }> {
+  // 1. Check API key
+  if (!process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
+    throw new Error(
+      "Gemini API key not configured. Please add NEXT_PUBLIC_GEMINI_API_KEY to your environment.",
+    );
+  }
+
+  const allQuestions: QuizQuestion[] = [];
+  const errors: string[] = [];
+
+  onProgress?.(0, `Starting quiz generation for chapter "${chapter.title}"...`);
+
+  try {
+    // 3a. Call your AI service with a prompt tailored to chapter context
+    const aiResponse = await callGeminiAPI(
+      `You are an AWS certification quiz generator. You will be provided with a single Chapter object containing:
+- id: the unique chapter identifier
+- title: the chapter’s title
+- content: the full text of the chapter
+- order: the chapter’s position in the course sequence
+
+Format for each chapter:
+	1.	Chapter Title  
+	2.	Chapter Subtitle (a one-line overview)  
+	3.	For each flashcard in the chapter, always use the same Story N: [Metaphor-themed Title] for each term or concept but update it to align with the term and concept.  
+	•	Customer Request: Turn the question into a simple, relatable request in your chosen metaphor.  
+	•	Everyday Example: Weave the example into a super-clear, low-complexity scenario.    
+	•	Metaphor Mapping: Briefly connect AWS services or components back to the story elements.  
+	•	Mnemonic: “[mnemonic phrase]”  
+	•	Bullet glossary items for that card:  
+	•	[Metaphor-themed phrase]: One-line “real-world” summary.  
+	•	[Original term]: Formal AWS definition.  
+	4.	After all stories, add:  
+	•	🔁 Quick Recap: One or two sentences per story that reinforce the metaphor and AWS mapping.  
+	•	📘 Glossary: List every bolded term with its AWS definition.
+
+Your task is to generate high-quality, scenario-driven multiple-choice questions styled exactly like official AWS certification exams (Cloud Practitioner).
+
+Instructions:
+1. **Chapter Header**  
+   1.1. **Chapter Title** (use ${chapter.title})  
+   1.2. **Chapter Subtitle** – synthesize a concise one-line overview of the chapter’s key focus, drawn from ${chapter.content}.  
+2. **Question Generation**  
+   - Use realistic AWS-exam scenarios or short contexts rooted in the chapter’s content.  
+   - Rephrase each flashcard-style concept into a clear, engaging question.  
+   - Provide **3 plausible, domain-relevant distractors** alongside the correct answer.  
+   - Match the tone, complexity, and logical style of real AWS exam items—no trivial language.  
+   - Ensure each choice is a reasonable, non-obvious option.  
+3. **Metadata Tagging**  
+   - In each question’s "metadata" block, set "subject" to the chapter title.  
+   - Generate a unique "original_card_id" by combining the chapter’s id and a per-question sequence (e.g. "{chapter.id}-1", "{chapter.id}-2", …).  
+4. **Progressive Context**  
+   - If you need to refer to the chapter’s sequence, you may mention order in your internal logic, but don’t output it—focus on title and content.
+
+### Chapter Content:
+${chapter.content}
+
+### Required Output Format (Raw JSON only) not markdown:
+[
+  {
+    "question": "Clear, engaging multiple-choice question",
+    "choices": ["Option A", "Option B", "Option C", "Option D"],
+    "correct_answer": "Exact text of correct choice",
+    "difficulty": "beginner | intermediate | expert",
+    "metadata": {
+      "subject": "${chapter.title}",
+      "course": "generate a course based on chapter context", 
+      "category": "generate a category based on chapter context",
+      "original_card_id": "generate a unique ID for this question"
+    }
+  }
+]
+
+`,
+    );
+
+    if (aiResponse.success) {
+      let cleanJson = aiResponse.data.trim();
+      if (cleanJson.startsWith("```json")) {
+        // Remove markdown code block if present
+        cleanJson = cleanJson.replace(/```json\n?/, "").replace(/\n?```$/, "");
+      }
+      // 3b. Convert from raw AI schema into your app's QuizQuestion[]
+      const formatted = JSON.parse(cleanJson).map(convertAIQuestionToAppFormat);
+      console.log("Formatted questions:", formatted);
+      allQuestions.push(...formatted);
+    } else {
+      errors.push(`Chunk ${1}: ${aiResponse.error}`);
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    errors.push(`Chunk ${1}: ${err.message}`);
+  }
+
+  onProgress?.(100, "AI quiz generation complete!");
+  return { questions: allQuestions, errors };
 }

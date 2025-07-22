@@ -19,7 +19,12 @@ const defaultPreferences: Preferences = {
   lineHeight: 1.6,
 };
 
-export function StudyApp() {
+interface StudyAppProps {
+  onClose: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onStartQuiz: (questions: any[]) => void;
+}
+export function StudyApp({ onClose, onStartQuiz }: StudyAppProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -219,6 +224,8 @@ export function StudyApp() {
           onUpdateProgress={updateProgress}
           onAddHighlight={addHighlight}
           onRemoveHighlight={removeHighlight}
+          onClose={onClose}
+          onStartQuiz={onStartQuiz}
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
         />
       </div>

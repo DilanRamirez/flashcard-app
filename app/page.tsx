@@ -45,7 +45,7 @@ import {
   trackQuizAnswer,
   updateCardStats,
 } from "@/lib/learning-analytics";
-import Reader from "@/components/markdown-reader";
+import { StudyApp } from "@/components/markdown-reader/study-app";
 
 export interface Flashcard {
   id: string;
@@ -497,18 +497,14 @@ export default function FlashcardApp() {
       />
     );
   }
-  if (appState.quizMode === "results" && quizResult) {
-    return (
-      <QuizResults
-        result={quizResult}
-        onRetakeQuiz={handleRetakeQuiz}
-        onBackToHome={handleExitQuiz}
-      />
-    );
-  }
 
   if (appState.reader) {
-    return <Reader />;
+    return (
+      <StudyApp
+        onClose={() => setAppState((prev) => ({ ...prev, reader: false }))}
+        onStartQuiz={handleStartAIQuiz}
+      />
+    );
   }
 
   if (isLoading) {

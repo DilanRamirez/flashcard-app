@@ -12,9 +12,16 @@ import {
   Highlighter,
   StickyNote,
   X,
+  Sparkles,
+  AlertCircle,
 } from "lucide-react";
 import type { Chapter, StudyData, Highlight } from "@/types/study";
 import "../../styles/markdown.css"; // Import custom markdown styles
+import { generateChapterAIQuiz } from "@/lib/ai-quiz-generator";
+import { Card, CardContent } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+
+import { Progress } from "@/components/ui/progress";
 
 interface ContentAreaProps {
   chapter: Chapter | undefined;
@@ -25,7 +32,10 @@ interface ContentAreaProps {
     highlight: Omit<Highlight, "id" | "createdAt">,
   ) => void;
   onRemoveHighlight: (chapterId: string, highlightId: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onStartQuiz: (questions: any[]) => void;
   onToggleSidebar: () => void;
+  onClose: () => void;
 }
 
 export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
@@ -37,6 +47,8 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       onAddHighlight,
       onRemoveHighlight,
       onToggleSidebar,
+      onStartQuiz,
+      onClose,
     },
     ref,
   ) => {
@@ -48,6 +60,10 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
     const [showHighlightPopover, setShowHighlightPopover] = useState(false);
     const [highlightNote, setHighlightNote] = useState("");
     const [popoverPosition, setPopoverPosition] = useState({ x: 0, y: 0 });
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [aiProgress, setProgress] = useState(0);
+    const [status, setStatus] = useState("");
+    const [errors, setErrors] = useState<string[]>([]);
 
     // Handle text selection
     useEffect(() => {
@@ -124,6 +140,45 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       setShowHighlightPopover(false);
       setSelectedText(null);
       setHighlightNote("");
+    };
+
+    const handleGenerateQuiz = async () => {
+      if (!chapter) return;
+
+      setIsGenerating(true);
+      setProgress(0);
+      setStatus("Initializing...");
+      setErrors([]);
+
+      try {
+        // Generate new questions
+        const result = await generateChapterAIQuiz(chapter, (prog, stat) => {
+          setProgress(prog);
+          setStatus(stat);
+        });
+
+        if (result.questions.length > 0) {
+          setStatus("Quiz ready!");
+          setTimeout(() => {
+            onStartQuiz(result.questions);
+          }, 500);
+        } else {
+          setErrors([
+            "No questions were generated. Please try again or check your API configuration.",
+          ]);
+        }
+
+        if (result.errors.length > 0) {
+          setErrors(result.errors);
+        }
+      } catch (error) {
+        console.error("AI Quiz generation failed:", error);
+        setErrors([
+          error instanceof Error ? error.message : "Unknown error occurred",
+        ]);
+      } finally {
+        setIsGenerating(false);
+      }
     };
 
     // Restore highlights in content
@@ -257,8 +312,57 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                 </>
               )}
             </Button>
+            <Button variant="outline" size="sm" onClick={handleGenerateQuiz}>
+              <Sparkles className="h-3 w-3 mr-1" />
+              AI Quiz
+            </Button>
+            <Button variant="outline" size="sm" onClick={onClose}>
+              Close
+            </Button>
           </div>
         </div>
+
+        {/* Progress */}
+
+        {isGenerating && (
+          <div ref={ref} className="flex-1">
+            <div ref={contentRef} className="max-w-3xl mx-auto px-6 sm:mt-4">
+              <Card>
+                <CardContent className="p-6">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 animate-spin text-primary" />
+                      <span className="font-medium">
+                        Generating AI Quiz Questions...
+                      </span>
+                    </div>
+                    <Progress value={aiProgress} className="h-2" />
+                    <p className="text-sm text-muted-foreground">{status}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* Errors */}
+
+        {errors.length > 0 && (
+          <div ref={ref} className="flex-1">
+            <div ref={contentRef} className="max-w-3xl mx-auto px-6 sm:mt-4">
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  <div className="space-y-1">
+                    {errors.map((error, index) => (
+                      <div key={index}>{error}</div>
+                    ))}
+                  </div>
+                </AlertDescription>
+              </Alert>
+            </div>
+          </div>
+        )}
 
         {/* Content */}
         <div ref={ref} className="flex-1">
