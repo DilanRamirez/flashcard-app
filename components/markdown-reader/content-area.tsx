@@ -25,11 +25,10 @@ import type { Chapter, StudyData, Highlight } from "@/types/study";
 import "../../styles/markdown.css"; // Import custom markdown styles
 import { generateChapterAIQuiz } from "@/lib/ai-quiz-generator";
 import { Card, CardContent } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import { Progress } from "@/components/ui/progress";
 import { prepareChapterForSpeech } from "@/lib/utils";
-import { PlayArrow } from "@mui/icons-material";
+import { NoteAdd, PlayArrow } from "@mui/icons-material";
 
 interface ContentAreaProps {
   chapter: Chapter | undefined;
@@ -38,7 +37,7 @@ interface ContentAreaProps {
   onUpdateProgress: (chapterId: string, status: "reading" | "complete") => void;
   onAddHighlight: (
     chapterId: string,
-    highlight: Omit<Highlight, "id" | "createdAt">,
+    highlight: Omit<Highlight, "id" | "createdAt">
   ) => void;
   onRemoveHighlight: (chapterId: string, highlightId: string) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -64,7 +63,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       onNextChapter,
       onPreviousChapter,
     },
-    ref,
+    ref
   ) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [selectedText, setSelectedText] = useState<{
@@ -78,6 +77,12 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
     const [aiProgress, setProgress] = useState(0);
     const [status, setStatus] = useState("");
     const [errors, setErrors] = useState<string[]>([]);
+
+    // Chapter notes
+    const [note, setNote] = useState<string>("");
+    // Note editor UI state
+    const [showNoteEditor, setShowNoteEditor] = useState(false);
+    const [noteEditorValue, setNoteEditorValue] = useState<string>("");
 
     // Speech integration
     const {
@@ -128,6 +133,13 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       };
     }, []);
 
+    // Load note from localStorage
+    useEffect(() => {
+      if (!chapter) return;
+      const saved = localStorage.getItem(`notes_${chapter.id}`) || "";
+      setNote(saved);
+    }, [chapter]);
+
     // Add highlight
     const handleAddHighlight = (withNote = false) => {
       if (!selectedText || !chapter) return;
@@ -147,6 +159,24 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       setShowHighlightPopover(false);
       setSelectedText(null);
       setHighlightNote("");
+    };
+
+    // Open note editor
+    const handleAddNotes = () => {
+      if (!chapter) return;
+      setNoteEditorValue(note);
+      setShowNoteEditor(true);
+    };
+
+    const handleSaveNotes = () => {
+      if (!chapter) return;
+      localStorage.setItem(`notes_${chapter.id}`, noteEditorValue);
+      setNote(noteEditorValue);
+      setShowNoteEditor(false);
+    };
+
+    const handleCancelNotes = () => {
+      setShowNoteEditor(false);
     };
 
     // Remove highlight
@@ -218,7 +248,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         const walker = document.createTreeWalker(
           content,
           NodeFilter.SHOW_TEXT,
-          null,
+          null
         );
 
         let node;
@@ -287,8 +317,8 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                   {progress === "complete"
                     ? "Complete"
                     : progress === "reading"
-                      ? "Reading"
-                      : "Not Started"}
+                    ? "Reading"
+                    : "Not Started"}
                 </Badge>
 
                 {isBookmarked && (
@@ -325,7 +355,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                 onClick={() =>
                   onUpdateProgress(
                     chapter.id,
-                    progress === "reading" ? "complete" : "reading",
+                    progress === "reading" ? "complete" : "reading"
                   )
                 }
               >
@@ -350,7 +380,14 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                 onClick={handleGenerateQuiz}
               >
                 <Sparkles className="h-3 w-3 mr-1" />
-                Quiz
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
+                onClick={handleAddNotes}
+              >
+                <NoteAdd className="h-3 w-3 mr-1" />
               </Button>
               {!speaking ? (
                 <Button
@@ -435,18 +472,42 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         {/* Errors */}
 
         {errors.length > 0 && (
-          <div ref={ref} className="flex-1">
-            <div ref={contentRef} className="max-w-3xl mx-auto px-6 sm:mt-4">
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>
-                  <div className="space-y-1">
-                    {errors.map((error, index) => (
-                      <div key={index}>{error}</div>
-                    ))}
-                  </div>
-                </AlertDescription>
-              </Alert>
+          <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white p-4 rounded shadow-lg z-50 flex items-start space-x-2">
+            <AlertCircle className="h-5 w-5 flex-shrink-0" />
+            <div className="flex-1 space-y-1">
+              {errors.map((error, index) => (
+                <div key={index}>{error}</div>
+              ))}
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setErrors([])}
+              className="text-white"
+            >
+              ×
+            </Button>
+          </div>
+        )}
+
+        {showNoteEditor && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 z-50">
+            <div className="bg-white p-6 rounded shadow-lg w-11/12 sm:w-96">
+              <h2 className="text-lg font-semibold mb-2">
+                Notes for {chapter.title}
+              </h2>
+              <Textarea
+                value={noteEditorValue}
+                onChange={(e) => setNoteEditorValue(e.target.value)}
+                rows={6}
+                className="w-full mb-4"
+              />
+              <div className="flex justify-end space-x-2">
+                <Button variant="outline" onClick={handleCancelNotes}>
+                  Cancel
+                </Button>
+                <Button onClick={handleSaveNotes}>Save</Button>
+              </div>
             </div>
           </div>
         )}
@@ -467,7 +528,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
             style={{
               left: Math.min(
                 Math.max(16, popoverPosition.x - 144),
-                window.innerWidth - 288 - 16,
+                window.innerWidth - 288 - 16
               ),
               top:
                 popoverPosition.y + 10 > window.innerHeight - 200
@@ -553,7 +614,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         </Button>
       </div>
     );
-  },
+  }
 );
 
 ContentArea.displayName = "ContentArea";
