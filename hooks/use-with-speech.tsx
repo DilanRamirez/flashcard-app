@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 export interface UseWithSpeechOptions {
   /** Language code for speech recognition (e.g. 'en-US') */
   recognitionLang?: string;
+  /** Language code for speech synthesis (e.g. 'en-US') */
+  synthesisLang?: string;
 }
 
 export interface UseWithSpeechReturn {
@@ -30,6 +32,7 @@ export interface UseWithSpeechReturn {
 
 export const useWithSpeech = ({
   recognitionLang = "en-US",
+  synthesisLang = "en-US",
 }: UseWithSpeechOptions = {}): UseWithSpeechReturn => {
   // Text-to-Speech (TTS) setup
   const synthesisSupported =
@@ -56,6 +59,7 @@ export const useWithSpeech = ({
       window.speechSynthesis.cancel();
     }
     const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = synthesisLang;
     const defaultVoice = voices.find((v) => v.default) || voices[0];
     if (defaultVoice) {
       utterance.voice = defaultVoice;
