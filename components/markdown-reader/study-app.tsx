@@ -11,7 +11,13 @@ import { useMarkdownLoader } from "@/hooks/use-markdown-loader";
 import { useHighlighting } from "@/hooks/use-highlighting";
 import { useSearch } from "@/hooks/use-search";
 import type { StudyData, Chapter, Preferences } from "@/types/study";
-import { defaultPreferences } from "@/app/layout";
+
+export const defaultPreferences: Preferences = {
+  theme: "light",
+  fontSize: "med",
+  fontFamily: "default",
+  lineHeight: 1.6,
+};
 
 interface StudyAppProps {
   onClose: () => void;
