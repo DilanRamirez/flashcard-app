@@ -37,7 +37,7 @@ interface ContentAreaProps {
   onUpdateProgress: (chapterId: string, status: "reading" | "complete") => void;
   onAddHighlight: (
     chapterId: string,
-    highlight: Omit<Highlight, "id" | "createdAt">
+    highlight: Omit<Highlight, "id" | "createdAt">,
   ) => void;
   onRemoveHighlight: (chapterId: string, highlightId: string) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,7 +63,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       onNextChapter,
       onPreviousChapter,
     },
-    ref
+    ref,
   ) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [selectedText, setSelectedText] = useState<{
@@ -126,10 +126,12 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
 
       document.addEventListener("mouseup", handleSelection);
       document.addEventListener("keyup", handleSelection);
+      document.addEventListener("touchend", handleSelection);
 
       return () => {
         document.removeEventListener("mouseup", handleSelection);
         document.removeEventListener("keyup", handleSelection);
+        document.removeEventListener("touchend", handleSelection);
       };
     }, []);
 
@@ -248,7 +250,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         const walker = document.createTreeWalker(
           content,
           NodeFilter.SHOW_TEXT,
-          null
+          null,
         );
 
         let node;
@@ -317,8 +319,8 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                   {progress === "complete"
                     ? "Complete"
                     : progress === "reading"
-                    ? "Reading"
-                    : "Not Started"}
+                      ? "Reading"
+                      : "Not Started"}
                 </Badge>
 
                 {isBookmarked && (
@@ -355,7 +357,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                 onClick={() =>
                   onUpdateProgress(
                     chapter.id,
-                    progress === "reading" ? "complete" : "reading"
+                    progress === "reading" ? "complete" : "reading",
                   )
                 }
               >
@@ -491,8 +493,8 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         )}
 
         {showNoteEditor && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 z-50">
-            <div className="bg-white p-6 rounded shadow-lg w-11/12 sm:w-96">
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+            <div className="bg-white p-6 rounded w-11/12 sm:w-96">
               <h2 className="text-lg font-semibold mb-2">
                 Notes for {chapter.title}
               </h2>
@@ -528,7 +530,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
             style={{
               left: Math.min(
                 Math.max(16, popoverPosition.x - 144),
-                window.innerWidth - 288 - 16
+                window.innerWidth - 288 - 16,
               ),
               top:
                 popoverPosition.y + 10 > window.innerHeight - 200
@@ -598,7 +600,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         <Button
           variant="outline"
           size="sm"
-          className="fixed bottom-4 right-22 z-50 flex items-center justify-center"
+          className="fixed bottom-4 right-22 z-1 flex items-center justify-center"
           onClick={onPreviousChapter}
         >
           <ChevronLeft className="h-4 w-4" />
@@ -607,14 +609,14 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
         <Button
           variant="outline"
           size="sm"
-          className="fixed bottom-4 right-10 z-50 flex items-center justify-center"
+          className="fixed bottom-4 right-10 z-1 flex items-center justify-center"
           onClick={onNextChapter}
         >
           <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
     );
-  }
+  },
 );
 
 ContentArea.displayName = "ContentArea";
