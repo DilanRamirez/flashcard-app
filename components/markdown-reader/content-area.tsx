@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Menu,
   CheckCircle,
   Circle,
   BookmarkIcon,
@@ -14,6 +13,7 @@ import {
   X,
   Sparkles,
   AlertCircle,
+  Menu,
 } from "lucide-react";
 import type { Chapter, StudyData, Highlight } from "@/types/study";
 import "../../styles/markdown.css"; // Import custom markdown styles
@@ -26,6 +26,7 @@ import { Progress } from "@/components/ui/progress";
 interface ContentAreaProps {
   chapter: Chapter | undefined;
   studyData: StudyData;
+  themeClasses: string;
   onUpdateProgress: (chapterId: string, status: "reading" | "complete") => void;
   onAddHighlight: (
     chapterId: string,
@@ -43,6 +44,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
     {
       chapter,
       studyData,
+      themeClasses,
       onUpdateProgress,
       onAddHighlight,
       onRemoveHighlight,
@@ -243,82 +245,99 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
     const highlights = studyData.highlights[chapter.id] || [];
 
     return (
-      <div className="flex-1 flex flex-col relative overflow-auto">
+      <div
+        className={`flex-1 flex flex-col relative overflow-auto ${themeClasses}`}
+      >
         {/* Header */}
-        <div className="border-b bg-white p-3 sm:p-4">
-          <div className="flex items-start justify-between gap-3">
-            <div className="flex items-start gap-3 min-w-0 flex-1">
+        <div className={`border-b p-3 sm:p-4 ${themeClasses}`}>
+          <div className="flex-col justify-center align-center">
+            <div className="flex items-center justify-left gap-3 min-w-0 flex-1 mb-2">
+              <div className="flex items-center justify-left gap-3 flex-1 min-w-0 mb-2">
+                <h1 className="text-lg sm:text-xl font-semibold leading-tight">
+                  {chapter.title}
+                </h1>
+
+                <Badge
+                  variant={progress === "complete" ? "default" : "secondary"}
+                  className="text-xs"
+                >
+                  {progress === "complete"
+                    ? "Complete"
+                    : progress === "reading"
+                      ? "Reading"
+                      : "Not Started"}
+                </Badge>
+
+                {isBookmarked && (
+                  <Badge variant="outline" className="text-xs">
+                    <BookmarkIcon className="h-3 w-3 mr-1" />
+                    Bookmarked
+                  </Badge>
+                )}
+                {highlights.length > 0 && (
+                  <Badge variant="outline" className="text-xs">
+                    <Highlighter className="h-3 w-3 mr-1" />
+                    {highlights.length}
+                  </Badge>
+                )}
+              </div>
+            </div>
+
+            <div
+              className={`flex items-center justify-left gap-3 ${themeClasses}`}
+            >
+              {/* Menu button visible only on mobile */}
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
-                className="md:hidden flex-shrink-0 mt-1"
+                className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses} block sm:hidden`}
                 onClick={onToggleSidebar}
               >
                 <Menu className="h-4 w-4" />
               </Button>
-              <div className="min-w-0 flex-1">
-                <h1 className="text-lg sm:text-xl font-semibold leading-tight">
-                  {chapter.title}
-                </h1>
-                <div className="flex flex-wrap items-center gap-2 mt-2">
-                  <Badge
-                    variant={progress === "complete" ? "default" : "secondary"}
-                    className="text-xs"
-                  >
-                    {progress === "complete"
-                      ? "Complete"
-                      : progress === "reading"
-                        ? "Reading"
-                        : "Not Started"}
-                  </Badge>
-                  {isBookmarked && (
-                    <Badge variant="outline" className="text-xs">
-                      <BookmarkIcon className="h-3 w-3 mr-1" />
-                      Bookmarked
-                    </Badge>
-                  )}
-                  {highlights.length > 0 && (
-                    <Badge variant="outline" className="text-xs">
-                      <Highlighter className="h-3 w-3 mr-1" />
-                      {highlights.length}
-                    </Badge>
-                  )}
-                </div>
-              </div>
+              <Button
+                variant={progress === "reading" ? "default" : "outline"}
+                size="sm"
+                className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
+                onClick={() =>
+                  onUpdateProgress(
+                    chapter.id,
+                    progress === "reading" ? "complete" : "reading",
+                  )
+                }
+              >
+                {progress === "complete" ? (
+                  <>
+                    <CheckCircle className="h-4 w-4 mr-1 sm:mr-2" />
+                    <span className="hidden sm:inline">Completed</span>
+                    <span className="sm:hidden">Done</span>
+                  </>
+                ) : (
+                  <>
+                    <Circle className="h-4 w-4 mr-1 sm:mr-2" />
+                    <span className="hidden sm:inline">Mark Complete</span>
+                    <span className="sm:hidden">Complete</span>
+                  </>
+                )}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
+                onClick={handleGenerateQuiz}
+              >
+                <Sparkles className="h-3 w-3 mr-1" />
+                AI Quiz
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
+                onClick={onClose}
+              >
+                Close
+              </Button>
             </div>
-
-            <Button
-              variant={progress === "reading" ? "default" : "outline"}
-              size="sm"
-              className="flex-shrink-0 text-xs sm:text-sm"
-              onClick={() =>
-                onUpdateProgress(
-                  chapter.id,
-                  progress === "reading" ? "complete" : "reading",
-                )
-              }
-            >
-              {progress === "complete" ? (
-                <>
-                  <CheckCircle className="h-4 w-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Completed</span>
-                  <span className="sm:hidden">Done</span>
-                </>
-              ) : (
-                <>
-                  <Circle className="h-4 w-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Mark Complete</span>
-                  <span className="sm:hidden">Complete</span>
-                </>
-              )}
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleGenerateQuiz}>
-              <Sparkles className="h-3 w-3 mr-1" />
-              AI Quiz
-            </Button>
-            <Button variant="outline" size="sm" onClick={onClose}>
-              Close
-            </Button>
           </div>
         </div>
 

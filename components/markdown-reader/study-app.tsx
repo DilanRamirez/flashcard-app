@@ -11,13 +11,7 @@ import { useMarkdownLoader } from "@/hooks/use-markdown-loader";
 import { useHighlighting } from "@/hooks/use-highlighting";
 import { useSearch } from "@/hooks/use-search";
 import type { StudyData, Chapter, Preferences } from "@/types/study";
-
-const defaultPreferences: Preferences = {
-  theme: "light",
-  fontSize: "med",
-  fontFamily: "default",
-  lineHeight: 1.6,
-};
+import { defaultPreferences } from "@/app/layout";
 
 interface StudyAppProps {
   onClose: () => void;
@@ -47,6 +41,26 @@ export function StudyApp({ onClose, onStartQuiz }: StudyAppProps) {
     "awsStudyApp_preferences",
     defaultPreferences,
   );
+
+  // Compute classes and styles based on user preferences
+  const themeClasses =
+    preferences.theme === "dark"
+      ? "bg-gray-900 text-gray-100"
+      : "bg-white text-gray-900";
+
+  const fontSizeClasses =
+    preferences.fontSize === "small"
+      ? "text-sm"
+      : preferences.fontSize === "med"
+        ? "text-base"
+        : "text-lg";
+
+  const fontFamilyClasses =
+    preferences.fontFamily === "default"
+      ? "font-sans"
+      : `font-${preferences.fontFamily}`;
+
+  const lineHeightStyle = { lineHeight: preferences.lineHeight };
 
   // Load markdown content
   const { content, loading, error } = useMarkdownLoader(
@@ -118,11 +132,23 @@ export function StudyApp({ onClose, onStartQuiz }: StudyAppProps) {
     processMarkdown();
   }, [content, studyData.lastVisited]);
 
-  // Apply theme and preferences
+  // At the top of your component, add a ref to track the first render:
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
-    const root = document.documentElement;
-    root.className = `theme-${preferences.theme} font-${preferences.fontSize} font-family-${preferences.fontFamily}`;
-    root.style.setProperty("--line-height", preferences.lineHeight.toString());
+    // Skip writing to localStorage on initial mount
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      // Only update storage when preferences have actually changed
+      const key = "awsStudyApp_preferences";
+      const serialized = JSON.stringify(preferences);
+      const existing = localStorage.getItem(key);
+      if (existing !== serialized) {
+        localStorage.setItem(key, serialized);
+      }
+    }
+    // (Theme and font application to document.documentElement is now handled via component classes/styles)
   }, [preferences]);
 
   // Navigate to chapter
@@ -201,7 +227,10 @@ export function StudyApp({ onClose, onStartQuiz }: StudyAppProps) {
   const currentChapterData = chapters.find((c) => c.id === currentChapter);
 
   return (
-    <div className="flex h-screen bg-background text-foreground">
+    <div
+      className={`flex h-screen ${themeClasses} ${fontSizeClasses} ${fontFamilyClasses}`}
+      style={lineHeightStyle}
+    >
       {/* Sidebar */}
       <Sidebar
         open={sidebarOpen}
@@ -213,11 +242,16 @@ export function StudyApp({ onClose, onStartQuiz }: StudyAppProps) {
         onToggleBookmark={toggleBookmark}
         onOpenSearch={() => setSearchOpen(true)}
         onOpenSettings={() => setSettingsOpen(true)}
+        themeClasses={themeClasses}
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div
+        className={`flex-1 flex flex-col ${themeClasses} ${fontSizeClasses} ${fontFamilyClasses}`}
+        style={lineHeightStyle}
+      >
         <ContentArea
+          themeClasses={themeClasses}
           ref={contentRef}
           chapter={currentChapterData}
           studyData={studyData}

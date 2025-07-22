@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   open: boolean;
+  themeClasses: string;
   onOpenChange: (open: boolean) => void;
   chapters: Chapter[];
   currentChapter: string | null;
@@ -30,6 +31,7 @@ interface SidebarProps {
 
 export function Sidebar({
   open,
+  themeClasses,
   onOpenChange,
   chapters,
   currentChapter,
@@ -97,7 +99,7 @@ export function Sidebar({
   const stats = getCompletionStats();
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full w-full">
+    <div className={`flex flex-col h-full w-full px-5 ${themeClasses}`}>
       {/* Header */}
       <div className="p-4 border-b">
         <h1 className="text-lg font-semibold flex items-center gap-2">
@@ -121,7 +123,7 @@ export function Sidebar({
       </div>
 
       {/* Actions */}
-      <div className="p-4 border-b space-y-2">
+      <div className={`p-4 border-b space-y-2 ${themeClasses}`}>
         <Button
           variant="outline"
           className="w-full justify-start bg-transparent"
@@ -141,34 +143,41 @@ export function Sidebar({
       </div>
 
       {/* Table of Contents */}
-      <ScrollArea className="flex-1">
-        <div className="p-4 space-y-4">
+      <ScrollArea className={`flex-1 ${themeClasses}`}>
+        <div className={`p-4 space-y-4 ${themeClasses}`}>
           {Object.entries(groupedChapters).map(([domain, domainChapters]) => (
             <div key={domain}>
-              <h3 className="font-medium text-sm text-gray-600 mb-2 uppercase tracking-wide">
+              <h3
+                className={`font-medium text-sm mb-2 uppercase tracking-wide ${themeClasses}`}
+              >
                 {domain}
               </h3>
-              <div className="space-y-1">
+              <div className={`space-y-1 ${themeClasses}`}>
                 {domainChapters.map((chapter) => (
                   <div
                     key={chapter.id}
                     className={cn(
-                      "group flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors touch-manipulation",
-                      "min-h-[48px]", // Ensure minimum touch target size
+                      "group flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors touch-manipulation",
+                      `min-h-[48px] ${themeClasses}`, // Ensure minimum touch target size
                       currentChapter === chapter.id &&
-                        "bg-blue-50 border border-blue-200",
+                        `bg-blue-50 border border-blue-200 ${themeClasses}`,
                     )}
                     onClick={() => onNavigate(chapter.id)}
                   >
                     {getProgressIcon(chapter.id)}
-                    <span className="flex-1 text-sm" title={chapter.title}>
+                    <span
+                      className={`flex-1 text-sm ${themeClasses}`}
+                      title={chapter.title}
+                    >
                       {chapter.title}
                     </span>
-                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div
+                      className={`flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity ${themeClasses}`}
+                    >
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="h-6 w-6 p-0"
+                        className={`h-6 w-6 p-0 ${themeClasses}`}
                         onClick={(e) => {
                           e.stopPropagation();
                           onToggleBookmark(chapter.id);
@@ -176,10 +185,10 @@ export function Sidebar({
                       >
                         <BookmarkIcon
                           className={cn(
-                            "h-3 w-3",
+                            `h-3 w-3  ${themeClasses}`,
                             studyData.bookmarks[chapter.id]
-                              ? "text-yellow-600 fill-current"
-                              : "text-gray-400",
+                              ? `text-yellow-600 fill-current ${themeClasses}`
+                              : `text-gray-400 ${themeClasses}`,
                           )}
                         />
                       </Button>
@@ -193,11 +202,15 @@ export function Sidebar({
       </ScrollArea>
 
       {/* Footer Stats */}
-      <div className="p-4 border-t">
-        <div className="flex gap-2 text-xs">
-          <Badge variant="secondary">{stats.completed} Complete</Badge>
-          <Badge variant="outline">{stats.reading} Reading</Badge>
-          <Badge variant="outline">
+      <div className={`p-4 border-t ${themeClasses}`}>
+        <div className={`flex gap-2 text-xs ${themeClasses}`}>
+          <Badge variant="outline" className={`flex ${themeClasses}`}>
+            {stats.completed} Complete
+          </Badge>
+          <Badge variant="outline" className={`flex ${themeClasses}`}>
+            {stats.reading} Reading
+          </Badge>
+          <Badge variant="outline" className={`flex ${themeClasses}`}>
             {
               Object.keys(studyData.bookmarks).filter(
                 (id) => studyData.bookmarks[id],

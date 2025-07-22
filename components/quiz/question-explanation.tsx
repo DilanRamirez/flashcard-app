@@ -114,10 +114,7 @@ export function QuestionExplanationComponent({
             <span className="text-sm text-muted-foreground whitespace-normal break-words">
               Your answer:
             </span>
-            <Badge
-              variant="destructive"
-              className="text-xs whitespace-normal break-words px-4 py-1"
-            >
+            <Badge className="text-xs whitespace-normal break-words px-4 py-1">
               {userAnswer}
             </Badge>
           </div>
