@@ -202,6 +202,23 @@ export function StudyApp({ onClose, onStartQuiz }: StudyAppProps) {
     setCurrentChapter(chapters.length > 0 ? chapters[0].id : null);
   };
 
+  // Navigate to the next chapter
+  const handleNextChapter = () => {
+    if (!currentChapter) return;
+    const currentIndex = chapters.findIndex((c) => c.id === currentChapter);
+    if (currentIndex >= 0 && currentIndex < chapters.length - 1) {
+      navigateToChapter(chapters[currentIndex + 1].id);
+    }
+  };
+
+  const onPreviousChapter = () => {
+    if (!currentChapter) return;
+    const currentIndex = chapters.findIndex((c) => c.id === currentChapter);
+    if (currentIndex > 0) {
+      navigateToChapter(chapters[currentIndex - 1].id);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -267,6 +284,8 @@ export function StudyApp({ onClose, onStartQuiz }: StudyAppProps) {
           onClose={onClose}
           onStartQuiz={onStartQuiz}
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+          onNextChapter={handleNextChapter}
+          onPreviousChapter={onPreviousChapter}
         />
       </div>
 

@@ -95,7 +95,8 @@ export const useWithSpeech = ({
   // Speech-to-Text (STT) setup
   const RecogClass =
     typeof window !== "undefined" &&
-    (window.SpeechRecognition || (window as any).webkitSpeechRecognition);
+    ((window as any).SpeechRecognition ||
+      (window as any).webkitSpeechRecognition);
   const recognitionSupported = Boolean(RecogClass);
   const recognitionRef = useRef<any | null>(null);
   const [transcript, setTranscript] = useState("");

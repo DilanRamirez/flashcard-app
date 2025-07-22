@@ -217,7 +217,6 @@ async function processBatch(
 function convertAIQuestionToAppFormat(
   aiQuestion: AIQuizQuestion,
 ): QuizQuestion {
-  console.log("Converting AI question to app format:", aiQuestion);
   return {
     id: `ai-mc-${aiQuestion.metadata.original_card_id}-${Date.now()}`,
     type: "multiple-choice",
@@ -473,7 +472,6 @@ ${chapter.content}
       }
       // 3b. Convert from raw AI schema into your app's QuizQuestion[]
       const formatted = JSON.parse(cleanJson).map(convertAIQuestionToAppFormat);
-      console.log("Formatted questions:", formatted);
       allQuestions.push(...formatted);
     } else {
       errors.push(`Chunk ${1}: ${aiResponse.error}`);

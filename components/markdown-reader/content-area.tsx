@@ -15,9 +15,11 @@ import {
   Sparkles,
   AlertCircle,
   Menu,
-  Speaker,
   Play,
   Pause,
+  StopCircle,
+  ChevronRight,
+  ChevronLeft,
 } from "lucide-react";
 import type { Chapter, StudyData, Highlight } from "@/types/study";
 import "../../styles/markdown.css"; // Import custom markdown styles
@@ -26,6 +28,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import { Progress } from "@/components/ui/progress";
+import { prepareChapterForSpeech } from "@/lib/utils";
+import { PlayArrow } from "@mui/icons-material";
 
 interface ContentAreaProps {
   chapter: Chapter | undefined;
@@ -41,6 +45,8 @@ interface ContentAreaProps {
   onStartQuiz: (questions: any[]) => void;
   onToggleSidebar: () => void;
   onClose: () => void;
+  onNextChapter: () => void;
+  onPreviousChapter: () => void;
 }
 
 export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
@@ -55,6 +61,8 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       onToggleSidebar,
       onStartQuiz,
       onClose,
+      onNextChapter,
+      onPreviousChapter,
     },
     ref,
   ) => {
@@ -79,6 +87,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       speak,
       pauseSpeaking,
       resumeSpeaking,
+      cancelSpeaking,
     } = useWithSpeech();
 
     // Handle text selection
@@ -260,7 +269,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
 
     return (
       <div
-        className={`flex-1 flex flex-col relative overflow-auto ${themeClasses}`}
+        className={`flex-1 flex flex-col relative overflow-auto p-relative ${themeClasses}`}
       >
         {/* Header */}
         <div className={`border-b p-3 sm:p-4 ${themeClasses}`}>
@@ -272,7 +281,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                 </h1>
 
                 <Badge
-                  variant={progress === "complete" ? "default" : "secondary"}
+                  variant={progress === "complete" ? "outline" : "secondary"}
                   className="text-xs"
                 >
                   {progress === "complete"
@@ -298,7 +307,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
             </div>
 
             <div
-              className={`flex items-center justify-left gap-3 ${themeClasses}`}
+              className={`flex items-center justify-left gap-1 ${themeClasses}`}
             >
               {/* Menu button visible only on mobile */}
               <Button
@@ -341,17 +350,20 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                 onClick={handleGenerateQuiz}
               >
                 <Sparkles className="h-3 w-3 mr-1" />
-                AI Quiz
+                Quiz
               </Button>
               {!speaking ? (
                 <Button
                   variant="outline"
                   size="sm"
                   className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
-                  onClick={() => synthesisSupported && speak(chapter.content)}
+                  onClick={() =>
+                    synthesisSupported &&
+                    speak(prepareChapterForSpeech(chapter))
+                  }
                   disabled={!synthesisSupported}
                 >
-                  <Speaker className="h-3 w-3 mr-1" />
+                  <PlayArrow className="h-3 w-3 mr-1" />
                 </Button>
               ) : paused ? (
                 <Button
@@ -372,6 +384,17 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
                   disabled={!synthesisSupported}
                 >
                   <Pause className="h-3 w-3 mr-1" />
+                </Button>
+              )}
+              {speaking && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={`flex-shrink-0 text-xs sm:text-sm ${themeClasses}`}
+                  onClick={() => synthesisSupported && cancelSpeaking()}
+                  disabled={!synthesisSupported}
+                >
+                  <StopCircle className="h-3 w-3 mr-1" />
                 </Button>
               )}
               <Button
@@ -510,6 +533,24 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
             </div>
           </div>
         )}
+
+        <Button
+          variant="outline"
+          size="sm"
+          className="fixed bottom-4 right-22 z-50 flex items-center justify-center"
+          onClick={onPreviousChapter}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+
+        <Button
+          variant="outline"
+          size="sm"
+          className="fixed bottom-4 right-10 z-50 flex items-center justify-center"
+          onClick={onNextChapter}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
       </div>
     );
   },
