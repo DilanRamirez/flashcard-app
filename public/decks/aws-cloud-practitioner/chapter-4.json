@@ -1,0 +1,99 @@
+{
+  "name": "Chapter 4: Scaling Amazon EC2",
+  "description": "Flashcards explaining EC2 Auto Scaling features using real-world pizza shop metaphors.",
+  "category": "Compute",
+  "cards": [
+    {
+      "id": "X9TZL7WQ84",
+      "front": "You want your EC2 instances to automatically adjust based on customer traffic. What AWS feature enables this?",
+      "back": "Amazon EC2 Auto Scaling provides scalability by automatically adjusting the number of instances based on demand, helping optimize cost and performance.",
+      "example": "A news website adds more EC2 instances during peak hours and scales down at night using Auto Scaling.",
+      "mnemonic": "More mouths? More ovens. Fewer mouths? Fewer bills.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["auto-scaling", "ec2", "scalability"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon EC2 Auto Scaling",
+          "definition": "AWS service that adjusts compute capacity automatically to maintain performance and cost-efficiency."
+        },
+        {
+          "term": "Scalability",
+          "definition": "The ability to automatically grow or shrink resources in response to changing demand."
+        }
+      ]
+    },
+    {
+      "id": "M4N8W2VZKS",
+      "front": "You want to add EC2 instances when traffic spikes and remove them when demand drops. Which scaling method supports this?",
+      "back": "Dynamic scaling uses real-time metrics like CPU utilization to adjust EC2 instance counts up or down automatically as traffic changes.",
+      "example": "An e-commerce site scales out during flash sales and scales back afterward using dynamic scaling.",
+      "mnemonic": "React in real-time—no cold pizzas, no cold profits.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["dynamic-scaling", "auto-scaling", "ec2"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Dynamic scaling",
+          "definition": "Scaling EC2 instances based on real-time performance metrics."
+        }
+      ]
+    },
+    {
+      "id": "D9XR2KLWQB",
+      "front": "You know your EC2 usage will spike every Friday night. What Auto Scaling strategy should you use?",
+      "back": "Predictive scaling uses historical patterns to schedule instance scaling actions in advance, improving responsiveness and reducing lag.",
+      "example": "A media company schedules scaling events every Friday for their livestream platform based on previous demand.",
+      "mnemonic": "If the crowd’s predictable, schedule the sizzle.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["predictive-scaling", "auto-scaling", "ec2"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Predictive scaling",
+          "definition": "Scaling EC2 instances based on anticipated demand from historical trends."
+        }
+      ]
+    },
+    {
+      "id": "R3KJ5MVXLC",
+      "front": "How can you configure Auto Scaling to ensure you always run at least one instance, aim for two, and never exceed four?",
+      "back": "Set the Auto Scaling group’s minimum to 1, desired to 2, and maximum to 4 to define the lower, target, and upper limits for EC2 instance scaling.",
+      "example": "A web app sets its Auto Scaling group with min=1, desired=2, max=4 to handle variable traffic with controlled limits.",
+      "mnemonic": "Set the floor, aim for the sweet spot, and cap the ceiling.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["auto-scaling", "capacity-settings", "ec2"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Minimum capacity",
+          "definition": "The lowest number of EC2 instances maintained at all times."
+        },
+        {
+          "term": "Desired capacity",
+          "definition": "The target number of EC2 instances Auto Scaling tries to maintain."
+        },
+        {
+          "term": "Maximum capacity",
+          "definition": "The upper limit on EC2 instances Auto Scaling can launch."
+        }
+      ]
+    }
+  ]
+}

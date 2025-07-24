@@ -1,0 +1,131 @@
+{
+  "name": "Chapter 2: Benefits of Cloud Computing",
+  "description": "Flashcards highlighting the key business and operational advantages of cloud computing using pizza shop metaphors.",
+  "category": "Cloud Fundamentals",
+  "cards": [
+    {
+      "id": "W7R82H5LQZ",
+      "front": "You're starting a new app and want to avoid large capital investments in servers. What cloud benefit addresses this concern?",
+      "back": "Trading upfront expense for variable expense allows you to pay only for what you use, avoiding the cost of purchasing and maintaining infrastructure upfront.",
+      "example": "Instead of buying racks of servers, a startup launches on AWS and pays per hour of EC2 usage.",
+      "mnemonic": "Why buy the whole oven when you can pay per pizza?",
+      "category": "Cloud Fundamentals",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["cost", "pay-as-you-go"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Trade upfront expense for variable expense",
+          "definition": "Pay only for what you use in the cloud, rather than making large capital investments in infrastructure."
+        }
+      ]
+    },
+    {
+      "id": "R5D1TZQ8NM",
+      "front": "You're tired of managing physical infrastructure and want to focus on application development. What cloud advantage helps with this?",
+      "back": "Stop spending money to run and maintain data centers. With cloud, providers manage the infrastructure so you can focus on your applications.",
+      "example": "A company moves to AWS to avoid maintaining its cooling systems, servers, and generators.",
+      "mnemonic": "Stop fixing fridges. Start making sauce.",
+      "category": "Cloud Fundamentals",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["operations", "infrastructure"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Stop spending money to run and maintain data centers",
+          "definition": "Reduce costs and operational overhead by using managed infrastructure in the cloud."
+        }
+      ]
+    },
+    {
+      "id": "K9LX7VJ8PQ",
+      "front": "Your app has unpredictable traffic—some days high, some low. What cloud feature lets you adjust without overpaying?",
+      "back": "Stop guessing capacity. Cloud services scale automatically up or down, letting you match resources to actual usage.",
+      "example": "A ticketing website handles spikes during a concert sale by scaling EC2 instances via Auto Scaling.",
+      "mnemonic": "Scale your slices—not your stress.",
+      "category": "Cloud Fundamentals",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["scalability", "performance"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Stop guessing capacity",
+          "definition": "Scale resources as needed to meet real-time demand using cloud elasticity."
+        }
+      ]
+    },
+    {
+      "id": "J8QN3MWTZ2",
+      "front": "How does cloud computing help small businesses reduce costs on infrastructure purchases?",
+      "back": "Benefit from massive economies of scale. Cloud providers aggregate usage across millions, lowering costs passed on to customers.",
+      "example": "A small developer gets enterprise-grade storage pricing through AWS’s large-scale infrastructure deals.",
+      "mnemonic": "Big baker buys = better deals for small pizza shops.",
+      "category": "Cloud Fundamentals",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["economies-of-scale", "pricing"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Benefit from massive economies of scale",
+          "definition": "Cloud providers reduce per-unit infrastructure cost through bulk operations."
+        }
+      ]
+    },
+    {
+      "id": "P7MBRZ64TW",
+      "front": "You want to test and deploy new features quickly. What benefit of the cloud helps you do that?",
+      "back": "Increase speed and agility. The cloud allows rapid provisioning of resources, enabling faster development, testing, and deployment.",
+      "example": "A developer launches a new backend test in AWS Lambda within minutes of writing the function.",
+      "mnemonic": "From garlic idea to garlic crust—tonight.",
+      "category": "Cloud Fundamentals",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["agility", "development"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Increase speed and agility",
+          "definition": "Cloud services allow quick resource provisioning, accelerating innovation and time to market."
+        }
+      ]
+    },
+    {
+      "id": "L4YQ6KNTXJ",
+      "front": "You want to deploy an app to users in different continents with low latency. What cloud benefit enables this?",
+      "back": "Go global in minutes. AWS’s global infrastructure lets you deploy applications close to users, improving performance.",
+      "example": "A media company uses CloudFront and multiple AWS Regions to stream content to users in Asia and North America with low latency.",
+      "mnemonic": "One dough, two continents, zero delay.",
+      "category": "Cloud Fundamentals",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["global", "latency", "regions"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Go global in minutes",
+          "definition": "Deploy applications worldwide using a cloud provider’s network of data centers."
+        },
+        {
+          "term": "Amazon EC2",
+          "definition": "A scalable compute service that allows users to launch virtual servers on demand."
+        }
+      ]
+    }
+  ]
+}

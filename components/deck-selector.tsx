@@ -1,16 +1,12 @@
 "use client";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectSeparator,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import React from "react";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import ListSubheader from "@mui/material/ListSubheader";
 import type { Flashcard } from "@/app/page";
+import { Paper } from "@mui/material";
 
 export interface Deck {
   id: string;
@@ -30,6 +26,8 @@ export function DeckSelector({
   currentDeckId,
   onDeckChange,
 }: DeckSelectorProps) {
+  // Determine the currently selected deck object
+  const currentDeck = decks.find((deck) => deck.id === currentDeckId);
   // Group decks by course
   const groupedDecks: Record<string, Deck[]> = decks.reduce(
     (acc, deck) => {
@@ -45,25 +43,26 @@ export function DeckSelector({
   Object.values(groupedDecks).forEach((group) => {
     group.sort((a, b) => a.id.localeCompare(b.id));
   });
-
   return (
-    <Select value={currentDeckId} onValueChange={onDeckChange}>
-      <SelectTrigger className="w-full h-9 text-sm">
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        {Object.entries(groupedDecks).map(([course, decks]) => (
-          <SelectGroup key={course}>
-            <SelectLabel>{course}</SelectLabel>
-            {decks.map((deck) => (
-              <SelectItem key={deck.id} value={deck.id} className="text-sm">
+    <Paper sx={{ width: "350px", maxWidth: "100vw" }}>
+      <FormControl fullWidth size="small" sx={{ backgroundColor: "white" }}>
+        <Select
+          fullWidth
+          labelId="deck-selector-label"
+          id="deck-selector"
+          value={currentDeck?.id || ""}
+          onChange={(event) => onDeckChange(event.target.value as string)}
+        >
+          {Object.entries(groupedDecks).flatMap(([course, decks]) => [
+            <ListSubheader key={`${course}-label`}>{course}</ListSubheader>,
+            ...decks.map((deck) => (
+              <MenuItem key={deck.id} value={deck.id}>
                 {deck.name} ({deck.cards.length} cards)
-              </SelectItem>
-            ))}
-            <SelectSeparator />
-          </SelectGroup>
-        ))}
-      </SelectContent>
-    </Select>
+              </MenuItem>
+            )),
+          ])}
+        </Select>
+      </FormControl>
+    </Paper>
   );
 }

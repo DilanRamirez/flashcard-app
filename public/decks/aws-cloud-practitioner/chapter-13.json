@@ -1,0 +1,63 @@
+{
+  "name": "Chapter 13: AWS Elastic Beanstalk vs. CloudFormation",
+  "description": "Flashcards comparing AWS Elastic Beanstalk's simplicity with AWS CloudFormation's power and flexibility.",
+  "category": "Compute & Infrastructure as Code",
+  "cards": [
+    {
+      "id": "G5HJ8ZK3MX",
+      "front": "You're deploying an app and want AWS to handle the provisioning, scaling, and monitoring while you focus on code. Which service should you use?",
+      "back": "Use AWS Elastic Beanstalk. It automatically manages infrastructure tasks such as provisioning, load balancing, scaling, and monitoring based on your code and configuration.",
+      "example": "Like handing your pizza recipe to a professional kitchen that handles staffing, ovens, and order flow so you can focus on your menu.",
+      "mnemonic": "Beanstalk = code in, pizza out.",
+      "category": "Compute & Infrastructure as Code",
+      "subject": "Cloud Support Basics",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["elastic-beanstalk", "paas", "automation"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "AWS Elastic Beanstalk",
+          "definition": "A service for deploying and managing web applications with automatic infrastructure provisioning, scaling, and monitoring."
+        },
+        {
+          "term": "Load balancing",
+          "definition": "Distributing incoming traffic across multiple resources to ensure reliability and performance."
+        },
+        {
+          "term": "Automatic scaling",
+          "definition": "Automatically increasing or decreasing resource capacity based on application demand."
+        },
+        {
+          "term": "Application health monitoring",
+          "definition": "Tracking the performance and availability of an application to detect and respond to issues."
+        }
+      ]
+    },
+    {
+      "id": "Q2NR5BTLJD",
+      "front": "You want full control over your AWS infrastructure and need a repeatable way to deploy environments using version-controlled templates. Which service fits best?",
+      "back": "Use AWS CloudFormation. It lets you define infrastructure as code through templates, enabling repeatable, automated, and safe provisioning of AWS resources.",
+      "example": "Like writing a detailed pizza shop blueprint you can reuse to build identical shops across the country—precise, consistent, and fully customizable.",
+      "mnemonic": "Blueprint it. Build it. Repeat it.",
+      "category": "Compute & Infrastructure as Code",
+      "subject": "Cloud Support Basics",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["cloudformation", "iac", "templates"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "AWS CloudFormation",
+          "definition": "A service that allows you to define and provision AWS infrastructure using declarative templates."
+        },
+        {
+          "term": "Infrastructure as Code (IaC)",
+          "definition": "Managing infrastructure through machine-readable configuration files instead of manual processes."
+        }
+      ]
+    }
+  ]
+}

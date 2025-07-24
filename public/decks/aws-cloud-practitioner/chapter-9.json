@@ -1,0 +1,95 @@
+{
+  "name": "Chapter 9: Selecting an AWS Region",
+  "description": "Flashcards that explain how to choose an AWS Region based on compliance, latency, service availability, and pricing.",
+  "category": "Global Infrastructure",
+  "cards": [
+    {
+      "id": "C9P4Y2X7VL",
+      "front": "Your company is based in the UK and local laws require all customer data to stay within the country. How should you select an AWS Region?",
+      "back": "Choose the AWS London Region to meet compliance requirements that restrict data to within national boundaries.",
+      "example": "A UK pizza shop must store customer info in London due to legal restrictions, not in nearby EU locations.",
+      "mnemonic": "Stay legal. Pick the Region your laws allow.",
+      "category": "Global Infrastructure",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["region", "compliance", "data residency"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Compliance",
+          "definition": "Adherence to legal or regulatory standards requiring data to be processed or stored in specific locations."
+        },
+        {
+          "term": "AWS Region",
+          "definition": "A separate geographic area where AWS clusters data centers to serve users."
+        }
+      ]
+    },
+    {
+      "id": "T5R9X0L2MB",
+      "front": "Why would you choose an AWS Region close to your customers even if your business operates elsewhere?",
+      "back": "To reduce latency and improve user experience by serving content from a Region geographically closer to the customer base.",
+      "example": "A Washington DC pizza shop opens a Singapore branch to deliver hot pizzas faster to fans in Asia.",
+      "mnemonic": "Hot pizza needs a local oven.",
+      "category": "Global Infrastructure",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["region", "latency", "user proximity"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Latency",
+          "definition": "The delay before a transfer of data begins following an instruction."
+        },
+        {
+          "term": "Proximity to customers",
+          "definition": "The practice of deploying resources close to end users to reduce response time and improve performance."
+        }
+      ]
+    },
+    {
+      "id": "L8X2NZQ5VU",
+      "front": "What should you check before deploying a new AWS service in a specific Region?",
+      "back": "Ensure that the service is available in that Region, as not all AWS services are launched globally at the same time.",
+      "example": "You want to use Amazon Braket, but it's only available in a few Regions like Oregon—not all Regions support it.",
+      "mnemonic": "Right tool? Right Region.",
+      "category": "Global Infrastructure",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["region", "service availability", "deployment"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Service availability",
+          "definition": "The presence or absence of specific AWS services in a given Region."
+        }
+      ]
+    },
+    {
+      "id": "B2Z7MKRVQP",
+      "front": "Why might the same AWS service cost more in one Region than another?",
+      "back": "Because pricing varies by Region due to local infrastructure, taxes, labor, and operational costs.",
+      "example": "Running a pizza shop in São Paulo costs more than in Portland due to higher local expenses—same for AWS services.",
+      "mnemonic": "Same pizza, different price tags.",
+      "category": "Global Infrastructure",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["region", "pricing", "cost optimization"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Pricing differences",
+          "definition": "Variation in AWS service costs between Regions due to local operating conditions."
+        }
+      ]
+    }
+  ]
+}

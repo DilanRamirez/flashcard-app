@@ -1,0 +1,71 @@
+{
+  "name": "Chapter 1: Deployment Models for Cloud Computing",
+  "description": "Flashcards covering cloud-based, on-premises, and hybrid deployment models using real-world metaphors.",
+  "category": "Deployment Models",
+  "cards": [
+    {
+      "id": "T7V5Q9J2XR",
+      "front": "You're launching a fully online photo editing platform and want to avoid owning any hardware. Which deployment model fits this use case best?",
+      "back": "Cloud-based deployment is ideal. It allows you to build or migrate applications fully into the cloud, leveraging managed services for scalability and speed without hardware ownership.",
+      "example": "A startup builds a SaaS editing tool hosted entirely on AWS, using EC2, S3, and RDS—no physical servers involved.",
+      "mnemonic": "“Cloud is the kitchen you rent—not the one you own.”",
+      "category": "Deployment Models",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["cloud-based", "deployment", "cloud-native"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Cloud-based deployment",
+          "definition": "Running all application parts in the cloud—either migrated or built natively using cloud services."
+        },
+        {
+          "term": "Virtual servers",
+          "definition": "Emulated computing environments running on physical hardware."
+        }
+      ]
+    },
+    {
+      "id": "H3Z9W1KMPL",
+      "front": "A hospital prefers to keep all patient data on site and use their own IT infrastructure. What deployment strategy is best?",
+      "back": "On-premises deployment is best suited here, where all resources and infrastructure are hosted and managed locally for greater control and compliance.",
+      "example": "A hospital runs its patient management system in a private data center for regulatory compliance.",
+      "mnemonic": "“Your shop, your rules—but also your maintenance.”",
+      "category": "Deployment Models",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["on-premises", "compliance", "deployment"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "On-premises deployment",
+          "definition": "Hosting and managing resources in a local data center controlled by the organization."
+        }
+      ]
+    },
+    {
+      "id": "R6NM82DZWQ",
+      "front": "A retail company wants to keep inventory systems on-premises but use cloud tools to handle peak online traffic. Which deployment model should they adopt?",
+      "back": "Hybrid deployment fits this use case. It allows the company to retain on-premises systems while leveraging cloud scalability for specific workloads.",
+      "example": "A store uses local servers for inventory and Amazon EC2 Auto Scaling during Black Friday sales.",
+      "mnemonic": "“A hybrid is your truck plus a turbo boost from the cloud.”",
+      "category": "Deployment Models",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["hybrid", "scalability", "mixed-deployment"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Hybrid deployment",
+          "definition": "Combining cloud services with on-premises infrastructure to support mixed environments."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "name": "Chapter 14: Connectivity to AWS",
+  "description": "Flashcards explaining VPC-based networking services with metaphors and examples",
+  "category": "Networking",
+  "cards": [
+    {
+      "id": "F9X2G7KQ1P",
+      "front": "You’ve built your cloud infrastructure and want to isolate resources like EC2 and RDS while controlling access paths. What AWS service should you use?",
+      "back": "Use Amazon VPC (Virtual Private Cloud) to create an isolated network with subnets for specific functions and fine-grained control over access.",
+      "example": "You place web servers in a public subnet and databases in a private subnet inside your VPC.",
+      "mnemonic": "VPC = Your private pizza plaza",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["vpc", "networking", "subnet"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon VPC",
+          "definition": "A logically isolated virtual network in AWS."
+        },
+        {
+          "term": "Subnet",
+          "definition": "A range of IP addresses in your VPC used to group resources."
+        }
+      ]
+    },
+    {
+      "id": "K7RM4QBX90",
+      "front": "You’ve launched a public-facing web app in your VPC but users can’t access it. What might be missing?",
+      "back": "You need to attach an Internet Gateway to your VPC to allow public internet access to resources in public subnets.",
+      "example": "A static website hosted on EC2 can't be reached until the VPC has an Internet Gateway.",
+      "mnemonic": "Internet Gateway = Entry to your cloud kitchen",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["internet-gateway", "public-subnet"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Internet Gateway",
+          "definition": "Enables public access to and from the VPC over the internet."
+        }
+      ]
+    },
+    {
+      "id": "XZ38V1DLY9",
+      "front": "Your company wants to access AWS resources securely from its on-premises network. Which setup should you use?",
+      "back": "Set up a VPN connection using a Virtual Private Gateway to create an encrypted tunnel from on-prem to your VPC.",
+      "example": "A corporate office securely connects to AWS using a VPN over the internet via a Virtual Private Gateway.",
+      "mnemonic": "Encrypted tunnel. VIP access.",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["vpn", "virtual-private-gateway"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Virtual Private Gateway",
+          "definition": "An AWS endpoint for VPN connections."
+        },
+        {
+          "term": "VPN",
+          "definition": "A secure, encrypted connection over a public network."
+        }
+      ]
+    },
+    {
+      "id": "MA1ZWY4T92",
+      "front": "You need a fast, private connection between your on-premises data center and AWS—without using the public internet. What should you use?",
+      "back": "Use AWS Direct Connect to establish a private, dedicated connection between your on-premises infrastructure and AWS.",
+      "example": "An enterprise uses AWS Direct Connect to run latency-sensitive financial workloads.",
+      "mnemonic": "Direct Connect = Private hallway to the cloud",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["direct-connect", "private-link"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "AWS Direct Connect",
+          "definition": "Provides a private, dedicated network connection to AWS."
+        }
+      ]
+    },
+    {
+      "id": "R4VFQ21HML",
+      "front": "You want instances in a private subnet to access the internet for updates, but not be accessible from the internet. What service should you use?",
+      "back": "Use a NAT Gateway to enable outbound internet access from private subnets while blocking inbound traffic.",
+      "example": "Your EC2 instances in a private subnet fetch OS updates through a NAT Gateway in a public subnet.",
+      "mnemonic": "NAT = Outbound only, keep it private",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["nat-gateway", "private-subnet"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "NAT Gateway",
+          "definition": "Enables instances in a private subnet to access the internet without allowing inbound connections."
+        }
+      ]
+    },
+    {
+      "id": "JDYTN4RZQ3",
+      "front": "Your app spans two VPCs and they need to communicate privately. What AWS feature allows this?",
+      "back": "Use VPC Peering to allow private, direct traffic between two VPCs using internal IP addresses.",
+      "example": "Two VPCs—one for analytics and another for ingestion—communicate using VPC Peering.",
+      "mnemonic": "Peering = Shop-to-shop bridge",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["vpc-peering", "cross-vpc"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "VPC Peering",
+          "definition": "Allows private communication between two VPCs without internet traffic."
+        }
+      ]
+    },
+    {
+      "id": "QGH1N8LW5T",
+      "front": "You're managing a multi-VPC environment and need a centralized way to route traffic across VPCs and on-prem networks. What should you use?",
+      "back": "Use AWS Transit Gateway to act as a central hub that connects multiple VPCs and on-prem networks efficiently.",
+      "example": "A large enterprise uses Transit Gateway to link 10+ VPCs and multiple on-prem locations in one place.",
+      "mnemonic": "Transit Gateway = Pizza network switchboard",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "expert",
+      "tags": ["transit-gateway", "network-architecture"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Transit Gateway",
+          "definition": "A hub that simplifies connecting multiple VPCs and on-prem networks."
+        }
+      ]
+    },
+    {
+      "id": "U53JNYZ7MA",
+      "front": "You want to securely offer a service to another VPC without exposing it to the internet. What should you use?",
+      "back": "Use AWS PrivateLink to expose services to other VPCs using private IPs—without public internet exposure.",
+      "example": "A SaaS provider exposes an internal API to clients through AWS PrivateLink.",
+      "mnemonic": "PrivateLink = Service window, not a backdoor",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "expert",
+      "tags": ["privatelink", "vpc-endpoint"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "AWS PrivateLink",
+          "definition": "Provides private access to services across VPCs without public internet exposure."
+        }
+      ]
+    }
+  ]
+}

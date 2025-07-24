@@ -1,0 +1,79 @@
+{
+  "name": "Chapter 12: Ways to Interact with AWS",
+  "description": "Flashcards covering the main methods to interact with AWS services: Console, CLI, and SDKs.",
+  "category": "AWS Management Interfaces",
+  "cards": [
+    {
+      "id": "F8K3Z7LYQC",
+      "front": "You're new to AWS and want a user-friendly, visual interface to manage services. What should you use?",
+      "back": "Use the AWS Management Console—a web-based dashboard that offers search, graphics, and guided workflows for managing AWS services.",
+      "example": "Just like a pizza shop touchscreen lets you adjust ovens or reorder ingredients, the Console lets you do the same for AWS services without needing code.",
+      "mnemonic": "Click. Configure. Control.",
+      "category": "AWS Management Interfaces",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["console", "visual-interface", "dashboard"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "AWS Management Console",
+          "definition": "A web-based interface for accessing and managing AWS services with visual tools and wizards."
+        },
+        {
+          "term": "Console mobile app",
+          "definition": "A mobile version of the AWS Console for on-the-go monitoring and management."
+        }
+      ]
+    },
+    {
+      "id": "R7W2L4MJDP",
+      "front": "How can you quickly issue repeatable commands and automate AWS tasks without using a visual interface?",
+      "back": "Use the AWS CLI (Command Line Interface), which lets you type commands or use scripts to manage AWS services more efficiently.",
+      "example": "Like texting your kitchen to 'start oven' or 'add dough,' CLI lets you run commands like `aws ec2 start-instances` or automate them in scripts.",
+      "mnemonic": "Type to run your shop. Script to run it smarter.",
+      "category": "AWS Management Interfaces",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["cli", "automation", "command-line"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "AWS CLI",
+          "definition": "A command-line tool for managing AWS services and automating tasks with scripts."
+        },
+        {
+          "term": "Script",
+          "definition": "A file containing a sequence of commands to automate repetitive tasks."
+        }
+      ]
+    },
+    {
+      "id": "N5Q8V9WBXR",
+      "front": "How do developers integrate AWS functionality directly into their own apps or software?",
+      "back": "By using AWS SDKs—language-specific libraries that allow you to call AWS services programmatically from your application code.",
+      "example": "Just like a pizza app can connect to ovens and delivery routes, an app using an AWS SDK can spin up EC2 instances or write to DynamoDB automatically.",
+      "mnemonic": "Code your own kitchen crew.",
+      "category": "AWS Management Interfaces",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["sdk", "api", "integration"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "AWS SDK",
+          "definition": "A set of libraries that enables developers to call AWS services directly from their preferred programming languages."
+        },
+        {
+          "term": "API",
+          "definition": "A set of functions and protocols that allows software applications to communicate with each other."
+        }
+      ]
+    }
+  ]
+}

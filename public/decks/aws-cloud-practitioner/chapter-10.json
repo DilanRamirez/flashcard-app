@@ -1,0 +1,103 @@
+{
+  "name": "Chapter 10: Availability Zones",
+  "description": "Flashcards to explain the role and benefit of using multiple Availability Zones in AWS for resilience and performance.",
+  "category": "Global Infrastructure",
+  "cards": [
+    {
+      "id": "X2P7K9JQVL",
+      "front": "Your app is running entirely in a single Availability Zone. What risk are you exposing it to?",
+      "back": "If that Availability Zone experiences a failure (like power loss or natural disaster), your entire application could go down, since there’s no redundancy.",
+      "example": "A pizza shop with one oven has to shut down if that oven breaks. With only one AZ, there’s no backup.",
+      "mnemonic": "One oven = one risk.",
+      "category": "Global Infrastructure",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["availability-zone", "ec2", "resilience"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Availability Zone (AZ)",
+          "definition": "One or more isolated data centers within an AWS Region that provide high availability and fault isolation."
+        },
+        {
+          "term": "Amazon EC2 instance",
+          "definition": "A virtual server running in the AWS cloud to host applications."
+        }
+      ]
+    },
+    {
+      "id": "D8L2MQW0ZT",
+      "front": "How can you ensure your AWS application keeps running even if one Availability Zone fails?",
+      "back": "Deploy Amazon EC2 instances across multiple Availability Zones within the same Region to achieve high availability and fault tolerance.",
+      "example": "Two pizza shops in different locations ensure service continues if one has an emergency. Similarly, using multiple AZs keeps your app online.",
+      "mnemonic": "Two ovens. Twice the uptime.",
+      "category": "Global Infrastructure",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["high-availability", "multi-az", "fault-tolerance"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "High availability",
+          "definition": "Ensures systems remain operational with minimal downtime during failures."
+        },
+        {
+          "term": "Multi-AZ",
+          "definition": "Deploying resources across multiple Availability Zones for increased fault tolerance."
+        }
+      ]
+    },
+    {
+      "id": "F6J9BXE1WU",
+      "front": "Why are Availability Zones designed to be both separated and closely connected?",
+      "back": "AZs are far enough apart to protect against local disasters, but close enough to provide low-latency network communication between them.",
+      "example": "Two pizza shops far enough to avoid the same outage, yet close enough to share staff and ingredients. AWS AZs follow the same design logic.",
+      "mnemonic": "Spread out, but synced up.",
+      "category": "Global Infrastructure",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["latency", "disaster-recovery", "availability-zone"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Low latency",
+          "definition": "Minimal delay in data communication between systems."
+        },
+        {
+          "term": "Disaster isolation",
+          "definition": "Architectural design that prevents localized failures from impacting other components."
+        }
+      ]
+    },
+    {
+      "id": "9Q3K5ZV8YH",
+      "front": "What is the benefit of using multiple Availability Zones for your application?",
+      "back": "It increases resilience by allowing your application to continue running even if one AZ fails, thus minimizing downtime and data loss.",
+      "example": "If one pizza shop closes due to a power outage, the other can still serve customers. Similarly, multiple AZs keep your app available.",
+      "mnemonic": "More zones, more safety.",
+      "category": "Global Infrastructure",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["resilience", "availability-zone", "fault-tolerance"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Resilience",
+          "definition": "The ability of a system to recover quickly from failures."
+        },
+        {
+          "term": "Fault tolerance",
+          "definition": "The capability of a system to continue operating properly in the event of a failure."
+        }
+      ]
+    }
+  ]
+}

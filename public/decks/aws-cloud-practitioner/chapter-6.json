@@ -1,0 +1,107 @@
+{
+  "name": "Chapter 6: Serverless and Container Computing",
+  "description": "Flashcards covering EC2, Lambda, Containers, and ECS using real-world metaphors for better understanding.",
+  "category": "Compute",
+  "cards": [
+    {
+      "id": "R3X9PD7KWB",
+      "front": "You're deploying an app in AWS and want full control over the infrastructure, but in the cloud. Which compute service should you choose?",
+      "back": "Use Amazon EC2. It provides virtual servers where you manage the OS, patches, scaling, and runtime environment while AWS hosts the infrastructure.",
+      "example": "A dev team running a legacy application with specific OS requirements chooses EC2 to control their environment setup.",
+      "mnemonic": "Cloud kitchen, your ovens.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["ec2", "virtual-servers"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon EC2",
+          "definition": "Cloud-based virtual servers that users manage and configure."
+        }
+      ]
+    },
+    {
+      "id": "VL7Y2FQ9XE",
+      "front": "You want to run code only in response to specific events without managing any servers. What AWS service should you use?",
+      "back": "AWS Lambda. It lets you upload your code, set a trigger, and run it without provisioning or managing servers. You’re billed only for the compute time used.",
+      "example": "An e-commerce site uses Lambda to automatically resize product images when a new one is uploaded.",
+      "mnemonic": "Just code. No cookbooks, no kitchens.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["lambda", "serverless"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "AWS Lambda",
+          "definition": "Serverless compute service that runs code on demand, triggered by events."
+        }
+      ]
+    },
+    {
+      "id": "KX2MG79ALF",
+      "front": "You need to build an application that runs consistently across your dev, test, and production environments. What's the best AWS compute method?",
+      "back": "Use containers. Containers package your application and its dependencies into a portable unit that runs consistently across environments.",
+      "example": "A development team uses Docker containers to ensure their app behaves identically on local machines and AWS production servers.",
+      "mnemonic": "Pizza-ready boxes. Bake them anywhere.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["containers", "portability"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Container",
+          "definition": "A lightweight package of software including code and dependencies for consistent execution across platforms."
+        }
+      ]
+    },
+    {
+      "id": "NE8ZT6C5RJ",
+      "front": "You are managing hundreds of containerized applications across many environments. Which AWS service helps automate this?",
+      "back": "Amazon ECS (Elastic Container Service) orchestrates and manages container deployment, scaling, and operations across infrastructure.",
+      "example": "A SaaS company uses ECS to deploy and manage thousands of microservices across multiple availability zones.",
+      "mnemonic": "ECS = Empire Container Scheduler.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["ecs", "container-orchestration"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon ECS",
+          "definition": "A scalable service for running and managing containerized applications in the AWS cloud."
+        }
+      ]
+    },
+    {
+      "id": "TX9RK2YMEU",
+      "front": "You want your code to run only when triggered by specific events and be billed only for execution time. How does AWS Lambda support this?",
+      "back": "AWS Lambda uses an event-driven model: you upload code, set a trigger (like an S3 upload or API call), and Lambda executes only when triggered, charging for compute time used.",
+      "example": "A blog site triggers Lambda to convert markdown to HTML when a new post is uploaded to S3.",
+      "mnemonic": "Upload. Trigger. Run. Done.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "intermediate",
+      "tags": ["lambda", "event-driven", "billing"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Event-driven computing",
+          "definition": "A model where code runs in response to specific triggers or events."
+        }
+      ]
+    }
+  ]
+}

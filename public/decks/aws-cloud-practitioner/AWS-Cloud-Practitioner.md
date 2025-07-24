@@ -1340,90 +1340,144 @@ That’s **AWS CloudFormation**—a tool that lets you define your infrastructur
 
 ---
 
-## **Story 1: Your Pizza Shop in a Private Plaza**
+## Story 1: Your Pizza Shop in a Private Plaza
 
 **Customer Request:** "How do I make sure only the right people can access my cloud pizza shop?"
 
 **Everyday Example:**  
-Imagine you’ve opened a pizza shop inside a private plaza. You’ve set up separate areas—one for delivery, one for dine-in, and one for storage. The plaza is fenced off from the rest of the city, and you decide who enters and how.
+You’ve opened a pizza shop inside a private plaza. You’ve set up separate areas—delivery, dine-in, storage. The plaza is fenced off from the rest of the city, and you decide who enters and how.
 
 **Metaphor Mapping:**  
-That private plaza is an **Amazon Virtual Private Cloud (Amazon VPC)**. It lets you isolate your AWS resources (like EC2 instances and databases) within a controlled, private environment. You divide it into **subnets**, each serving a specific role.
+That’s your Amazon VPC (Virtual Private Cloud). You isolate AWS resources (like EC2 and RDS) in a private network, split into subnets for specific functions.
 
-**Mnemonic:** “**VPC = Your private pizza plaza.**”
-
-- **Amazon VPC:** A virtual, isolated network inside the AWS Cloud.
-- **Subnet:** A defined section of the VPC that holds related resources (e.g., public servers, private databases).
+**Mnemonic:** “VPC = Your private pizza plaza.”
 
 ---
 
-## **Story 2: The Main Door to the Pizza Shop**
+## Story 2: The Main Door to the Pizza Shop
 
 **Customer Request:** "How can online customers access my cloud pizza shop?"
 
 **Everyday Example:**  
-You set up a front door to your shop so customers from anywhere in the city can enter and place an order. Without that door, no one can access your menu or even know your shop exists.
+You install a front door for your shop so customers can enter and place orders.
 
 **Metaphor Mapping:**  
-That’s the role of an **Internet Gateway**. It connects your **VPC** to the internet, allowing traffic in and out—just like a front door lets people into your store.
+The Internet Gateway connects your VPC to the internet, allowing public access to your resources.
 
-**Mnemonic:** “**Internet Gateway = Entry to your cloud kitchen.**”
-
-- **Public access point**
-- **Internet Gateway:** Enables public internet traffic to enter or leave the VPC.
+**Mnemonic:** “Internet Gateway = Entry to your cloud kitchen.”
 
 ---
 
-## **Story 3: A Protected Tunnel to the Pizza Shop**
+## Story 3: A Protected Tunnel to the Pizza Shop
 
 **Customer Request:** "What if I want to connect my corporate office securely to AWS?"
 
 **Everyday Example:**  
-You drive to the pizza shop using public roads, but you’ve got a bodyguard to protect you from pickpockets. The shop has a backdoor that only opens for people with the right credentials.
+You drive to the shop using public roads, but you’re protected by a bodyguard. The backdoor opens only for people with the right credentials.
 
 **Metaphor Mapping:**  
-This is like a **VPN connection** through a **Virtual Private Gateway**. Your company’s data center connects securely to your **AWS VPC**, and traffic is encrypted to protect sensitive info.
+A Virtual Private Gateway enables secure VPN connections from on-prem to your AWS VPC using encrypted tunnels.
 
-**Mnemonic:** “**Encrypted tunnel. VIP access.**”
-
-- **VPN + Virtual Private Gateway:** Encrypted path over public internet for secure access between your on-premises network and AWS.
+**Mnemonic:** “Encrypted tunnel. VIP access.”
 
 ---
 
-## **Story 4: The VIP Hallway to the Pizza Shop**
+## Story 4: The VIP Hallway to the Pizza Shop
 
 **Customer Request:** "Can I skip public roads entirely and set up a private entrance?"
 
 **Everyday Example:**  
-You build a private hallway that connects your apartment building directly to the pizza shop. It’s secure, dedicated, and used only by your residents—no traffic jams, no distractions.
+You build a private hallway from your building directly to the pizza shop. No traffic, no risk.
 
 **Metaphor Mapping:**  
-That’s **AWS Direct Connect**. It provides a **dedicated private connection** between your on-premises network and AWS, bypassing the internet entirely. This improves **speed**, **reliability**, and **security**.
+AWS Direct Connect provides a private, high-bandwidth, low-latency connection between your on-prem network and AWS.
 
-**Mnemonic:** “**Direct Connect = Private hallway to the cloud.**”
+**Mnemonic:** “Direct Connect = Private hallway to the cloud.”
 
-- **Exclusive access lane**
-- **AWS Direct Connect:** A dedicated network connection between your data center and AWS for high-performance workloads.
+---
+
+## Story 5: Letting Your Staff Out the Back Door Safely (NAT Gateway)
+
+**Customer Request:** "Can my private staff access online resources securely?"
+
+**Everyday Example:**  
+Your kitchen staff need to download online recipes but shouldn’t be seen by customers.
+
+**Metaphor Mapping:**  
+A NAT Gateway allows outbound internet access for private subnets while blocking inbound traffic.
+
+**Mnemonic:** “NAT = Outbound only, keep it private.”
+
+---
+
+## Story 6: Sharing Pizza Between Shops (VPC Peering)
+
+**Customer Request:** "Can my two pizza shops share supplies directly?"
+
+**Everyday Example:**  
+You build a private bridge between two shops to share toppings.
+
+**Metaphor Mapping:**  
+VPC Peering allows private traffic between VPCs using internal IPs—no internet needed.
+
+**Mnemonic:** “Peering = Shop-to-shop bridge.”
+
+---
+
+## Story 7: Managing a Pizza Empire (Transit Gateway)
+
+**Customer Request:** "How can I manage dozens of pizza shops efficiently?"
+
+**Everyday Example:**  
+You set up a central pizza hub where all shops connect and route orders through one place.
+
+**Metaphor Mapping:**  
+Transit Gateway connects multiple VPCs and on-prem networks via a scalable hub.
+
+**Mnemonic:** “Transit Gateway = Pizza network switchboard.”
+
+---
+
+## Story 8: Letting Other Brands Sell Your Sauce (AWS PrivateLink)
+
+**Customer Request:** "How can I let partners access my services without opening my network?"
+
+**Everyday Example:**  
+A sauce distributor views your stock through a secure window without entering your kitchen.
+
+**Metaphor Mapping:**  
+AWS PrivateLink exposes specific services to other VPCs using private IPs—no internet exposure.
+
+**Mnemonic:** “PrivateLink = Service window, not a backdoor.”
 
 ---
 
 ## 🔁 Quick Recap
 
-- **Amazon VPC** is your private network space in AWS—fully controlled and divided into **subnets**.
-- **Internet Gateway** is the public entry point for users to access cloud resources.
-- **Virtual Private Gateway + VPN** creates a secure, encrypted tunnel from your on-prem network into your VPC.
-- **AWS Direct Connect** gives you a private, high-speed connection from your data center to AWS—no public internet involved.
+- **Amazon VPC** is your private, isolated network in AWS where you launch resources securely.
+- **Subnets** divide your VPC into logical segments like public zones (e.g., web servers) and private zones (e.g., databases).
+- **Internet Gateway** allows public internet access to resources in public subnets—essential for web apps and APIs.
+- **Virtual Private Gateway + VPN** create a secure, encrypted tunnel between your on-premises network and AWS over the public internet.
+- **AWS Direct Connect** provides a dedicated, private connection to AWS for better performance, reliability, and lower latency.
+- **NAT Gateway** allows instances in private subnets to reach the internet (for updates or patches) without being exposed to it.
+- **VPC Peering** enables direct communication between two VPCs using private IPs—useful for cross-account or cross-region access.
+- **Transit Gateway** acts as a central router to connect multiple VPCs and on-premises networks, simplifying complex topologies.
+- **AWS PrivateLink** lets you securely expose your services to other VPCs without ever exposing them to the public internet.
 
 ---
 
-## 📘 Glossary
+## 📘 Extended Glossary
 
-- **Amazon VPC (Virtual Private Cloud):** A logically isolated section of the AWS Cloud where you define and control a virtual network.
-- **Subnet:** A range of IP addresses in your VPC that hosts AWS resources.
-- **Internet Gateway:** A horizontally scaled, redundant, and highly available component that allows communication between instances in your VPC and the internet.
-- **Virtual Private Gateway:** A component that enables secure connections (VPN) from an on-premises network to an AWS VPC.
-- **VPN (Virtual Private Network):** A secure connection over a public network.
-- **AWS Direct Connect:** A private, dedicated network connection from your data center to AWS for better performance and lower latency.
+- **Amazon VPC (Virtual Private Cloud):** A logically isolated virtual network within AWS.
+- **Subnet:** A range of IPs within a VPC for hosting resources.
+- **Internet Gateway:** A component that enables public internet access to/from your VPC.
+- **Virtual Private Gateway:** AWS endpoint for VPN connections from on-premises.
+- **VPN (Virtual Private Network):** A secure, encrypted connection over the internet.
+- **AWS Direct Connect:** A private, dedicated network connection to AWS.
+- **NAT Gateway:** Allows private subnets to initiate outbound internet connections.
+- **VPC Peering:** Direct, private link between two VPCs using internal IPs.
+- **Transit Gateway:** A central hub for connecting multiple VPCs and networks.
+- **AWS PrivateLink:** Private access to services across VPCs without public exposure.
 
 ---
 

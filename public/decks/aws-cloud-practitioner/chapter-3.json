@@ -1,0 +1,107 @@
+{
+  "name": "Chapter 3: Amazon EC2 Pricing Models",
+  "description": "Flashcards explaining different EC2 pricing models through real-world pizza kitchen metaphors.",
+  "category": "Compute",
+  "cards": [
+    {
+      "id": "KQ7FJX2MLV",
+      "front": "You have an unpredictable workload and want to avoid long-term commitments. Which EC2 pricing model fits?",
+      "back": "On-Demand Instances let you pay only for compute capacity used, without upfront costs or commitments—ideal for short-term or variable workloads.",
+      "example": "A developer launches test environments with EC2 On-Demand for a few hours each week.",
+      "mnemonic": "Pay as you bake. No strings, no stress.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["ec2", "pricing", "on-demand"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "On-Demand Instances",
+          "definition": "EC2 pricing model where you pay by the hour or second with no long-term commitment."
+        }
+      ]
+    },
+    {
+      "id": "ND5PKXZ3YW",
+      "front": "You plan to run workloads consistently over the next year. Which pricing model offers savings without tying you to specific instance types?",
+      "back": "Amazon EC2 Savings Plans offer lower prices when you commit to consistent usage (e.g., $10/hour) for 1 or 3 years, across EC2 instance families.",
+      "example": "A SaaS company commits to $100/hr of compute usage, receiving discounts across all EC2 instance types.",
+      "mnemonic": "Commit to bake, and save your cake.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["ec2", "pricing", "savings-plan"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon EC2 Savings Plans",
+          "definition": "A flexible pricing model that offers discounts in exchange for a usage commitment."
+        }
+      ]
+    },
+    {
+      "id": "VP6TXQZ19J",
+      "front": "You want to reserve a specific EC2 instance for predictable, long-term workloads. Which model applies?",
+      "back": "Reserved Instances allow you to reserve specific EC2 instance types for 1 or 3 years at a discounted rate—ideal for steady-state workloads.",
+      "example": "A company reserves m5.large instances for a 3-year database deployment, saving over 70%.",
+      "mnemonic": "Reserve to preserve your budget.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["ec2", "reserved", "pricing"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Reserved Instances",
+          "definition": "EC2 pricing option with cost savings for long-term commitments on specific instance types."
+        }
+      ]
+    },
+    {
+      "id": "BT94ZL63WF",
+      "front": "You’re running a flexible workload and want the lowest cost, even if interrupted. What EC2 pricing model fits?",
+      "back": "Spot Instances let you use spare EC2 capacity at up to 90% off, but can be interrupted when AWS needs the capacity back.",
+      "example": "A data processing job runs on Spot Instances, restarting only if interrupted by AWS reclaiming the capacity.",
+      "mnemonic": "Cheap heat—but you might get beat.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "expert",
+      "tags": ["ec2", "spot-instances", "pricing"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Spot Instances",
+          "definition": "EC2 option using unused capacity at a discount, with the risk of interruption."
+        }
+      ]
+    },
+    {
+      "id": "YM3VK2SL98",
+      "front": "Your application requires physical isolation for compliance. Which EC2 pricing model ensures full control over the server?",
+      "back": "Dedicated Hosts provide physical EC2 servers for your exclusive use, enabling you to meet licensing or compliance requirements.",
+      "example": "A healthcare provider uses Dedicated Hosts to comply with regulatory rules requiring isolated environments.",
+      "mnemonic": "Your kitchen, your rules—but at a premium.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "expert",
+      "tags": ["ec2", "dedicated-host", "compliance"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Dedicated Hosts",
+          "definition": "Physical EC2 servers allocated to a single customer for greater control and compliance."
+        }
+      ]
+    }
+  ]
+}

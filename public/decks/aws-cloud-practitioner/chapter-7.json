@@ -1,0 +1,79 @@
+{
+  "name": "Chapter 7:Amazon SNS – Message Distribution",
+  "description": "Flashcards to understand Amazon Simple Notification Service (SNS) using pizza shop metaphors.",
+  "category": "Messaging",
+  "cards": [
+    {
+      "id": "B7MPX2FDQY",
+      "front": "You want to send the same notification to all subscribers regardless of their interest. How does Amazon SNS handle this?",
+      "back": "Use a single SNS topic. All subscribers receive every message published to that topic, regardless of their preferences.",
+      "example": "A pizza shop sends a single newsletter with coupons, trivia, and new menu items to everyone, whether they care or not.",
+      "mnemonic": "One topic, all the toppings.",
+      "category": "Messaging",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["sns", "publish-subscribe", "single-topic"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon SNS",
+          "definition": "A fully managed pub/sub messaging service that enables message distribution to multiple subscribers."
+        },
+        {
+          "term": "Topic",
+          "definition": "A channel for message delivery in SNS."
+        }
+      ]
+    },
+    {
+      "id": "M94V3QEJNC",
+      "front": "How can you send different types of messages to different groups using Amazon SNS?",
+      "back": "Create multiple SNS topics, each targeting a specific message type or audience. Subscribers choose only the topics they care about.",
+      "example": "A pizza shop sends separate newsletters for coupons, trivia, and product updates so customers can pick what they receive.",
+      "mnemonic": "Choose your toppings—skip the rest.",
+      "category": "Messaging",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["sns", "messaging", "multi-topic"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Multi-topic publishing",
+          "definition": "An SNS setup where each topic is focused on a specific category, enabling targeted delivery."
+        },
+        {
+          "term": "Subscriber",
+          "definition": "The recipient of messages published to an SNS topic."
+        }
+      ]
+    },
+    {
+      "id": "T8KZD6JXUR",
+      "front": "You're sending one message to be received by email, SMS, a web app, and a Lambda function. How does Amazon SNS support this?",
+      "back": "SNS supports multiple endpoints, allowing a single published message to be delivered across various channels like email, SMS, Lambda, and HTTP/S.",
+      "example": "A pizza coupon is sent by email to customers, displayed on the kitchen monitor, posted to a website, and pushed to mobile—all from one SNS message.",
+      "mnemonic": "Publish once. Notify everyone.",
+      "category": "Messaging",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["sns", "endpoints", "message-distribution"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Endpoint",
+          "definition": "The destination for an SNS message, such as email, Lambda, HTTP/S, SMS, or SQS."
+        },
+        {
+          "term": "Publisher",
+          "definition": "The entity that sends messages to an SNS topic."
+        }
+      ]
+    }
+  ]
+}

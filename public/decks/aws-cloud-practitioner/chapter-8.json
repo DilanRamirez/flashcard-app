@@ -1,0 +1,79 @@
+{
+  "name": "Chapter 8: Amazon SQS – Decoupling with Queues",
+  "description": "Flashcards to understand Amazon Simple Queue Service (SQS) and how it enables decoupled, reliable systems.",
+  "category": "Messaging",
+  "cards": [
+    {
+      "id": "K3P9BQX7MD",
+      "front": "What’s the problem with directly handing tasks between services without a buffer in between?",
+      "back": "This creates tight coupling—both services must be ready at the same time, making the system fragile and slow under load.",
+      "example": "A pizza cashier gives orders directly to the chef. If the chef is busy, orders pile up and the line stalls.",
+      "mnemonic": "If the chef’s not ready, the line gets messy.",
+      "category": "Messaging",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["sqs", "tight coupling", "sync dependencies"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Tightly coupled",
+          "definition": "A design where services depend on each other's availability to function properly."
+        }
+      ]
+    },
+    {
+      "id": "N4X3T7ZQYU",
+      "front": "How does Amazon SQS improve system reliability between components?",
+      "back": "SQS adds a queue that stores messages until the receiving service is ready, enabling decoupled communication and smoother workflows.",
+      "example": "A cashier places pizza orders on an order board. The chef picks them up whenever ready, so the cashier never waits.",
+      "mnemonic": "Queue it up, pick it up.",
+      "category": "Messaging",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["sqs", "decoupling", "queues"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon SQS",
+          "definition": "A fully managed message queue for decoupling and scaling microservices, systems, and serverless apps."
+        },
+        {
+          "term": "Message queue",
+          "definition": "A buffer that stores messages between producing and consuming services."
+        }
+      ]
+    },
+    {
+      "id": "F8R7MJXEQL",
+      "front": "Why is decoupling important in distributed systems and how does SQS help?",
+      "back": "Decoupling allows components to work independently, improving scalability and fault tolerance. SQS facilitates this by acting as a message buffer.",
+      "example": "Even if the chef has a backlog of orders, the cashier keeps taking new ones. The queue handles the delay smoothly.",
+      "mnemonic": "Don’t wait—delegate to the queue.",
+      "category": "Messaging",
+      "subject": "Cloud Support Basics",
+      "course": "Cloud Support Essentials: A Technical Approach",
+      "module": "Module 2",
+      "difficulty": "beginner",
+      "tags": ["sqs", "decoupling", "scalability"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Decoupling",
+          "definition": "Designing components to function independently so one can continue working even if the other is unavailable or delayed."
+        },
+        {
+          "term": "Producer",
+          "definition": "The component that sends messages to a queue (e.g., a cashier)."
+        },
+        {
+          "term": "Consumer",
+          "definition": "The component that retrieves and processes messages from the queue (e.g., a chef)."
+        }
+      ]
+    }
+  ]
+}

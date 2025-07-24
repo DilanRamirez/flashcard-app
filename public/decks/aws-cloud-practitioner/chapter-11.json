@@ -1,0 +1,79 @@
+{
+  "name": "Chapter 11: Edge Locations and Caching",
+  "description": "Flashcards explaining how AWS uses edge locations and caching to reduce latency and improve content delivery with Amazon CloudFront.",
+  "category": "Content Delivery and Networking",
+  "cards": [
+    {
+      "id": "G1Z7V3LXPQ",
+      "front": "Why might a customer in China experience slow load times when content is hosted in Brazil?",
+      "back": "Because the data must travel a long physical distance from the origin server in Brazil, causing high latency and a poor user experience.",
+      "example": "A pizza shop in Brazil taking orders from China results in cold deliveries due to the distance—same with content hosted far from the user.",
+      "mnemonic": "Long-distance pizza = cold slices.",
+      "category": "Content Delivery and Networking",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["latency", "origin", "content-delivery"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Origin",
+          "definition": "The source server (e.g., EC2 or S3) that holds original application data or content."
+        },
+        {
+          "term": "Latency",
+          "definition": "The time delay between a user's request and the response from the server."
+        }
+      ]
+    },
+    {
+      "id": "J4M9X2CWRT",
+      "front": "How does AWS deliver content faster to users who are far from your origin server?",
+      "back": "By using Amazon CloudFront edge locations that cache content closer to users, reducing the distance data must travel.",
+      "example": "Setting up a pizza kiosk in Shanghai allows fast local delivery rather than shipping from Brazil. Edge locations do the same for AWS.",
+      "mnemonic": "Local slice, global kitchen.",
+      "category": "Content Delivery and Networking",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["edge-location", "cloudfront", "cdn"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Edge location",
+          "definition": "A site used by CloudFront to cache content close to users."
+        },
+        {
+          "term": "Amazon CloudFront",
+          "definition": "AWS’s global content delivery network that distributes content via edge locations."
+        }
+      ]
+    },
+    {
+      "id": "K8T4Y6BLZU",
+      "front": "What happens when a user repeatedly requests the same content through CloudFront?",
+      "back": "If the content is cached at the edge location, CloudFront serves it immediately from there, improving speed and reducing load on the origin server.",
+      "example": "A pizza kiosk keeps popular orders ready to serve fast—like cached content ready at an edge location for repeat user requests.",
+      "mnemonic": "Hot from the kiosk, not from the continent.",
+      "category": "Content Delivery and Networking",
+      "subject": "Cloud Support Basics",
+      "course": "Introduction to Information Technology and AWS Cloud",
+      "module": "Module 1",
+      "difficulty": "beginner",
+      "tags": ["caching", "cdn", "cloudfront"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Cache",
+          "definition": "Temporary storage for frequently accessed data located at an edge location."
+        },
+        {
+          "term": "Content Delivery Network (CDN)",
+          "definition": "A system of distributed servers that deliver web content based on user location."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "name": "Subnets, Network ACLs, and Security Groups",
+  "description": "Flashcards explaining VPC segmentation and security using pizza shop metaphors",
+  "category": "Networking",
+  "cards": [
+    {
+      "id": "U6P92JFWQX",
+      "front": "You're designing a cloud network and want to isolate public-facing resources from internal databases. What AWS construct allows this?",
+      "back": "Use subnets in an Amazon VPC. Public subnets host resources with internet access, while private subnets isolate internal resources like databases.",
+      "example": "You place your web servers in a public subnet and RDS in a private subnet to separate access levels.",
+      "mnemonic": "Public counter, private kitchen.",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["vpc", "subnet", "isolation"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Subnet",
+          "definition": "A segment of a VPC used to isolate resources by function or access level."
+        },
+        {
+          "term": "Amazon VPC",
+          "definition": "A private virtual network inside AWS."
+        }
+      ]
+    },
+    {
+      "id": "E3LZK71NVY",
+      "front": "You want to filter traffic entering and leaving a subnet, treating each packet independently. What should you use?",
+      "back": "Use a Network ACL (Access Control List). It acts as a stateless firewall at the subnet level, inspecting every inbound and outbound packet.",
+      "example": "You create a NACL to allow only HTTP and SSH traffic into your public subnet and deny all others.",
+      "mnemonic": "No memory. No shortcuts. Each packet checked twice.",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["nacl", "stateless", "firewall"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Network ACL",
+          "definition": "A stateless firewall that filters traffic at the subnet level."
+        },
+        {
+          "term": "Stateless Filtering",
+          "definition": "Each packet is evaluated without memory of previous ones."
+        }
+      ]
+    },
+    {
+      "id": "YX9WG2F75M",
+      "front": "You want to control access to a specific EC2 instance and automatically allow return traffic. Which tool should you use?",
+      "back": "Use a Security Group. It's a stateful firewall that filters inbound traffic to an EC2 instance and allows return traffic automatically.",
+      "example": "You configure a security group to allow HTTPS traffic to your EC2 instance; responses are allowed out automatically.",
+      "mnemonic": "One check-in = smooth check-out.",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "beginner",
+      "tags": ["security-group", "stateful", "ec2"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Security Group",
+          "definition": "A stateful firewall that controls traffic at the EC2 instance level."
+        },
+        {
+          "term": "Stateful Filtering",
+          "definition": "Remembers allowed traffic and permits return responses."
+        }
+      ]
+    },
+    {
+      "id": "TJW4C8MKLD",
+      "front": "You’re configuring access controls in AWS and want layered protection—one at the subnet and another at the instance level. What combo should you use?",
+      "back": "Use Network ACLs for subnet-level filtering and Security Groups for instance-level control. Together they provide layered security.",
+      "example": "You restrict all traffic at the subnet level with NACLs and fine-tune EC2 access with security groups.",
+      "mnemonic": "Bouncer at the door. Doorman inside.",
+      "category": "Networking",
+      "subject": "AWS Cloud Essentials",
+      "course": "AWS Cloud Technical Essentials",
+      "module": "Module 3",
+      "difficulty": "intermediate",
+      "tags": ["layered-security", "nacl", "security-group"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Security Group",
+          "definition": "Controls traffic to and from an EC2 instance, statefully."
+        },
+        {
+          "term": "Network ACL",
+          "definition": "Controls traffic in/out of a subnet, statelessly."
+        }
+      ]
+    }
+  ]
+}

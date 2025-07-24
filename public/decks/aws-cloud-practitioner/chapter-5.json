@@ -1,0 +1,79 @@
+{
+  "name": "Chapter 5: Elastic Load Balancer",
+  "description": "Flashcards explaining Elastic Load Balancing and its integration with Auto Scaling using pizza shop metaphors.",
+  "category": "Compute",
+  "cards": [
+    {
+      "id": "J9L4M2C7XQ",
+      "front": "Your application is deployed across several EC2 instances. How do you ensure incoming traffic is distributed evenly to avoid overloading one instance?",
+      "back": "Use Elastic Load Balancing (ELB) to automatically distribute incoming application traffic across multiple Amazon EC2 instances, improving availability and responsiveness.",
+      "example": "An online food ordering system uses ELB to balance requests between multiple EC2 servers during high-traffic periods.",
+      "mnemonic": "Let the host seat the guests—not the oven.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["elb", "load-balancing", "ec2"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Elastic Load Balancing (ELB)",
+          "definition": "AWS service that automatically distributes traffic across multiple EC2 instances or other targets."
+        },
+        {
+          "term": "Amazon EC2",
+          "definition": "Scalable virtual server environment for running applications in the AWS cloud."
+        }
+      ]
+    },
+    {
+      "id": "F7P1R6WZKL",
+      "front": "How does the load balancer respond when EC2 Auto Scaling adds or removes instances during traffic changes?",
+      "back": "Elastic Load Balancing dynamically adjusts and includes or excludes EC2 instances as they are added or removed by Auto Scaling, ensuring traffic is always routed efficiently.",
+      "example": "A mobile app that experiences spikes during lunch hours sees EC2 Auto Scaling add instances, and ELB instantly routes traffic to the new instances.",
+      "mnemonic": "New ovens? No problem. The host knows.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["elb", "auto-scaling", "ec2"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Amazon EC2 Auto Scaling",
+          "definition": "Automatically adjusts EC2 instance count based on demand."
+        },
+        {
+          "term": "Load balancer",
+          "definition": "Distributes incoming traffic to multiple backend resources for better availability."
+        }
+      ]
+    },
+    {
+      "id": "K2XZ7NPLVD",
+      "front": "During periods of low and high demand, how does ELB maintain application performance?",
+      "back": "ELB works with Auto Scaling to distribute traffic evenly across available EC2 instances, regardless of the number running, maintaining performance and preventing overload.",
+      "example": "A retail site uses ELB to maintain fast page loads by routing user requests to underutilized EC2 instances during flash sales.",
+      "mnemonic": "Few customers? Few registers. Big crowd? Big spread.",
+      "category": "Compute",
+      "subject": "Cloud Support Basics",
+      "course": "Skills and Best Practices for Cloud Support Associates",
+      "module": "Module 1",
+      "difficulty": "intermediate",
+      "tags": ["load-balancer", "performance", "auto-scaling"],
+      "createdOn": "2025-07-18",
+      "glossary": [
+        {
+          "term": "Elastic Load Balancer",
+          "definition": "A service that distributes application traffic to multiple resources to improve availability and reliability."
+        },
+        {
+          "term": "Auto Scaling",
+          "definition": "Automatically adds or removes EC2 instances based on application demand."
+        }
+      ]
+    }
+  ]
+}
