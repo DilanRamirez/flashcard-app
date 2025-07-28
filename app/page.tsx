@@ -49,6 +49,7 @@ import {
   updateCardStats,
 } from "@/lib/learning-analytics";
 import { StudyApp } from "@/components/markdown-reader/study-app";
+import ExamConfig from "@/components/exam/exam-config";
 
 export interface Flashcard {
   id: string;
@@ -100,6 +101,7 @@ export interface AppState {
   showDeckManager: boolean;
   showStudyPath: boolean;
   reader: boolean; // For reader mode
+  practiceExamMode?: boolean; // For practice exam mode
   filteredCardIds: string[] | null; // For study path filtering
 }
 
@@ -510,6 +512,17 @@ export default function FlashcardApp() {
     );
   }
 
+  if (appState.practiceExamMode) {
+    return (
+      <ExamConfig
+        onClose={() =>
+          setAppState((prev) => ({ ...prev, practiceExamMode: false }))
+        }
+        onStartQuiz={handleStartAIQuiz}
+      />
+    );
+  }
+
   if (isLoading) {
     return (
       <Box
@@ -602,7 +615,6 @@ export default function FlashcardApp() {
       />
     );
   }
-  console.log("appState:", appState);
 
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
@@ -918,6 +930,25 @@ const HeaderDrawer: React.FC<HeaderDrawerProps> = ({
               >
                 <Sparkles className="h-3 w-3 mr-1" />
                 AI Quiz
+              </Button>
+
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={() =>
+                  setAppState((prev) => ({ ...prev, practiceExamMode: true }))
+                }
+                disabled={displayCards.length === 0}
+                sx={{
+                  width: "100%",
+                  fontSize: "0.75rem",
+                  color: displayCards.length === 0 ? "#888" : "inherit",
+                  borderColor: "white.main",
+                  py: 0.5,
+                }}
+              >
+                <Sparkles className="h-3 w-3 mr-1" />
+                Exam
               </Button>
 
               <Button

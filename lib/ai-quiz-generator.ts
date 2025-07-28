@@ -1,4 +1,5 @@
 import type { Flashcard } from "@/app/page";
+import { aiExamPrompt } from "@/components/exam/prompt";
 import type { QuizQuestion, QuizConfig } from "@/types/quiz";
 import { Chapter } from "@/types/study";
 import { GoogleGenAI } from "@google/genai";
@@ -484,3 +485,41 @@ ${chapter.content}
   onProgress?.(100, "AI quiz generation complete!");
   return { questions: allQuestions, errors };
 }
+
+export const aiExamGenerator = async (
+  numQuestions: number,
+  onProgress?: (progress: number, status: string) => void,
+) => {
+  // 1. Check API key
+  if (!process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
+    throw new Error(
+      "Gemini API key not configured. Please add NEXT_PUBLIC_GEMINI_API_KEY to your environment.",
+    );
+  }
+
+  const allQuestions: QuizQuestion[] = [];
+  const errors: string[] = [];
+  onProgress?.(0, `Starting exam generation for ${numQuestions} questions...`);
+
+  try {
+    const prompt = aiExamPrompt(numQuestions);
+    const aiResponse = await callGeminiAPI(prompt);
+    if (aiResponse.success) {
+      let cleanJson = aiResponse.data.trim();
+      if (cleanJson.startsWith("```json")) {
+        // Remove markdown code block if present
+        cleanJson = cleanJson.replace(/```json\n?/, "").replace(/\n?```$/, "");
+      }
+      // 3b. Convert from raw AI schema into your app's QuizQuestion[]
+      const formatted = JSON.parse(cleanJson).map(convertAIQuestionToAppFormat);
+      allQuestions.push(...formatted);
+    } else {
+      errors.push(`Chunk ${1}: ${aiResponse.error}`);
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    errors.push(`Chunk ${1}: ${err.message}`);
+  }
+  onProgress?.(100, "AI quiz generation complete!");
+  return { questions: allQuestions, errors };
+};
