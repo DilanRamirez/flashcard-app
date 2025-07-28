@@ -34,6 +34,7 @@
 
 - [Chapter 16: Storage That Stays or Goes](#chapter-16-storage-that-stays-or-goes)
 - [Chapter 17: Storing Data Like a Pizza Shop Owner](#chapter-17-storing-data-like-a-pizza-shop-owner)
+- [Chapter 47: “Picking the Right Coffee Shelf: AWS S3 Storage Classes”](#chapter-47-picking-the-right-coffee-shelf-aws-s3-storage-classes)
 
 ## Database Services (Narrative Format)
 
@@ -143,6 +144,7 @@
 - [Chapter 40: “Migration Menu: The 6 R’s of Moving to the Cloud”](#chapter-40-migration-menu-the-6-rs-of-moving-to-the-cloud)
 - [Chapter 41: “The Data Delivery Fleet: Meet the AWS Snow Family”](#chapter-41-the-data-delivery-fleet-meet-the-aws-snow-family)
 - [Chapter 43: The AWS Well-Architected Framework](#chapter-43-the-aws-well-architected-framework)
+- [Chapter 47: “Picking the Right Coffee Shelf: AWS S3 Storage Classes”](#chapter-47-picking-the-right-coffee-shelf-aws-s3-storage-classes)
 
 ---
 
@@ -2241,6 +2243,126 @@ This service can even:
 - **Source database:** The original database where your data currently resides.
 - **Target database:** The new database where you want your data to go.
 - **Continuous replication:** A feature that enables DMS to keep the target database up to date by continuously applying changes from the source.
+
+---
+
+# Chapter 47: “Picking the Right Coffee Shelf: AWS S3 Storage Classes”
+
+### Subtitle: Learn how Amazon S3 storage classes balance cost, speed, and access needs
+
+---
+
+### ☕️ Story 1: “S3 Standard – The Front Counter Shelf”
+
+#### Customer Request:
+
+“I need my coffee beans ready to grab anytime—fast and fresh!”
+
+#### Everyday Example:
+
+At your café, premium beans are kept **right on the counter**:
+
+- Quick to grab.
+- Always available.
+- Best for daily use.
+
+#### Metaphor Mapping:
+
+That’s **S3 Standard**—high-performance storage for **frequently accessed data**:
+
+- **Fast retrieval**.
+- **High durability (11 nines)**.
+- Perfect for **websites, apps, and active content**.
+
+---
+
+### ☕️ Story 2: “S3 Intelligent-Tiering – The Smart Shelf Organizer”
+
+#### Customer Request:
+
+“Can someone move my beans to the back if I don’t use them often—and bring them back if I do?”
+
+#### Everyday Example:
+
+Your café hires a smart assistant:
+
+- Frequently used beans stay **up front**.
+- Rarely used beans are moved to a **back shelf** (cheaper storage).
+- If customers start asking again, they come back to the front—**automatically**.
+
+#### Metaphor Mapping:
+
+That’s **S3 Intelligent-Tiering**:
+
+- Monitors usage and moves data between **frequent** and **infrequent** tiers.
+- No retrieval fees.
+- Ideal when **access patterns are unpredictable**.
+
+---
+
+### ☕️ Story 3: “S3 Standard-IA – The Storage Closet for Rarely Used Beans”
+
+#### Customer Request:
+
+“I need beans available fast, but I don’t grab them often.”
+
+#### Everyday Example:
+
+You keep backup beans in a storage closet:
+
+- **Cheaper than the counter shelf**.
+- Still **quick to grab** if needed.
+- Perfect for those “just in case” moments.
+
+#### Metaphor Mapping:
+
+That’s **S3 Standard-IA (Infrequent Access)**:
+
+- Lower cost than S3 Standard.
+- **Fast retrieval**, but with a **retrieval fee**.
+- Great for **backups or infrequently used files**.
+
+---
+
+### ☕️ Story 4: “S3 Glacier Deep Archive – The Locked Basement Freezer”
+
+#### Customer Request:
+
+“I need to store beans for years but don’t expect to use them soon.”
+
+#### Everyday Example:
+
+You stash old beans in a deep freezer in the basement:
+
+- Cheapest option.
+- Takes **hours to thaw**.
+- Only for **rarely accessed historical stock**.
+
+#### Metaphor Mapping:
+
+That’s **S3 Glacier Deep Archive**:
+
+- **Lowest cost storage** in S3.
+- **12–48 hours retrieval time**.
+- Ideal for **long-term archiving** and compliance data.
+
+---
+
+## 🔁 Quick Recap
+
+- **S3 Standard:** Front shelf for frequently used data—fast, always ready.
+- **S3 Intelligent-Tiering:** Auto-moves data between front and back shelves—perfect for changing patterns.
+- **S3 Standard-IA:** Closet storage—fast access but cheaper, with retrieval fees.
+- **S3 Glacier Deep Archive:** Basement freezer—ultra-cheap, for rare, long-term use.
+
+---
+
+## 📘 Glossary
+
+- **S3 Standard:** High-performance storage for hot data.
+- **S3 Intelligent-Tiering:** Automated cost optimization for unpredictable data.
+- **S3 Standard-IA:** Low-cost, quick retrieval storage for infrequent access.
+- **S3 Glacier Deep Archive:** Lowest-cost option, designed for archival and compliance with long retrieval times.
 
 ---
 
@@ -4539,4 +4661,4 @@ With good preparation and the right mindset, you'll be well-positioned to succee
 
 **Good luck—you’ve got this! 🚀**
 
-# Chapter 47: End
+# Chapter 48: End

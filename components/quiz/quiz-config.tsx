@@ -29,6 +29,7 @@ const questionTypeLabels: Record<QuestionType, string> = {
   "multiple-choice": "Multiple Choice",
   "fill-in-blank": "Fill in the Blank",
   "true-false": "True/False",
+  "multiple-response": "Multiple Response",
   matching: "Matching",
 };
 
