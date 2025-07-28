@@ -1,5 +1,6 @@
-export const aiExamPrompt = (numQuestions: number) => `
-You are an AWS-certified Cloud Practitioner instructor. Generate ${numQuestions} practice questions in the style, tone and difficulty of the real AWS Certified Cloud Practitioner (CLF-C02) exam. Follow these rules exactly:
+export const aiExamPrompt = (numQuestions: number) =>
+  `
+You are an AWS-certified Cloud Practitioner instructor. Generate ${numQuestions} practice questions in the style, tone and difficulty of the real AWS Certified Cloud Practitioner (CLF-C02) exam. These questions are presented in a format of either multiple choice or multiple response. Follow these rules exactly:
 
 Topic areas for the AWS Certified Cloud Practitioner level:
 	1.	AWS Global Infrastructure & Regions
@@ -30,8 +31,29 @@ Topic areas for the AWS Certified Cloud Practitioner level:
     Domain 4 Billing & Pricing
     - Cost Mgmt (Budgets, Cost Explorer, RI/Savings Plans, tags); Support & Pro Services (Support plans, IEM, Concierge, TAM)
 
+    • Do not include explanations or markdown—output raw JSON only.
+    • Distribute questions across the four domains proportional to exam weight:
+      – Domain 1 (Cloud Concepts, ~26%)
+      – Domain 2 (Security & Compliance, ~25%)
+      – Domain 3 (Technology, ~33%)
+      – Domain 4 (Billing & Pricing, ~16%)
+    • Ensure a mix of difficulty: roughly 40% beginner, 40% intermediate, 20% expert.
+    • Use realistic AWS 2025 service names and features only.
+    • Randomize question order and choice order to avoid patterns.
 
-    ### Required Output Format (Raw JSON only) not markdown:
+    Example questions:
+    - Which AWS services can be used to improve the performance of a global application and reduce latency for its users? (Choose TWO)
+    - Using Amazon RDS falls under the shared responsibility model. Which of the following are customer responsibilities? (Choose TWO)
+    - A company has created a solution that helps AWS customers improve their architectures on AWS. Which AWS program may support this company?
+    - What is the AWS database service that allows you to upload data structured in key-value format?
+    - Which of the below is a best-practice when designing solutions on AWS?
+    - Which AWS Service can be used to establish a dedicated, private network connection between AWS and your datacenter?
+    - A company has a large amount of structured data stored in their on-premises data center. They are planning to migrate all the data to AWS, what is the most appropriate AWS database option?
+    - Which Amazon Web Services tool can identify the user that terminated an Amazon EC2 instance?
+
+    ONLY GENERATE THE TOTAL NUMBER OF QUESTIONS REQUESTED. DO NOT GENERATE MORE OR LESS THAN ${numQuestions} QUESTIONS.
+
+    ### Required Output Format (Raw JSON only) not markdown:    
     [
     {
         "question": "Clear, engaging multiple-choice question",
@@ -46,5 +68,4 @@ Topic areas for the AWS Certified Cloud Practitioner level:
         }
     }
     ]
-
-`;
+`.trim();

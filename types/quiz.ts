@@ -12,7 +12,8 @@ export type QuestionType =
   | "multiple-choice"
   | "fill-in-blank"
   | "true-false"
-  | "matching";
+  | "matching"
+  | "multiple-response";
 
 export interface QuizQuestion {
   id: string;

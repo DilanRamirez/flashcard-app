@@ -1,16 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useEffect, useCallback } from "react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Clock, ArrowRight } from "lucide-react";
 import type { QuizQuestion, QuizAnswer, QuizResult } from "@/types/quiz";
-// Import tracking function
 import { trackQuizAnswer } from "@/lib/learning-analytics";
 
 interface QuizSessionProps {
@@ -19,282 +20,351 @@ interface QuizSessionProps {
   onExit: () => void;
 }
 
+interface UseQuizReturn {
+  current: QuizQuestion;
+  index: number;
+  isLast: boolean;
+  progress: number;
+  answer: any;
+  setAnswer: (val: any) => void;
+  submit: () => void;
+}
+
+/**
+ * Encapsulates quiz state and logic: navigation, timing, scoring.
+ */
+function useQuiz(
+  questions: QuizQuestion[],
+  onComplete: (res: QuizResult) => void,
+): UseQuizReturn {
+  const [idx, setIdx] = useState(0);
+  const [responses, setResponses] = useState<QuizAnswer[]>([]);
+  const [answer, setAnswer] = useState<any>([]);
+  const [quizStart] = useState(() => Date.now());
+  const [questionStart, setQuestionStart] = useState(() => Date.now());
+
+  const current = questions[idx];
+  const isLast = idx === questions.length - 1;
+  const progress = ((idx + 1) / questions.length) * 100;
+
+  useEffect(() => {
+    setQuestionStart(Date.now());
+    setAnswer(current.type === "multiple-response" ? [] : "");
+  }, [idx, current.type]);
+
+  const submit = useCallback(() => {
+    // Guard: require valid selection
+    if (!answer || (Array.isArray(answer) && answer.length === 0)) return;
+
+    const elapsed = Date.now() - questionStart;
+    let correct = false;
+
+    switch (current.type) {
+      case "multiple-choice":
+      case "true-false":
+        correct = answer === current.correctAnswer;
+        break;
+      case "multiple-response":
+        const selection = answer as string[];
+        const expected = JSON.parse(current.correctAnswer) as string[];
+        correct =
+          selection.length === expected.length &&
+          expected.every((opt) => selection.includes(opt));
+        break;
+      case "fill-in-blank":
+        const words = (answer as string).toLowerCase().split(/\s+/);
+        correct = (current.blanks || []).every((w) =>
+          words.some((x) => x.includes(w)),
+        );
+        break;
+      case "matching":
+        const userMap = answer as Record<string, string>;
+        const correctMap = JSON.parse(current.correctAnswer);
+        correct = Object.entries(correctMap).every(
+          ([key, val]) => userMap[key] === val,
+        );
+        break;
+    }
+
+    const entry: QuizAnswer = {
+      questionId: current.id,
+      userAnswer: answer,
+      isCorrect: correct,
+      timeSpent: elapsed,
+    };
+
+    trackQuizAnswer(current.id, correct);
+    setResponses((prev) => [...prev, entry]);
+
+    if (isLast) {
+      const totalTime = Date.now() - quizStart;
+      const score = [...responses, entry].filter((r) => r.isCorrect).length;
+      onComplete({
+        score,
+        totalQuestions: questions.length,
+        percentage: Math.round((score / questions.length) * 100),
+        answers: [...responses, entry],
+        questions,
+        timeSpent: totalTime,
+        completedAt: new Date().toISOString(),
+      });
+    } else {
+      setIdx((i) => i + 1);
+    }
+  }, [
+    answer,
+    current,
+    isLast,
+    onComplete,
+    questions,
+    questionStart,
+    quizStart,
+    responses,
+  ]);
+
+  return { current, index: idx, isLast, progress, answer, setAnswer, submit };
+}
+
+/** Displays question count and progress bar, plus an Exit button. */
+const QuizHeader = ({
+  index,
+  total,
+  onExit,
+}: {
+  index: number;
+  total: number;
+  onExit: () => void;
+}) => (
+  <header className="sticky top-0 z-50 bg-card border-b">
+    <div className="container mx-auto flex items-center justify-between p-3">
+      <div className="flex items-center gap-2">
+        <Clock className="w-5 h-5" />
+        <h2 className="text-lg font-semibold">
+          {`Question ${index + 1} of ${total}`}
+        </h2>
+      </div>
+      <div className="flex items-center gap-2">
+        <Badge variant="outline">{`${index + 1}/${total}`}</Badge>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onExit}
+          data-cy="exit-quiz"
+        >
+          Exit
+        </Button>
+      </div>
+    </div>
+    <Progress value={((index + 1) / total) * 100} className="h-2" />
+  </header>
+);
+
+const MCQ = ({
+  options,
+  value,
+  onChange,
+}: {
+  options: string[];
+  value: string;
+  onChange: (v: string) => void;
+}) => (
+  <RadioGroup value={value} onValueChange={onChange} className="space-y-3">
+    {options.map((opt, i) => (
+      <div key={i} className="flex items-center gap-2">
+        <RadioGroupItem id={`opt-${i}`} value={opt} />
+        <Label htmlFor={`opt-${i}`}>{opt}</Label>
+      </div>
+    ))}
+  </RadioGroup>
+);
+
+const MultiResponse = ({
+  options,
+  value,
+  onChange,
+}: {
+  options: string[];
+  value: string[];
+  onChange: (v: string[]) => void;
+}) => (
+  <div className="space-y-2">
+    {options.map((opt, i) => (
+      <div key={i} className="flex items-center gap-2">
+        <Checkbox
+          id={`chk-${i}`}
+          checked={value.includes(opt)}
+          onCheckedChange={(checked) => {
+            const next = checked
+              ? [...value, opt]
+              : value.filter((v) => v !== opt);
+            onChange(next);
+          }}
+        />
+        <Label htmlFor={`chk-${i}`}>{opt}</Label>
+      </div>
+    ))}
+  </div>
+);
+
+const TrueFalse = ({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) => <MCQ options={["True", "False"]} value={value} onChange={onChange} />;
+
+const FillBlank = ({
+  text,
+  value,
+  onChange,
+}: {
+  text: string;
+  value: string;
+  onChange: (v: string) => void;
+}) => (
+  <div className="space-y-2">
+    <Label>Fill in the blank:</Label>
+    <pre className="p-2 bg-muted rounded">{text}</pre>
+    <Input
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Your answer"
+      className="w-full"
+      data-cy="fill-blank"
+    />
+  </div>
+);
+
+const Matching = ({
+  pairs,
+  value,
+  onChange,
+}: {
+  pairs: { left: string; right: string }[];
+  value: Record<string, string>;
+  onChange: (map: Record<string, string>) => void;
+}) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {pairs.map((p, i) => (
+      <div key={i} className="space-y-1">
+        <Label>{p.left}</Label>
+        <select
+          className="w-full p-2 border rounded"
+          value={value[p.left] || ""}
+          onChange={(e) => onChange({ ...value, [p.left]: e.target.value })}
+          data-cy={`match-${i}`}
+        >
+          <option value="">Select...</option>
+          {pairs.map((opt, j) => (
+            <option key={j} value={opt.right}>
+              {opt.right}
+            </option>
+          ))}
+        </select>
+      </div>
+    ))}
+  </div>
+);
+
+const QuestionRenderer = ({
+  question,
+  answer,
+  onAnswer,
+}: {
+  question: QuizQuestion;
+  answer: any;
+  onAnswer: (v: any) => void;
+}) => {
+  switch (question.type) {
+    case "multiple-choice":
+      return (
+        <MCQ
+          options={question.options || []}
+          value={answer as string}
+          onChange={onAnswer}
+        />
+      );
+    case "multiple-response":
+      return (
+        <MultiResponse
+          options={question.options || []}
+          value={answer as string[]}
+          onChange={onAnswer}
+        />
+      );
+    case "true-false":
+      return <TrueFalse value={answer as string} onChange={onAnswer} />;
+    case "fill-in-blank":
+      return (
+        <FillBlank
+          text={question.originalText || ""}
+          value={answer as string}
+          onChange={onAnswer}
+        />
+      );
+    case "matching":
+      return (
+        <Matching
+          pairs={question.pairs || []}
+          value={answer as Record<string, string>}
+          onChange={onAnswer}
+        />
+      );
+    default:
+      return null;
+  }
+};
+
+/**
+ * Ensures the user has provided a valid response before enabling Next.
+ */
+function canAdvance(question: QuizQuestion, answer: any): boolean {
+  if (question.type === "matching") {
+    return question.pairs?.every((p) => Boolean(answer[p.left])) ?? false;
+  }
+  return Array.isArray(answer) ? answer.length > 0 : Boolean(answer);
+}
+
+/**
+ * Renders the quiz UI, driving state via useQuiz and declarative components.
+ */
 export function QuizSession({
   questions,
   onComplete,
   onExit,
 }: QuizSessionProps) {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<QuizAnswer[]>([]);
-  const [currentAnswer, setCurrentAnswer] = useState<
-    string | string[] | { [key: string]: string }
-  >("");
-  const [startTime] = useState(Date.now());
-  const [questionStartTime, setQuestionStartTime] = useState(Date.now());
-
-  const currentQuestion = questions[currentQuestionIndex];
-  const isLastQuestion = currentQuestionIndex === questions.length - 1;
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-
-  useEffect(() => {
-    setQuestionStartTime(Date.now());
-    setCurrentAnswer("");
-  }, [currentQuestionIndex]);
-
-  const handleAnswer = () => {
-    if (!currentAnswer) return;
-
-    const timeSpent = Date.now() - questionStartTime;
-    let isCorrect = false;
-
-    // Check correctness based on question type
-    switch (currentQuestion.type) {
-      case "multiple-choice":
-        isCorrect = currentAnswer === currentQuestion.correctAnswer;
-        break;
-      case "fill-in-blank":
-        const userWords = (currentAnswer as string).toLowerCase().split(/\s+/);
-        const correctWords = currentQuestion.blanks || [];
-        isCorrect = correctWords.every((word) =>
-          userWords.some(
-            (userWord) => userWord.includes(word) || word.includes(userWord),
-          ),
-        );
-        break;
-      case "true-false":
-        isCorrect = currentAnswer === currentQuestion.correctAnswer;
-        break;
-      case "matching":
-        const userMatches = currentAnswer as { [key: string]: string };
-        const correctMatches = JSON.parse(currentQuestion.correctAnswer);
-        isCorrect = Object.keys(correctMatches).every(
-          (key) => userMatches[key] === correctMatches[key],
-        );
-        break;
-    }
-
-    const answer: QuizAnswer = {
-      questionId: currentQuestion.id,
-      userAnswer: currentAnswer,
-      isCorrect,
-      timeSpent,
-    };
-
-    const newAnswers = [...answers, answer];
-    setAnswers(newAnswers);
-
-    // Track the quiz answer in analytics
-    trackQuizAnswer(currentQuestion.id, isCorrect);
-
-    if (isLastQuestion) {
-      // Complete quiz
-      const totalTime = Date.now() - startTime;
-      const score = newAnswers.filter((a) => a.isCorrect).length;
-      const result: QuizResult = {
-        score,
-        totalQuestions: questions.length,
-        percentage: Math.round((score / questions.length) * 100),
-        answers: newAnswers,
-        questions,
-        timeSpent: totalTime,
-        completedAt: new Date().toISOString(),
-      };
-      onComplete(result);
-    } else {
-      setCurrentQuestionIndex((prev) => prev + 1);
-    }
-  };
-
-  const renderQuestion = () => {
-    switch (currentQuestion.type) {
-      case "multiple-choice":
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">{currentQuestion.question}</h3>
-            <RadioGroup
-              value={currentAnswer as string}
-              onValueChange={setCurrentAnswer}
-              className="space-y-3"
-            >
-              {currentQuestion.options?.map((option, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <RadioGroupItem value={option} id={`option-${index}`} />
-                  <Label
-                    htmlFor={`option-${index}`}
-                    className="flex-1 cursor-pointer"
-                  >
-                    {option}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          </div>
-        );
-
-      case "fill-in-blank":
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">{currentQuestion.question}</h3>
-            <div className="p-4 bg-muted rounded-lg">
-              <p className="text-sm font-mono leading-relaxed">
-                {currentQuestion.originalText}
-              </p>
-            </div>
-            <div className="space-y-2">
-              <Label>Fill in the blank(s):</Label>
-              <Input
-                value={currentAnswer as string}
-                onChange={(e) => setCurrentAnswer(e.target.value)}
-                placeholder="Type your answer..."
-                className="w-full"
-              />
-            </div>
-          </div>
-        );
-
-      case "true-false":
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">{currentQuestion.question}</h3>
-            <RadioGroup
-              value={currentAnswer as string}
-              onValueChange={setCurrentAnswer}
-              className="space-y-3"
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="True" id="true" />
-                <Label htmlFor="true" className="cursor-pointer">
-                  True
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="False" id="false" />
-                <Label htmlFor="false" className="cursor-pointer">
-                  False
-                </Label>
-              </div>
-            </RadioGroup>
-          </div>
-        );
-
-      case "matching":
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">{currentQuestion.question}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <h4 className="font-medium">Questions:</h4>
-                {currentQuestion.pairs?.map((pair, index) => (
-                  <div key={index} className="p-2 bg-muted rounded text-sm">
-                    {pair.left}
-                  </div>
-                ))}
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-medium">Match with:</h4>
-                {currentQuestion.pairs?.map((pair, index) => (
-                  <div key={index} className="space-y-1">
-                    <Label className="text-xs">{pair.left}</Label>
-                    <select
-                      className="w-full p-2 border rounded text-sm"
-                      value={
-                        (currentAnswer as { [key: string]: string })[
-                          pair.left
-                        ] || ""
-                      }
-                      onChange={(e) =>
-                        setCurrentAnswer((prev) => ({
-                          ...(prev as { [key: string]: string }),
-                          [pair.left]: e.target.value,
-                        }))
-                      }
-                    >
-                      <option value="">Select answer...</option>
-                      {currentQuestion.pairs?.map((p, i) => (
-                        <option key={i} value={p.right}>
-                          {p.right}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-
-      default:
-        return null;
-    }
-  };
-
-  const canProceed = () => {
-    if (!currentAnswer) return false;
-
-    switch (currentQuestion.type) {
-      case "matching":
-        const matches = currentAnswer as { [key: string]: string };
-        return (
-          currentQuestion.pairs?.every((pair) => matches[pair.left]) || false
-        );
-      default:
-        return true;
-    }
-  };
+  const { current, index, isLast, answer, setAnswer, submit } = useQuiz(
+    questions,
+    onComplete,
+  );
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card sticky top-0 z-50">
-        <div className="container mx-auto px-3 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Clock className="h-5 w-5" />
-              <h1 className="text-lg font-bold">Quiz in Progress</h1>
-            </div>
-            <div className="flex items-center gap-2">
-              <Badge variant="outline">
-                {currentQuestionIndex + 1} of {questions.length}
-              </Badge>
-              <Button variant="outline" size="sm" onClick={onExit}>
-                Exit Quiz
+      <QuizHeader index={index} total={questions.length} onExit={onExit} />
+      <main className="container mx-auto p-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>{current.question}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <QuestionRenderer
+              question={current}
+              answer={answer}
+              onAnswer={setAnswer}
+            />
+            <div className="flex justify-end">
+              <Button
+                onClick={submit}
+                disabled={!canAdvance(current, answer)}
+                data-cy="next-question"
+              >
+                {isLast ? "Finish" : "Next"}{" "}
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
-          </div>
-          <div className="mt-2">
-            <Progress value={progress} className="h-2" />
-          </div>
-        </div>
-      </header>
-
-      <main className="container mx-auto px-3 py-6">
-        <div className="max-w-2xl mx-auto">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
-                  Question {currentQuestionIndex + 1}
-                  <Badge variant="secondary" className="text-xs">
-                    {currentQuestion.type.replace("-", " ")}
-                  </Badge>
-                </CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {renderQuestion()}
-
-              <div className="flex justify-end">
-                <Button
-                  onClick={handleAnswer}
-                  disabled={!canProceed()}
-                  className="min-w-[120px]"
-                >
-                  {isLastQuestion ? "Finish Quiz" : "Next"}
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+          </CardContent>
+        </Card>
       </main>
     </div>
   );

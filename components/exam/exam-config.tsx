@@ -117,7 +117,7 @@ const ExamConfig: FC<ExamConfigProps> = ({ onStartQuiz, onClose }) => {
       {/* Progress */}
 
       {isGenerating && (
-        <div ref={ref} className="flex-1">
+        <div ref={ref} className="flex-1 mt-5">
           <div ref={contentRef} className="max-w-3xl mx-auto px-6 sm:mt-4">
             <Card>
               <CardContent className="p-6">
@@ -140,7 +140,7 @@ const ExamConfig: FC<ExamConfigProps> = ({ onStartQuiz, onClose }) => {
       {/* Errors */}
 
       {errors.length > 0 && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white p-4 rounded shadow-lg z-50 flex items-start space-x-2">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white p-4 rounded shadow-lg z-50 flex items-start space-x-2 mt-5">
           <AlertCircle className="h-5 w-5 flex-shrink-0" />
           <div className="flex-1 space-y-1">
             {errors.map((error, index) => (
