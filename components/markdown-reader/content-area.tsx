@@ -10,8 +10,6 @@ import {
   Circle,
   BookmarkIcon,
   Highlighter,
-  StickyNote,
-  X,
   Sparkles,
   AlertCircle,
   Menu,
@@ -55,8 +53,6 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       studyData,
       themeClasses,
       onUpdateProgress,
-      onAddHighlight,
-      onRemoveHighlight,
       onToggleSidebar,
       onStartQuiz,
       onClose,
@@ -66,13 +62,7 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
     ref,
   ) => {
     const contentRef = useRef<HTMLDivElement>(null);
-    const [selectedText, setSelectedText] = useState<{
-      text: string;
-      range: Range;
-    } | null>(null);
-    const [showHighlightPopover, setShowHighlightPopover] = useState(false);
-    const [highlightNote, setHighlightNote] = useState("");
-    const [popoverPosition, setPopoverPosition] = useState({ x: 0, y: 0 });
+
     const [isGenerating, setIsGenerating] = useState(false);
     const [aiProgress, setProgress] = useState(0);
     const [status, setStatus] = useState("");
@@ -95,73 +85,12 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
       cancelSpeaking,
     } = useWithSpeech();
 
-    // Handle text selection
-    useEffect(() => {
-      const handleSelection = () => {
-        const selection = window.getSelection();
-        if (!selection || selection.isCollapsed || !contentRef.current) {
-          setShowHighlightPopover(false);
-          setSelectedText(null);
-          return;
-        }
-
-        const range = selection.getRangeAt(0);
-        const text = selection.toString().trim();
-
-        if (text.length < 3) return; // Ignore very short selections
-
-        // Check if selection is within content area
-        if (!contentRef.current.contains(range.commonAncestorContainer)) return;
-
-        setSelectedText({ text, range });
-
-        // Position popover near selection
-        const rect = range.getBoundingClientRect();
-        setPopoverPosition({
-          x: rect.left + rect.width / 2,
-          y: rect.bottom + 10,
-        });
-        setShowHighlightPopover(true);
-      };
-
-      document.addEventListener("mouseup", handleSelection);
-      document.addEventListener("keyup", handleSelection);
-      document.addEventListener("touchend", handleSelection);
-
-      return () => {
-        document.removeEventListener("mouseup", handleSelection);
-        document.removeEventListener("keyup", handleSelection);
-        document.removeEventListener("touchend", handleSelection);
-      };
-    }, []);
-
     // Load note from localStorage
     useEffect(() => {
       if (!chapter) return;
       const saved = localStorage.getItem(`notes_${chapter.id}`) || "";
       setNote(saved);
     }, [chapter]);
-
-    // Add highlight
-    const handleAddHighlight = (withNote = false) => {
-      if (!selectedText || !chapter) return;
-
-      const highlight: Omit<Highlight, "id" | "createdAt"> = {
-        text: selectedText.text,
-        startPath: "", // Simplified - you might want to implement proper path tracking
-        startOffset: 0,
-        endPath: "",
-        endOffset: selectedText.text.length,
-        note: withNote ? highlightNote : "",
-      };
-      onAddHighlight(chapter.id, highlight);
-
-      // Clear selection
-      window.getSelection()?.removeAllRanges();
-      setShowHighlightPopover(false);
-      setSelectedText(null);
-      setHighlightNote("");
-    };
 
     // Open note editor
     const handleAddNotes = () => {
@@ -179,24 +108,6 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
 
     const handleCancelNotes = () => {
       setShowNoteEditor(false);
-    };
-
-    // Remove highlight
-    const handleRemoveHighlight = () => {
-      if (!selectedText || !chapter) return;
-      const highlightsList = studyData.highlights[chapter.id] || [];
-      // Find the matching highlight by text
-      const matching = highlightsList.find((h) => h.text === selectedText.text);
-      if (!matching) return;
-
-      // Invoke the removal callback
-      onRemoveHighlight(chapter.id, matching.id);
-
-      // Clear selection and popover state
-      window.getSelection()?.removeAllRanges();
-      setShowHighlightPopover(false);
-      setSelectedText(null);
-      setHighlightNote("");
     };
 
     const handleGenerateQuiz = async () => {
@@ -522,80 +433,6 @@ export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
             dangerouslySetInnerHTML={{ __html: chapter.content }}
           />
         </div>
-
-        {/* Highlight Popover */}
-        {showHighlightPopover && selectedText && (
-          <div
-            className="fixed bg-white border rounded-lg shadow-lg p-3 z-50 w-72 sm:min-w-64 max-w-[calc(100vw-2rem)]"
-            style={{
-              left: Math.min(
-                Math.max(16, popoverPosition.x - 144),
-                window.innerWidth - 288 - 16,
-              ),
-              top:
-                popoverPosition.y + 10 > window.innerHeight - 200
-                  ? popoverPosition.y - 200
-                  : popoverPosition.y + 10,
-            }}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium">Highlight Text</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-                onClick={() => setShowHighlightPopover(false)}
-              >
-                <X className="h-3 w-3" />
-              </Button>
-            </div>
-
-            <p className="text-xs text-gray-600 mb-3 line-clamp-2">
-              {selectedText.text}
-            </p>
-
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <Button
-                  size="sm"
-                  className="w-full justify-start"
-                  onClick={() => handleAddHighlight(false)}
-                >
-                  <Highlighter className="h-4 w-4 mr-2" />
-                  Highlight
-                </Button>
-
-                <Button
-                  size="sm"
-                  className="w-full justify-start"
-                  onClick={() => handleRemoveHighlight()}
-                >
-                  <Highlighter className="h-4 w-4 mr-2" />
-                  Remove
-                </Button>
-              </div>
-
-              <div className="space-y-2">
-                <Textarea
-                  placeholder="Add a note (optional)"
-                  value={highlightNote}
-                  onChange={(e) => setHighlightNote(e.target.value)}
-                  className="text-xs"
-                  rows={2}
-                />
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="w-full justify-start bg-transparent"
-                  onClick={() => handleAddHighlight(true)}
-                >
-                  <StickyNote className="h-4 w-4 mr-2" />
-                  Highlight + Note
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
 
         <Button
           variant="outline"

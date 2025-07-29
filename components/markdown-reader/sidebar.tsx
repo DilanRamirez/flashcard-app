@@ -1,11 +1,10 @@
 "use client";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import {
-  Menu,
   BookOpen,
   CheckCircle,
   Circle,
@@ -227,11 +226,6 @@ export function Sidebar({
     <>
       {/* Mobile Sidebar */}
       <Sheet open={open} onOpenChange={onOpenChange}>
-        <SheetTrigger asChild className="md:hidden">
-          <Button variant="ghost" size="sm" className="fixed top-4 left-4 z-50">
-            <Menu className="h-4 w-4" />
-          </Button>
-        </SheetTrigger>
         <SheetContent side="left" className="w-full sm:w-80 p-0">
           <SidebarContent />
         </SheetContent>

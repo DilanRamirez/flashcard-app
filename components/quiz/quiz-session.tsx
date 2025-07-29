@@ -135,8 +135,8 @@ const QuizHeader = ({
   total: number;
   onExit: () => void;
 }) => (
-  <header className="sticky top-0 z-50 bg-card border-b">
-    <div className="container mx-auto flex items-center justify-between p-3">
+  <div className="sticky top-0 z-50 bg-black border-b px-3">
+    <div className="container mx-auto flex items-center justify-between p-3 text-white">
       <div className="flex items-center gap-2">
         <Clock className="w-5 h-5" />
         <h2 className="text-lg font-semibold">
@@ -144,19 +144,27 @@ const QuizHeader = ({
         </h2>
       </div>
       <div className="flex items-center gap-2">
-        <Badge variant="outline">{`${index + 1}/${total}`}</Badge>
+        <Badge variant="outline" className="text-white border-white">
+          {`${index + 1}/${total}`}
+        </Badge>
         <Button
           variant="outline"
           size="sm"
           onClick={onExit}
           data-cy="exit-quiz"
+          className="text-black"
         >
           Exit
         </Button>
       </div>
     </div>
-    <Progress value={((index + 1) / total) * 100} className="h-2" />
-  </header>
+    <div className="container mx-auto mb-2">
+      <Progress
+        value={((index + 1) / total) * 100}
+        className="h-2 rounded-[15px] border border-white"
+      />
+    </div>
+  </div>
 );
 
 const MCQ = ({
@@ -342,8 +350,8 @@ export function QuizSession({
   return (
     <div className="min-h-screen bg-background">
       <QuizHeader index={index} total={questions.length} onExit={onExit} />
-      <main className="container mx-auto p-6">
-        <Card>
+      <div className="container mx-auto p-6">
+        <Card className="max-w-2xl mx-auto border border-gray-200 b-cg-card shadow-md transform transition-transform duration-200 hover:scale-100 hover:shadow-lg">
           <CardHeader>
             <CardTitle>{current.question}</CardTitle>
           </CardHeader>
@@ -365,7 +373,7 @@ export function QuizSession({
             </div>
           </CardContent>
         </Card>
-      </main>
+      </div>
     </div>
   );
 }

@@ -521,6 +521,6 @@ export const aiExamGenerator = async (
     errors.push(`Chunk ${1}: ${err.message}`);
   }
   onProgress?.(100, "AI quiz generation complete!");
-  console.log("Generated AI questions:", allQuestions);
+
   return { questions: allQuestions, errors };
 };

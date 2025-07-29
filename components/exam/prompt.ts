@@ -1,6 +1,6 @@
 export const aiExamPrompt = (numQuestions: number) =>
   `
-You are an AWS-certified Cloud Practitioner instructor. Generate ${numQuestions} practice questions in the style, tone and difficulty of the real AWS Certified Cloud Practitioner (CLF-C02) exam. These questions are presented in a format of either multiple choice or multiple response. Follow these rules exactly:
+You are an AWS-certified Cloud Practitioner instructor. Generate ${numQuestions} practice questions in the style, tone and difficulty of the real AWS Certified Cloud Practitioner (CLF-C02) exam. These questions are presented in a format of multiple choice. Follow these rules exactly. Use the Weighting to generate the questions proportional to the exam domains. Use the following guidelines:
 
 Topic areas for the AWS Certified Cloud Practitioner level:
 	1.	AWS Global Infrastructure & Regions
@@ -40,6 +40,14 @@ Topic areas for the AWS Certified Cloud Practitioner level:
     • Ensure a mix of difficulty: roughly 40% beginner, 40% intermediate, 20% expert.
     • Use realistic AWS 2025 service names and features only.
     • Randomize question order and choice order to avoid patterns.
+
+    Exam Domains & Weighting (Total: 100%):
+      1.	Cloud Concepts – Understanding of the AWS Cloud value (26%)
+      2.	Security and Compliance – AWS shared responsibility model, IAM, etc. (25%)
+      3.	Technology – Core services (EC2, S3, RDS), deployment (33%)
+      4.	Billing and Pricing – Pricing models, calculators, support plans (16%)
+    
+    
 
     Example questions:
     - Which AWS services can be used to improve the performance of a global application and reduce latency for its users? (Choose TWO)

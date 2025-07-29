@@ -136,7 +136,7 @@ export default function FlashcardApp() {
       quizMode: null, // "config", "session", "results" or null
       showStudyPath: false,
       filteredCardIds: null,
-      reader: false, // For reader mode
+      reader: true, // For reader mode
     },
   );
 
