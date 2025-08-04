@@ -57,6 +57,7 @@
 - [Chapter 30: “The Café Health Inspector”](#chapter-30-the-café-health-inspector)
 - [Chapter 31: “Welcome to the Free Sample Bar”](#chapter-31-welcome-to-the-free-sample-bar)
 - [Chapter 32: “Your Cloud Security Team: AWS Governance and Monitoring Services”](#chapter-32-your-cloud-security-team-aws-governance-and-monitoring-services)
+- [Chapter 49: “The Night Watcher - AWS CloudWatch”](#chapter-49-the-night-watcher-aws-cloudwatch)
 
 ## Billing & Pricing
 
@@ -3138,7 +3139,7 @@ You _watch_ metrics, set _alarms_, and _act_ automatically.
 
 ---
 
-# Chapter 29: “The Coffee Shop Security Camera”
+# Chapter 29: “The Coffee Shop Security Camera - AWS CloudTrail”
 
 ### Subtitle: Tracking and reviewing everything that happens in your AWS environment with AWS CloudTrail
 
@@ -3185,6 +3186,62 @@ You _track_ every change, _trace_ it to the source, and _trust_ your environment
 - **API Call**: A request sent to AWS to perform an action (like creating a user or launching an EC2 instance).
 - **CloudTrail Event History**: A searchable log of past API calls and user activity.
 - **CloudTrail Insights**: An optional feature in CloudTrail that detects unusual API call patterns, helping to identify potential security threats or misconfigurations.
+
+---
+
+# Chapter 49: “The Night Watcher - AWS CloudWatch”
+
+### Subtitle: Monitoring, logging, and alerting on the health and performance of your AWS environment with AWS CloudWatch
+
+### **Story 2:** “Keeping the Café Running Smoothly”
+
+### **Customer Request:**
+
+"I need to know if my coffee machines overheat, the cash register malfunctions, or the shop temperature goes out of range—and get alerted immediately."
+
+### **Everyday Example:**
+
+A coffee shop owner hires a night watcher who keeps an eye on everything after hours.
+
+- If the coffee machine overheats, they send an urgent text.
+- If the freezer temperature rises, they immediately turn on backup cooling.
+- They log every check—temperature, cash register status, and door activity—so the owner can review it in the morning.  
+  This ensures the café runs smoothly without surprises.
+
+### **Metaphor Mapping:**
+
+**AWS CloudWatch** is like that night watcher for your AWS environment.
+
+- It **monitors metrics** (CPU, memory, disk usage, latency).
+- It **collects logs** from applications and infrastructure for analysis.
+- It **alerts you** (via alarms) if something crosses defined thresholds.
+- It can even **automate responses**—like scaling up servers or restarting services.
+
+### **Mnemonic:**
+
+“**CloudWatch: Monitor, Alert, Automate.**”  
+You _monitor_ resources, _alert_ on issues, and _automate_ fixes.
+
+### **Glossary:**
+
+- 👀 **Constant Monitoring**: Watching systems 24/7 = **CloudWatch Metrics**
+- 📜 **Activity Logs**: Capturing detailed system and app events = **CloudWatch Logs**
+- 🚨 **Instant Alerts**: Triggered when things go wrong = **CloudWatch Alarms**
+- 🤖 **Automatic Actions**: Scaling or remediation = **CloudWatch + Actions (SNS, Auto Scaling)**
+
+## 🔁 **Quick Recap**
+
+- **AWS CloudWatch** keeps tabs on your AWS resources and applications, acting like a 24/7 operations guard.
+- It provides **metrics, logs, and alarms** to track performance, troubleshoot issues, and trigger automated responses.
+- With dashboards, you can visualize the health of your entire AWS environment in one place.
+
+## 📘 **Glossary**
+
+- **AWS CloudWatch**: A monitoring and observability service for AWS resources, apps, and infrastructure.
+- **Metrics**: Numerical data (e.g., CPU usage, network traffic) that CloudWatch collects and displays.
+- **Logs**: Detailed event records from applications or systems stored in CloudWatch for troubleshooting and analysis.
+- **Alarms**: Threshold-based triggers that send notifications or take automated action.
+- **Dashboards**: Custom visual displays of key metrics for real-time visibility.
 
 ---
 
@@ -3340,26 +3397,29 @@ It reviews your setup across:
 
 ---
 
-### 🔍 Story 2: “The Change Detective – AWS Config”
+# 🔍 Story 2: “The Change Detective – AWS Config”
 
-#### Customer Request:
+### Customer Request:
 
 “Who rearranged the coffee shop furniture, and when?”
 
-#### Everyday Example:
+### Everyday Example (Analogy)
 
-You install cameras that record every table move in your café. Now, you know:
+You install cameras in your café to keep track of furniture:
 
-- Who moved a table.
-- When they did it.
-- Whether it matches your rules.
+- They **record every table’s position** and any changes.
+- You can see **what changed** and **when it happened**.
+- Security footage helps identify **who moved it**.
+- Alerts tell you if a new layout **breaks your café’s rules**.
 
-#### Metaphor Mapping:
+### Metaphor Mapping to AWS Config
 
-That’s **AWS Config**—it **tracks all resource changes**:
+AWS Config works just like those cameras—but for your AWS environment:
 
-- Logs **who changed what, when, and how**.
-- Flags non-compliant resources (e.g., an unencrypted S3 bucket).
+- **Records resource configurations** you want to keep under close control.
+- **Tracks what changed and when** (integrates with **CloudTrail** for “who”).
+- **Evaluates compliance** using AWS Config Rules (e.g., detects an unencrypted S3 bucket).
+- **Notifies you** of any configuration changes or compliance violations so you can act quickly.
 
 ---
 
@@ -4769,6 +4829,8 @@ These sample questions include detailed explanations, helping you:
 
 With good preparation and the right mindset, you'll be well-positioned to succeed.
 
-**Good luck—you’ve got this! 🚀**
+## **Good luck—you’ve got this! 🚀**
 
-# Chapter 49: End
+---
+
+# Chapter 50: End

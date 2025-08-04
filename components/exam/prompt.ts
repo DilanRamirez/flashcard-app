@@ -21,7 +21,8 @@ Topic areas for the AWS Certified Cloud Practitioner level:
 	16.	Advanced Networking (AWS Direct Connect, Global Accelerator)
 	17.	Well-Architected Framework & Design Principles (operational excellence, “design for failure,” best practices)
 	18.	AWS Support & Professional Services (Support plans, Infrastructure Event Management, Professional Services)
-    
+	19. Amazon Macie, Amazon Aurora, AWS Certificate Manager, AWS Application Migration Service.
+
     Domain 1 Cloud Concepts
     - AWS Global Infra & Regions; Account Mgmt & Governance; Operational Excellence
     Domain 2 Security & Compliance
@@ -37,27 +38,24 @@ Topic areas for the AWS Certified Cloud Practitioner level:
       – Domain 2 (Security & Compliance, ~25%)
       – Domain 3 (Technology, ~33%)
       – Domain 4 (Billing & Pricing, ~16%)
-    • Ensure a mix of difficulty: roughly 40% beginner, 40% intermediate, 20% expert.
+    • Always Ensure a difficulty of 100% expert.
     • Use realistic AWS 2025 service names and features only.
     • Randomize question order and choice order to avoid patterns.
 
-    Exam Domains & Weighting (Total: 100%):
-      1.	Cloud Concepts – Understanding of the AWS Cloud value (26%)
-      2.	Security and Compliance – AWS shared responsibility model, IAM, etc. (25%)
-      3.	Technology – Core services (EC2, S3, RDS), deployment (33%)
-      4.	Billing and Pricing – Pricing models, calculators, support plans (16%)
-    
-    
-
     Example questions:
-    - Which AWS services can be used to improve the performance of a global application and reduce latency for its users? (Choose TWO)
-    - Using Amazon RDS falls under the shared responsibility model. Which of the following are customer responsibilities? (Choose TWO)
-    - A company has created a solution that helps AWS customers improve their architectures on AWS. Which AWS program may support this company?
-    - What is the AWS database service that allows you to upload data structured in key-value format?
-    - Which of the below is a best-practice when designing solutions on AWS?
-    - Which AWS Service can be used to establish a dedicated, private network connection between AWS and your datacenter?
-    - A company has a large amount of structured data stored in their on-premises data center. They are planning to migrate all the data to AWS, what is the most appropriate AWS database option?
-    - Which Amazon Web Services tool can identify the user that terminated an Amazon EC2 instance?
+    1. What is the MINIMUM AWS Support plan that provides technical support through phone calls?
+    2. What are benefits of using the AWS Cloud for companies with customers in many countries around the world? (Select TWO.)
+    3. A company has an on-premises Linux-based server with an Oracle database that runs on it. The company wants to migrate the database server to run on an Amazon EC2 instance in AWS.
+    4. Which service should the company use to complete the migration?
+    5. A user needs to automatically discover, classify, and protect sensitive data stored in Amazon S3.
+    6. Which AWS service can meet these requirements?
+    7. Which AWS service allows customers to purchase unused Amazon EC2 capacity at an often discounted rate?
+    8. Which AWS service identifies security groups that allow unrestricted access to a user's AWS resources?
+    9. A company is hosting a static website from a single Amazon S3 bucket.
+    10. Which AWS service will achieve lower latency and high transfer speeds?
+    11. An application development team needs a solution that sends an alert to an entire development team if a quality assurance test fails on an application.
+    12. Which AWS service should the application development team use to meet the requirement?
+    13. Which AWS service should be used to implement encryption in transit?
 
     ONLY GENERATE THE TOTAL NUMBER OF QUESTIONS REQUESTED. DO NOT GENERATE MORE OR LESS THAN ${numQuestions} QUESTIONS.
 
